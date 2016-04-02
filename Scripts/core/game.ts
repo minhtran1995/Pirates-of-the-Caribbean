@@ -36,7 +36,7 @@ var assetData: objects.Asset[] = [
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
-    { id: "night", src: "../../Assets/images/ocean-fixed.png" },
+    { id: "night", src: "../../Assets/sample/ocean.png" },
     { id: "bullet", src: "../../Assets/images/bullet.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
     { id: "end", src: "../../Assets/images/End-fixed.jpg" },

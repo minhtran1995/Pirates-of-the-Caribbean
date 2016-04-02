@@ -45,14 +45,15 @@ var scenes;
             //im making sure that the preloader images is loaded, and then it will be modified here
             if (Loading._flag) {
                 this._preloader.rotation += 3;
-            }
-            if (this._counter % 30 === 0) {
-                if (this._counter % 90 === 0) {
-                    this._loadingLabel.text = "Loading.";
-                    this._counter = 0;
-                }
-                else {
-                    this._loadingLabel.text += ".";
+                //update label after preload
+                if (this._counter % 30 === 0) {
+                    if (this._counter % 90 === 0) {
+                        this._loadingLabel.text = "Loading.";
+                        this._counter = 0;
+                    }
+                    else {
+                        this._loadingLabel.text += ".";
+                    }
                 }
             }
             this._counter++;

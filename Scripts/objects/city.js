@@ -40,7 +40,7 @@ var objects;
         City.prototype.update = function () {
             //console.log(this.x+" "+ this.y)            
             this.x -= this.speed.x;
-            this._checkBound(-4000);
+            this._checkBound(-2000);
         };
         return City;
     })(objects.GameObject);
