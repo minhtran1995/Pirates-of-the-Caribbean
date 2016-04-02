@@ -1,0 +1,71 @@
+﻿<!--
+    /*
+ ***************************************************************************************
+ * Source file name : index.html                                                       *
+ * Author's name : Duc Minh Tran (300771859)                                           *
+ * Last Modified by : Duc Minh Tran (300771859)                                        *
+ * Last Modified date : March 27 2016                                                  *
+ * Program description : This is a webgame that use  a Side Scroller background        * 
+ *                                                                                     *  
+ * Revision History : 1 - Update Internal Documentation                                *
+ *                                                                                     *
+ ***************************************************************************************
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pirates of the Caribbean</title>
+    <!-- CSS Section -->
+    <link href="Content/reset.css" rel="stylesheet" />
+    <link href="Content/game.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+</head>
+
+<body onload="preload();">
+    <div class="game">
+        <canvas id="canvas" width="1000" height="600"></canvas>
+    </div>
+
+    <!-- JavaScript Libraries-->
+    <script src="Scripts/config/config.js"></script>
+
+    <script src="Scripts/lib/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/lib/Stats.js"></script>
+    <script src="Scripts/lib/easeljs-0.8.1.min.js"></script>
+    <script src="Scripts/lib/tweenjs-0.6.1.min.js"></script>
+    <script src="Scripts/lib/soundjs-0.6.2.min.js"></script>
+    <script src="Scripts/lib/preloadjs-0.6.1.min.js"></script>
+
+    <!-- Game Scripts -->
+    <script src="Scripts/objects/asset.js"></script>
+    <script src="Scripts/objects/label.js"></script>
+    <script src="Scripts/objects/button.js"></script>
+    <script src="Scripts/objects/scene.js"></script>
+    <script src="Scripts/objects/gameObject.js"></script>
+    <script src="Scripts/objects/city.js"></script>
+    <script src="Scripts/objects/health.js"></script>
+    <script src="Scripts/objects/captainShield.js"></script>
+    <script src="Scripts/objects/player.js"></script>
+    <script src="Scripts/objects/bullet.js"></script>
+    <script src="Scripts/manager/collision.js"></script>
+
+    <!-- Scene Scripts -->
+    <script src="Scripts/scenes/loading.js"></script>
+    <script src="Scripts/scenes/end.js"></script>
+    <script src="Scripts/scenes/play.js"></script>
+    <script src="Scripts/scenes/menu.js"></script>
+    <script src="Scripts/scenes/instruction.js"></script>
+    <script src="Scripts/scenes/win.js"></script>
+
+
+    <!-- Main Game Scripts -->
+    <script src="Scripts/core/game.js"></script>
+</body>
+
+</html>

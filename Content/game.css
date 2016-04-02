@@ -1,0 +1,25 @@
+﻿body {
+    background-color: #e6c985;
+    min-height: 100%;
+    text-align: center;
+    background-image: url('../Assets/sample/webpageBG.jpg');
+    background-repeat: no-repeat;
+    background-position:center;
+    
+    background-attachment:fixed; 
+}
+
+canvas {
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;    
+    background-color: black;
+    
+    
+}
+
+.game {
+    
+    width: 1000px;
+    margin: 1% auto 1% auto;
+}
