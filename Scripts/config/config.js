@@ -23,7 +23,7 @@ var config;
         Scene.END = 4;
         Scene.WIN = 5;
         return Scene;
-    })();
+    }());
     config.Scene = Scene;
     // Screen Constants
     var Screen = (function () {
@@ -34,7 +34,7 @@ var config;
         Screen.CENTER_X = Screen.WIDTH / 2;
         Screen.CENTER_Y = Screen.HEIGHT / 2;
         return Screen;
-    })();
+    }());
     config.Screen = Screen;
     // Game Constants
     var Game = (function () {
@@ -42,7 +42,8 @@ var config;
         }
         Game.FPS = 60;
         return Game;
-    })();
+    }());
     config.Game = Game;
 })(config || (config = {}));
+
 //# sourceMappingURL=config.js.map

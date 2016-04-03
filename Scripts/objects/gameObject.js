@@ -53,7 +53,8 @@ var objects;
             this.image = assets.getResult(name);
         };
         return GameObject;
-    })(createjs.Bitmap);
+    }(createjs.Bitmap));
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=gameObject.js.map

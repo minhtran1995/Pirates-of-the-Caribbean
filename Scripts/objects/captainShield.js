@@ -45,7 +45,8 @@ var objects;
             this._checkBound(this._leftBound);
         };
         return CaptainShield;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.CaptainShield = CaptainShield;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=captainShield.js.map

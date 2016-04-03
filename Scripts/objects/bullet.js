@@ -50,7 +50,8 @@ var objects;
             this._checkBound(boundVal);
         };
         return Bullet;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.Bullet = Bullet;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=bullet.js.map

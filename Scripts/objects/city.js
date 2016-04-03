@@ -43,7 +43,8 @@ var objects;
             this._checkBound(-2000);
         };
         return City;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.City = City;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=city.js.map

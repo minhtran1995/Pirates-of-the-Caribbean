@@ -78,7 +78,8 @@ var scenes;
             this.addChild(this._loadingLabel);
         };
         return Loading;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Loading = Loading;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=loading.js.map

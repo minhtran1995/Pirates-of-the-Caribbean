@@ -45,7 +45,8 @@ var objects;
             //console.log((-config.Screen.WIDTH)*2)       
         };
         return Health;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.Health = Health;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=health.js.map
