@@ -30,7 +30,7 @@ var assetData = [
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
-    { id: "bullet", src: "../../Assets/images/bullet.png" },
+    { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
     { id: "end", src: "../../Assets/images/End-fixed.jpg" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
@@ -58,11 +58,8 @@ var assetData = [
     { id: "blank", src: "../../Assets/images/blank.png" },
     //audio
     { id: "bmg", src: "../../Assets/sample/bmg.mp3" },
-    { id: "leftClick", src: "../../Assets/audio/leftClick.mp3" },
+    { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "shoot", src: "../../Assets/audio/shoot.mp3" },
-    { id: "heal", src: "../../Assets/audio/heal.mp3" },
-    { id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
-    { id: "shocked", src: "../../Assets/audio/shocked.mp3" },
 ];
 //preload assets
 function preload() {

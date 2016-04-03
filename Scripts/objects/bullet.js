@@ -20,12 +20,13 @@ var objects;
     var Bullet = (function (_super) {
         __extends(Bullet, _super);
         function Bullet(player) {
-            _super.call(this, "bullet");
+            _super.call(this, "bullet1");
             this.name = "bullet";
             this._player = player;
-            this.speed.x = 180;
+            this.speed.x = config.Screen.WIDTH - this._player.x;
             this.y = this._player.y;
-            this.reset(this._leftBound + 500);
+            this.x = this._player.x;
+            this.reset(this._player.x);
         }
         //reset objects location
         Bullet.prototype.reset = function (value) {
@@ -34,20 +35,22 @@ var objects;
         };
         //check if objects in the right location
         Bullet.prototype._checkBound = function (value) {
-            var resetVal = this._leftBound + 500;
             if (this.x >= value) {
-                this.reset(resetVal);
+                this.reset(this._player.x);
             }
         };
         //update objects in the scene
         Bullet.prototype.update = function () {
-            if (!this.doneTheStuff) {
-                this.doneTheStuff = true;
-                this.y = this._player.y;
+            if (this._player.isShooting) {
+                this.x = stage.mouseX;
+                this.y = stage.mouseY;
+                //equation to make corresponding bullet direction
+                this.rotation = (stage.mouseX) * 180 / 1000 + 180;
             }
-            var boundVal = this._rightBound;
-            this.x += this.speed.x;
-            this._checkBound(boundVal);
+            else {
+                this.y = this._player.y;
+                this.x = this._player.x;
+            }
         };
         return Bullet;
     })(objects.GameObject);

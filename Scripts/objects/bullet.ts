@@ -17,12 +17,13 @@ module objects {
         private _player: Player;
         private doneTheStuff: boolean;
         constructor(player: Player) {
-            super("bullet");
+            super("bullet1");
             this.name = "bullet";
             this._player = player;
-            this.speed.x = 180;
+            this.speed.x = config.Screen.WIDTH - this._player.x;
             this.y = this._player.y;
-            this.reset(this._leftBound + 500);
+            this.x = this._player.x;
+            this.reset(this._player.x);
 
         }
 
@@ -35,23 +36,29 @@ module objects {
 
         //check if objects in the right location
         protected _checkBound(value: number): void {
-            var resetVal = this._leftBound + 500;
             if (this.x >= value) {
-                this.reset(resetVal);
+                this.reset(this._player.x);
             }
         }
 
         //update objects in the scene
         public update(): void {
-            if (!this.doneTheStuff) {
-                this.doneTheStuff = true;
+
+            if (this._player.isShooting) {
+                this.x = stage.mouseX;
+                this.y = stage.mouseY;
+                
+                
+                
+                //equation to make corresponding bullet direction
+                this.rotation = (stage.mouseX) * 180/1000 + 180; 
+            }
+            else {
                 this.y = this._player.y;
+                this.x = this._player.x;
             }
 
 
-            var boundVal = this._rightBound;
-            this.x += this.speed.x;
-            this._checkBound(boundVal);
 
 
         }

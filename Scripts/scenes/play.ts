@@ -76,7 +76,7 @@ module scenes {
             this.addChild(this._player);
 
             //adding captain shields
-            this._captainShieldCount = 10;//number of shields
+            this._captainShieldCount = 1;//number of shields
             this._captainShields = new Array<objects.CaptainShield>();
 
 

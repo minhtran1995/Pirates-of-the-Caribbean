@@ -19,8 +19,11 @@ module objects {
 
         private _topBounds: number;
         private _bottomBounds: number;
+        private _leftBounds: number;
+        private _rightBounds: number;
 
-        private static flag: boolean;
+
+
 
         public hitHealth: boolean;
         public hitShield: boolean;
@@ -28,20 +31,42 @@ module objects {
         public isShooting: boolean;
         public isDead: boolean;
 
+        //Static Variables++++++
+        private static flag: boolean;
+
+        private static up: boolean;
+        private static down: boolean;
+        private static left: boolean;
+        private static right: boolean;
+        private static counter: number;
+
+
+
         constructor() {
             super(assets.getResult("ironman"));
-            this.y = stage.mouseY;
+
+            this.y = 200;
+            this.x = 0;
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
 
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
 
-            this._topBounds = this.height * 0.5;
+            this._topBounds = 400;
             this._bottomBounds = config.Screen.HEIGHT - this.height * 0.5;
+
+            this._leftBounds = this.width * 0.5;
+            this._rightBounds = config.Screen.WIDTH - this.width * 0.5;
             this.x = this.regX;
 
             Player.flag = false;
+            Player.up = false;
+            Player.down = false;
+            Player.left = false;
+            Player.right = false;
+
+            Player.counter = 0;
 
             this.hitHealth = false;
             this.hitShield = false;
@@ -53,11 +78,19 @@ module objects {
         //check if player is in the allowed range
         private _checkBounds(): void {
 
-            if (this.y < 400) {
-                this.y = 400;
+            if (this.y < this._topBounds) {
+                this.y = this._topBounds;
             }
             if (this.y > this._bottomBounds) {
                 this.y = this._bottomBounds;
+            }
+
+            if (this.x < this._leftBounds) {
+                this.x = this._leftBounds;
+            }
+
+            if (this.x > this._rightBounds) {
+                this.x = this._rightBounds;
             }
         }
 
@@ -65,13 +98,46 @@ module objects {
         //update game objects in my scene
         public update(): void {
 
+            //control
+            document.onkeyup = function(e) {
+                if (e.which == 87) { Player.up = false; }
+                if (e.which == 83) { Player.down = false; }
+                if (e.which == 65) { Player.left = false; }
+                if (e.which == 68) { Player.right = false; }
+            }
 
-            this.y = stage.mouseY;
+
+            document.onkeydown = function(e) {
+                if (e.which == 87) { Player.up = true; }
+                if (e.which == 83) { Player.down = true; }
+                if (e.which == 65) { Player.left = true; }
+                if (e.which == 68) { Player.right = true; }
+            }
+
+            if (Player.up) {
+                this.y--;
+            }
+
+            if (Player.down) {
+                this.y++;
+            }
+
+            if (Player.left) {
+                this.x--;
+            }
+
+            if (Player.right) {
+                this.x++;
+            }
 
 
+
+            //this.y = stage.mouseY;
+            //this.x = stage.mouseX;
 
             window.onmouseup = function() {
                 Player.flag = false;
+                Player.counter = 0;
             }
 
             if (this.isDead) {
@@ -83,8 +149,8 @@ module objects {
                 };
             }
             else {
-
                 window.onmousedown = function() {
+
                     console.log("Shoot");
                     Player.flag = true;
                     createjs.Sound.play("leftClick");
@@ -105,17 +171,25 @@ module objects {
                         if (!Player.flag) {
                             this.image = this.shuffleImages("");
                             this.isShooting = false;
+
+
                         }
                         else {
-                            this.image = this.shuffleImages("shoot");
-                            this.isShooting = true;
+                            if (Player.counter <= 2) {
+                                this.image = this.shuffleImages("shoot");
+                                this.isShooting = true;
+                            }
+                            else {
+                                this.isShooting = false;
+                            }
+                            Player.counter++;
                         }
                     }
                 }
             }
             this._checkBounds();
-
         }
+
 
 
 

@@ -48,7 +48,7 @@ var scenes;
             this.addChild(this._bullet);
             this.addChild(this._player);
             //adding captain shields
-            this._captainShieldCount = 10; //number of shields
+            this._captainShieldCount = 1; //number of shields
             this._captainShields = new Array();
             for (var shield = 0; shield < this._captainShieldCount; shield++) {
                 this._captainShields[shield] = new objects.CaptainShield();
