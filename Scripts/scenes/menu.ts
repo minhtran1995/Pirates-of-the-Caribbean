@@ -31,8 +31,10 @@ module scenes {
             this._fadeIn(500);
 
             createjs.Sound.stop();
-            createjs.Sound.play("bmg").loop = -1;
-            createjs.Sound.volume = 50;
+            createjs.Sound.play("bmg","",0,0,-1,
+            //volume here
+            0.7);
+            
 
 
 
