@@ -61,7 +61,6 @@ var assetData = [
     //audio
     { id: "bmg", src: "../../Assets/sample/bmg.mp3" },
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
-    { id: "shoot", src: "../../Assets/audio/shoot.mp3" },
 ];
 //preload assets
 function preload() {

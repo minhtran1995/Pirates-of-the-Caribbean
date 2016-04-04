@@ -154,8 +154,6 @@ module objects {
                     console.log("Shoot");
                     Player.flag = true;
                     createjs.Sound.play("leftClick");
-                    createjs.Sound.play("shoot").volume = 0.5;
-
                 };
 
 
