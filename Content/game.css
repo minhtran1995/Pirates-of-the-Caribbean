@@ -14,7 +14,7 @@ canvas {
     border-radius: 10px;
     text-align: center;    
     background-color: black;
-    
+    cursor:url("../Assets/sample/shot aim.cur"), auto;
     
 }
 

@@ -45,7 +45,12 @@ var objects;
                 this.x = stage.mouseX;
                 this.y = stage.mouseY;
                 //equation to make corresponding bullet direction
-                this.rotation = (stage.mouseX) * 180 / 1000 + 180;
+                if (this.x < this._player.x) {
+                    this.rotation = Math.atan((this.y - this._player.y) / (this.x - this._player.x)) * 180 / Math.PI + 180;
+                }
+                else {
+                    this.rotation = Math.atan((this.y - this._player.y) / (this.x - this._player.x)) * 180 / Math.PI;
+                }
             }
             else {
                 this.y = this._player.y;

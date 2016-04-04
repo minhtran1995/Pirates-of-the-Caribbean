@@ -26,6 +26,7 @@ module scenes {
         //game objects
         private _bullet: objects.Bullet;
         private _player: objects.Player;
+        private _cannon: objects.Cannon;
         private _collision: managers.Collision;
 
         //score and health
@@ -74,6 +75,9 @@ module scenes {
             this._bullet = new objects.Bullet(this._player);
             this.addChild(this._bullet);
             this.addChild(this._player);
+
+            this._cannon = new objects.Cannon(this._player);
+            this.addChild(this._cannon);
 
             //adding captain shields
             this._captainShieldCount = 1;//number of shields
@@ -132,11 +136,14 @@ module scenes {
                 this._bullet.update();
             }
             else {
-                this._bullet.reset(config.Screen.WIDTH + (this._bullet.width) * 5);
+                this._bullet.reset(this._player.x);
             }
 
             //update player location
             this._player.update();
+
+            //update cannon angel
+            this._cannon.update();
 
             //update shields locations and check collision
             this._captainShields.forEach(shield => {

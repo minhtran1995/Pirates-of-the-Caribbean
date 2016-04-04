@@ -38,7 +38,7 @@ module objects {
         private static down: boolean;
         private static left: boolean;
         private static right: boolean;
-        private static counter: number;
+        public static counter: number;
 
 
 

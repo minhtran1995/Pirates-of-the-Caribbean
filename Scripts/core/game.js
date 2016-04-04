@@ -31,6 +31,8 @@ var assetData = [
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
+    { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
+    { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
     { id: "end", src: "../../Assets/images/End-fixed.jpg" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
