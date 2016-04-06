@@ -31,9 +31,9 @@ module scenes {
             this._fadeIn(500);
 
             createjs.Sound.stop();
-            createjs.Sound.play("bmg","",0,0,-1,
+            createjs.Sound.play("menuBGM","",0,0,-1,
             //volume here
-            0.7);
+            1);
             
 
 

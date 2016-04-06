@@ -116,9 +116,15 @@ var objects;
             }
             else {
                 window.onmousedown = function () {
-                    console.log("Shoot");
-                    Player.flag = true;
-                    createjs.Sound.play("leftClick");
+                    if (objects.Cannon.isloaded) {
+                        console.log("Shoot");
+                        Player.flag = true;
+                        createjs.Sound.play("leftClick");
+                        objects.Cannon.isloaded = false;
+                    }
+                    else {
+                        console.log("Reload");
+                    }
                 };
                 if (this.hitHealth) {
                     this.image = this.shuffleImages("health");

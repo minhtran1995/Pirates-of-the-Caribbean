@@ -2,13 +2,18 @@ module objects {
     export class Cannon extends objects.GameObject {
 
         private _player: Player;
-        private doneTheStuff: boolean;
+
+
+        public static isloaded: boolean;
+
+
         constructor(player: Player) {
             super("cannon");
             this.name = "cannon";
             this._player = player;
             this.y = this._player.y;
             this.x = this._player.x;
+            Cannon.isloaded = true;
         }
 
 
@@ -18,20 +23,22 @@ module objects {
             this.y = this._player.y + 20;
             this.x = this._player.x + 50;
 
-            if (this._player.isShooting) {
-                //animation here 
-                this.image = this.shuffleImages("shoot");
-            }
-            else {
-                this.image = this.shuffleImages("");
-            }
+            if (Cannon.isloaded) {
+                if (this._player.isShooting) {
+                    //animation here 
+                    this.image = this.shuffleImages("shoot");
+                }
+                else {
+                    this.image = this.shuffleImages("");
+                }
 
-            //equation to make corresponding bullet direction
-            if (stage.mouseX <= this.x) {
-                this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI + 180;
-            }
-            else {
-                this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI;
+                //equation to make corresponding bullet direction
+                if (stage.mouseX <= this.x) {
+                    this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI + 180;
+                }
+                else {
+                    this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI;
+                }
             }
 
         }

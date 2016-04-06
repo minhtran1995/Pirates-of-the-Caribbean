@@ -13,24 +13,27 @@ var objects;
             this._player = player;
             this.y = this._player.y;
             this.x = this._player.x;
+            Cannon.isloaded = true;
         }
         //update objects in the scene
         Cannon.prototype.update = function () {
             this.y = this._player.y + 20;
             this.x = this._player.x + 50;
-            if (this._player.isShooting) {
-                //animation here 
-                this.image = this.shuffleImages("shoot");
-            }
-            else {
-                this.image = this.shuffleImages("");
-            }
-            //equation to make corresponding bullet direction
-            if (stage.mouseX <= this.x) {
-                this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI + 180;
-            }
-            else {
-                this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI;
+            if (Cannon.isloaded) {
+                if (this._player.isShooting) {
+                    //animation here 
+                    this.image = this.shuffleImages("shoot");
+                }
+                else {
+                    this.image = this.shuffleImages("");
+                }
+                //equation to make corresponding bullet direction
+                if (stage.mouseX <= this.x) {
+                    this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI + 180;
+                }
+                else {
+                    this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI;
+                }
             }
         };
         Cannon.prototype.shuffleImages = function (val) {

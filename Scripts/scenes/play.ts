@@ -40,6 +40,11 @@ module scenes {
         //game labels
         private _healthLabel: objects.Label;
         private _deadLabel: objects.Label;
+        private _reloadLabel: objects.Label;
+
+
+        //Game buttons
+        private _reloadButton: objects.Button;
 
         private static _counter;
 
@@ -106,6 +111,18 @@ module scenes {
                 config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
 
+            //reload button 
+            this._reloadButton = new objects.Button("reload",
+                50, 70, true);
+            this.addChild(this._reloadButton);
+            this._reloadButton.on("click", this._reloadButtonClick, this);
+
+
+
+            this._reloadLabel = new objects.Label("Reload Pls !", "Bold 25px Merienda One",
+                "#b30000",
+                150, 70, true);
+            this.addChild(this._reloadLabel);
 
             //dead message
             this._deadLabel = new objects.Label("You are Dead !", "Bold 50px Merienda One",
@@ -208,6 +225,31 @@ module scenes {
                 }
                 Play._counter++;
             }
+
+
+            if (!objects.Cannon.isloaded) {
+                this._reloadButton.visible = true;
+                this._reloadButton.mouseEnabled = true;
+                this._reloadLabel.visible = true;
+            }
+            else {
+                this._reloadButton.visible = false;
+                this._reloadButton.mouseEnabled = false;
+                this._reloadLabel.visible = false;
+            }
+
+        }
+
+
+        //EVENT HANDLERS ++++++++++++++++++++
+
+        // LEFT_CAVE Button click event handler
+        private _reloadButtonClick(event: createjs.MouseEvent) {
+            createjs.Sound.play("reloadSound");
+            this._reloadButton.visible = false;
+            this._reloadButton.mouseEnabled = false;
+            this._reloadLabel.visible = false;
+            objects.Cannon.isloaded = true;
 
         }
 

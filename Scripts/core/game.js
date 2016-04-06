@@ -33,6 +33,7 @@ var assetData = [
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
     { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
     { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
+    { id: "reload", src: "../../Assets/sample/reload-resized.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
     { id: "end", src: "../../Assets/images/End-fixed.jpg" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
@@ -60,7 +61,9 @@ var assetData = [
     { id: "blank", src: "../../Assets/images/blank.png" },
     //audio
     { id: "bmg", src: "../../Assets/sample/bmg.mp3" },
+    { id: "menuBGM", src: "../../Assets/sample/menuBGM.mp3" },
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
+    { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
 ];
 //preload assets
 function preload() {

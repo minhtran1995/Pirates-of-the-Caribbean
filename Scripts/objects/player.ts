@@ -150,10 +150,16 @@ module objects {
             }
             else {
                 window.onmousedown = function() {
+                    if (Cannon.isloaded) {
+                        console.log("Shoot");
+                        Player.flag = true;
+                        createjs.Sound.play("leftClick");
+                        Cannon.isloaded = false;
+                    }
+                    else {
+                        console.log("Reload");
+                    }
 
-                    console.log("Shoot");
-                    Player.flag = true;
-                    createjs.Sound.play("leftClick");
                 };
 
 
