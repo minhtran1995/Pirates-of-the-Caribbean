@@ -25,7 +25,7 @@ module objects {
 
 
 
-        public hitHealth: boolean;
+        public hitMoney: boolean;
         public hitShield: boolean;
 
         public isShooting: boolean;
@@ -68,7 +68,7 @@ module objects {
 
             Player.counter = 0;
 
-            this.hitHealth = false;
+            this.hitMoney = false;
             this.hitShield = false;
             this.isShooting = false;
             this.isDead = false;
@@ -164,7 +164,7 @@ module objects {
 
 
 
-                if (this.hitHealth) {
+                if (this.hitMoney) {
                     this.image = this.shuffleImages("health");
                 }
                 else {

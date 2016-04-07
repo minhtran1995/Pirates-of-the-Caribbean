@@ -38,6 +38,8 @@ var assetData = [
     { id: "end", src: "../../Assets/images/End-fixed.jpg" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
     { id: "win", src: "../../Assets/images/win.jpg" },
+    { id: "enemy", src: "../../Assets/sample/enemy-resized.png" },
+    { id: "goldChest", src: "../../Assets/sample/goldChest-resized.png" },
     //fly effect
     { id: "ironman", src: "../../Assets/images/ironman.png" },
     { id: "ironman1", src: "../../Assets/images/ironman1.png" },
@@ -45,7 +47,6 @@ var assetData = [
     { id: "ironman3", src: "../../Assets/images/ironman3.png" },
     { id: "ironmanShoot", src: "../../Assets/images/ironmanShoot.png" },
     { id: "arcReactorFixed", src: "../../Assets/images/arcReactor-fixed.png" },
-    { id: "captainShield", src: "../../Assets/images/captainShield.png" },
     //hit effect
     { id: "ironmanHit", src: "../../Assets/images/getHit.png" },
     { id: "ironmanHit1", src: "../../Assets/images/getHit1.png" },

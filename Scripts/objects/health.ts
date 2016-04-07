@@ -15,17 +15,19 @@ module objects {
     export class Health extends objects.GameObject {
 
         constructor() {
-            super("arcReactorFixed");
+            super("goldChest");
             this.speed.x = 2;
             this.reset(this._rightBound);
-            this.name = "health";
+            this.name = "goldChest";
         }
 
         //reset health location
         protected reset(value: number): void {
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
+
             this.x = value;
-            this.y = Math.floor(Math.random() * this._bottomBound + this._topBound);
-            this.image = assets.getResult("arcReactorFixed");
+            this.y = Math.round((Math.random() * b + a));
         }
 
         //check if health item is in right location
@@ -35,12 +37,12 @@ module objects {
                 this.reset(this._rightBound);
             }
         }
-        
+
         //update my objects in the scene
         public update(): void {
             this.x -= this.speed.x;
             this._checkBound((-config.Screen.WIDTH) * 2);
-            //console.log((-config.Screen.WIDTH)*2)       
+
         }
 
 

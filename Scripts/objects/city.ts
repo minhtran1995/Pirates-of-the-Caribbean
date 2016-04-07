@@ -16,7 +16,7 @@ module objects {
 
         constructor() {
             super("night");
-            this.speed.x = 4;
+            this.speed.x = 2;
             this.reset(0);
             this.regX = 0;
             this.regY = 0;

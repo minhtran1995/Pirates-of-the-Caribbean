@@ -21,7 +21,7 @@ var objects;
         __extends(City, _super);
         function City() {
             _super.call(this, "night");
-            this.speed.x = 4;
+            this.speed.x = 2;
             this.reset(0);
             this.regX = 0;
             this.regY = 0;

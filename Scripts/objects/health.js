@@ -20,16 +20,17 @@ var objects;
     var Health = (function (_super) {
         __extends(Health, _super);
         function Health() {
-            _super.call(this, "arcReactorFixed");
+            _super.call(this, "goldChest");
             this.speed.x = 2;
             this.reset(this._rightBound);
-            this.name = "health";
+            this.name = "goldChest";
         }
         //reset health location
         Health.prototype.reset = function (value) {
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
             this.x = value;
-            this.y = Math.floor(Math.random() * this._bottomBound + this._topBound);
-            this.image = assets.getResult("arcReactorFixed");
+            this.y = Math.round((Math.random() * b + a));
         };
         //check if health item is in right location
         Health.prototype._checkBound = function (value) {
@@ -42,7 +43,6 @@ var objects;
         Health.prototype.update = function () {
             this.x -= this.speed.x;
             this._checkBound((-config.Screen.WIDTH) * 2);
-            //console.log((-config.Screen.WIDTH)*2)       
         };
         return Health;
     })(objects.GameObject);

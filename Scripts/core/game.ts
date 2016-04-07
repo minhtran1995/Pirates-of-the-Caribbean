@@ -50,6 +50,9 @@ var assetData: objects.Asset[] = [
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
     { id: "win", src: "../../Assets/images/win.jpg" },
 
+    { id: "enemy", src: "../../Assets/sample/enemy-resized.png" },
+    { id: "goldChest", src: "../../Assets/sample/goldChest-resized.png" },
+
 
 
     //fly effect
@@ -60,7 +63,6 @@ var assetData: objects.Asset[] = [
 
     { id: "ironmanShoot", src: "../../Assets/images/ironmanShoot.png" },
     { id: "arcReactorFixed", src: "../../Assets/images/arcReactor-fixed.png" },
-    { id: "captainShield", src: "../../Assets/images/captainShield.png" },
 
     //hit effect
     { id: "ironmanHit", src: "../../Assets/images/getHit.png" },

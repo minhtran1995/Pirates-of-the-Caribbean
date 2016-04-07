@@ -38,9 +38,8 @@ var managers;
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
                     // check if it's an health hit
-                    if (obj.name === "health") {
-                        this._player.hitHealth = true;
-                        obj.setImage("blank");
+                    if (obj.name === "goldChest") {
+                        this._player.hitMoney = true;
                         this._playScn.point += 1;
                         this._playScn.healthIMG.rotation += 4;
                         if (this._playScn.health < 100) {
@@ -56,7 +55,7 @@ var managers;
                         //console.log(Collision._healCounter);
                         Collision._healCounter++;
                     }
-                    else if (obj.name === "captainShield") {
+                    else if (obj.name === "enemy") {
                         this._player.hitShield = true;
                         this._playScn.point -= 2;
                         this._playScn.healthIMG.rotation -= 2;
@@ -75,7 +74,7 @@ var managers;
                         this._player.hitShield = false;
                         Collision._counter = 0;
                     }
-                    this._player.hitHealth = false;
+                    this._player.hitMoney = false;
                 }
             }
             Collision._counter++;

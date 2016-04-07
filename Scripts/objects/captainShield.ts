@@ -15,18 +15,20 @@ module objects {
     export class CaptainShield extends objects.GameObject {
 
         constructor() {
-            super("captainShield");
+            super("enemy");
+            this.name = "enemy";
             this.reset(this._rightBound);
-            this.name = "captainShield";
         }
 
         //reset objects location
         protected reset(value: number): void {
-            this.speed.x = Math.round((Math.random() * 5) + 3);
-            this.speed.y = Math.round((Math.random() * 6) - 3);
+            this.speed.x = Math.round((Math.random() * 4) + 1);
+
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
 
             this.x = value;
-            this.y = Math.round((Math.random() * this._bottomBound) + this._topBound);
+            this.y = Math.round((Math.random() * b + a));
 
         }
         //check if objects in the right location
@@ -39,10 +41,10 @@ module objects {
 
         //update objects in the scene
         public update(): void {
-            this.y -= this.speed.y;
-            this.x -= this.speed.x;
 
-            this.rotation -= Math.round((Math.random() * 3) + 7);
+            this.x -= this.speed.x;
+            
+            
             this._checkBound(this._leftBound);
         }
     }

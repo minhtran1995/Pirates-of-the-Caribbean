@@ -38,7 +38,7 @@ var objects;
             Player.left = false;
             Player.right = false;
             Player.counter = 0;
-            this.hitHealth = false;
+            this.hitMoney = false;
             this.hitShield = false;
             this.isShooting = false;
             this.isDead = false;
@@ -126,7 +126,7 @@ var objects;
                         console.log("Reload");
                     }
                 };
-                if (this.hitHealth) {
+                if (this.hitMoney) {
                     this.image = this.shuffleImages("health");
                 }
                 else {

@@ -20,16 +20,17 @@ var objects;
     var CaptainShield = (function (_super) {
         __extends(CaptainShield, _super);
         function CaptainShield() {
-            _super.call(this, "captainShield");
+            _super.call(this, "enemy");
+            this.name = "enemy";
             this.reset(this._rightBound);
-            this.name = "captainShield";
         }
         //reset objects location
         CaptainShield.prototype.reset = function (value) {
-            this.speed.x = Math.round((Math.random() * 5) + 3);
-            this.speed.y = Math.round((Math.random() * 6) - 3);
+            this.speed.x = Math.round((Math.random() * 4) + 1);
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
             this.x = value;
-            this.y = Math.round((Math.random() * this._bottomBound) + this._topBound);
+            this.y = Math.round((Math.random() * b + a));
         };
         //check if objects in the right location
         CaptainShield.prototype._checkBound = function (value) {
@@ -39,9 +40,7 @@ var objects;
         };
         //update objects in the scene
         CaptainShield.prototype.update = function () {
-            this.y -= this.speed.y;
             this.x -= this.speed.x;
-            this.rotation -= Math.round((Math.random() * 3) + 7);
             this._checkBound(this._leftBound);
         };
         return CaptainShield;
