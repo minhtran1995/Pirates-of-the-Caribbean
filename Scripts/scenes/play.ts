@@ -28,6 +28,7 @@ module scenes {
         private _player: objects.Player;
         private _cannon: objects.Cannon;
         private _collision: managers.Collision;
+        private _parrot: objects.Parrot;
 
         //score and health
         private _score: objects.Label;
@@ -111,6 +112,10 @@ module scenes {
                 config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
 
+            //parrot
+            this._parrot = new objects.Parrot();
+            this.addChild(this._parrot);
+
             //reload button 
             this._reloadButton = new objects.Button("reload",
                 50, 70, true);
@@ -161,6 +166,9 @@ module scenes {
 
             //update cannon angel
             this._cannon.update();
+
+            //update parrot
+            this._parrot.update();
 
             //update shields locations and check collision
             this._captainShields.forEach(shield => {

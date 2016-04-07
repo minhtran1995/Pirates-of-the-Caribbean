@@ -66,6 +66,9 @@ var scenes;
             this.health = 100;
             this._healthLabel = new objects.Label("%", "35px Merienda One", "#adffff", config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
+            //parrot
+            this._parrot = new objects.Parrot();
+            this.addChild(this._parrot);
             //reload button 
             this._reloadButton = new objects.Button("reload", 50, 70, true);
             this.addChild(this._reloadButton);
@@ -102,6 +105,8 @@ var scenes;
             this._player.update();
             //update cannon angel
             this._cannon.update();
+            //update parrot
+            this._parrot.update();
             //update shields locations and check collision
             this._captainShields.forEach(function (shield) {
                 shield.update();

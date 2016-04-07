@@ -60,6 +60,15 @@ var assetData = [
     { id: "healed2", src: "../../Assets/images/ironmanHealed2.png" },
     { id: "healed3", src: "../../Assets/images/ironmanHealed3.png" },
     { id: "health", src: "../../Assets/images/health-fixed.png" },
+    //parrot
+    { id: "parrot", src: "../../Assets/sample/parrot/parrot.png" },
+    { id: "parrot1", src: "../../Assets/sample/parrot/parrot1.png" },
+    { id: "parrot2", src: "../../Assets/sample/parrot/parrot2.png" },
+    { id: "parrot3", src: "../../Assets/sample/parrot/parrot3.png" },
+    { id: "parrot4", src: "../../Assets/sample/parrot/parrot4.png" },
+    { id: "parrot5", src: "../../Assets/sample/parrot/parrot5.png" },
+    { id: "parrot6", src: "../../Assets/sample/parrot/parrot6.png" },
+    { id: "parrot7", src: "../../Assets/sample/parrot/parrot7.png" },
     { id: "blank", src: "../../Assets/images/blank.png" },
     //audio
     { id: "bmg", src: "../../Assets/sample/bmg.mp3" },
