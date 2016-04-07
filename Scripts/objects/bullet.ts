@@ -31,7 +31,7 @@ module objects {
         public reset(value: number): void {
             this.y = this._player.y;
             this.x = value;
-
+            this.image = null;
         }
 
         //check if objects in the right location
@@ -45,6 +45,7 @@ module objects {
         public update(): void {
 
             if (this._player.isShooting) {
+                this.image = assets.getResult("bullet1");
                 this.x = stage.mouseX;
                 this.y = stage.mouseY;
 

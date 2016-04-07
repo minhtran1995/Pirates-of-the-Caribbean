@@ -26,7 +26,7 @@ module objects {
 
 
         public hitMoney: boolean;
-        public hitShield: boolean;
+        public hitEnemy: boolean;
 
         public isShooting: boolean;
         public isDead: boolean;
@@ -69,7 +69,7 @@ module objects {
             Player.counter = 0;
 
             this.hitMoney = false;
-            this.hitShield = false;
+            this.hitEnemy = false;
             this.isShooting = false;
             this.isDead = false;
         }
@@ -112,6 +112,10 @@ module objects {
                 if (e.which == 83) { Player.down = true; }
                 if (e.which == 65) { Player.left = true; }
                 if (e.which == 68) { Player.right = true; }
+                if (e.which == 32) {
+                    createjs.Sound.play("reloadSound");
+                    Cannon.isloaded = true;
+                }
             }
 
             if (Player.up) {
@@ -163,38 +167,36 @@ module objects {
                 };
 
 
-
-                if (this.hitMoney) {
+                if (this.hitEnemy) {
+                    this.image = this.shuffleImages("hit");
+                } else if (this.hitMoney) {
                     this.image = this.shuffleImages("health");
+                } else {
+                    this.playerAnimation();
                 }
-                else {
-                    if (this.hitShield) {
-                        this.image = this.shuffleImages("hit");
-                    }
-                    else {
-                        if (!Player.flag) {
-                            this.image = this.shuffleImages("");
-                            this.isShooting = false;
 
-
-                        }
-                        else {
-                            if (Player.counter <= 2) {
-                                this.image = this.shuffleImages("shoot");
-                                this.isShooting = true;
-                            }
-                            else {
-                                this.isShooting = false;
-                            }
-                            Player.counter++;
-                        }
-                    }
-                }
             }
             this._checkBounds();
         }
 
+        public playerAnimation(): void {
+            if (!Player.flag) {
+                this.image = this.shuffleImages("");
 
+            }
+            else {
+                if (Player.counter <= 2) {
+                    this.image = this.shuffleImages("shoot");
+                    this.isShooting = true;
+                    Cannon.shootCannon = true;
+                }
+                else {
+                    this.isShooting = false;
+                }
+
+                Player.counter++;
+            }
+        }
 
 
 

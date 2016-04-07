@@ -39,7 +39,7 @@ var objects;
             Player.right = false;
             Player.counter = 0;
             this.hitMoney = false;
-            this.hitShield = false;
+            this.hitEnemy = false;
             this.isShooting = false;
             this.isDead = false;
         }
@@ -88,6 +88,10 @@ var objects;
                 if (e.which == 68) {
                     Player.right = true;
                 }
+                if (e.which == 32) {
+                    createjs.Sound.play("reloadSound");
+                    objects.Cannon.isloaded = true;
+                }
             };
             if (Player.up) {
                 this.y--;
@@ -126,32 +130,33 @@ var objects;
                         console.log("Reload");
                     }
                 };
-                if (this.hitMoney) {
+                if (this.hitEnemy) {
+                    this.image = this.shuffleImages("hit");
+                }
+                else if (this.hitMoney) {
                     this.image = this.shuffleImages("health");
                 }
                 else {
-                    if (this.hitShield) {
-                        this.image = this.shuffleImages("hit");
-                    }
-                    else {
-                        if (!Player.flag) {
-                            this.image = this.shuffleImages("");
-                            this.isShooting = false;
-                        }
-                        else {
-                            if (Player.counter <= 2) {
-                                this.image = this.shuffleImages("shoot");
-                                this.isShooting = true;
-                            }
-                            else {
-                                this.isShooting = false;
-                            }
-                            Player.counter++;
-                        }
-                    }
+                    this.playerAnimation();
                 }
             }
             this._checkBounds();
+        };
+        Player.prototype.playerAnimation = function () {
+            if (!Player.flag) {
+                this.image = this.shuffleImages("");
+            }
+            else {
+                if (Player.counter <= 2) {
+                    this.image = this.shuffleImages("shoot");
+                    this.isShooting = true;
+                    objects.Cannon.shootCannon = true;
+                }
+                else {
+                    this.isShooting = false;
+                }
+                Player.counter++;
+            }
         };
         //change player images - Animation
         Player.prototype.shuffleImages = function (val) {

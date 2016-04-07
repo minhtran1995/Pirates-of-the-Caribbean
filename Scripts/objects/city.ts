@@ -23,7 +23,7 @@ module objects {
         }
 
         //reset objects location
-        protected reset(value: number): void {
+        public reset(value: number): void {
             this.x = value;
         }
         //check if objects in the right location

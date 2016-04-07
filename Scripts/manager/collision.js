@@ -17,15 +17,13 @@ var managers;
         function Collision(player, playScene) {
             this._player = player;
             Collision._counter = 0;
-            Collision._healCounter = 0;
-            Collision._shockCounter = 0;
             this._playScn = playScene;
         }
         Collision.prototype.distance = function (startPoint, endPoint) {
             return Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
         };
         //check collision between player and objects
-        Collision.prototype.check = function (obj) {
+        Collision.prototype.checkEnemyCollision = function (obj) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
             var playerHalfWidth = this._player.width * 0.5;
@@ -37,47 +35,58 @@ var managers;
             endPoint.y = obj.y;
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
-                    // check if it's an health hit
-                    if (obj.name === "goldChest") {
-                        this._player.hitMoney = true;
-                        this._playScn.point += 1;
-                        this._playScn.healthIMG.rotation += 4;
-                        if (this._playScn.health < 100) {
-                            this._playScn.health += 0.5;
-                        }
-                        if (this._playScn.health > 100) {
-                            this._playScn.health = 100;
-                        }
-                        if (Collision._healCounter % 60 === 0) {
-                            createjs.Sound.play("heal");
-                            Collision._healCounter = 0;
-                        }
-                        //console.log(Collision._healCounter);
-                        Collision._healCounter++;
-                    }
-                    else if (obj.name === "enemy") {
-                        this._player.hitShield = true;
-                        this._playScn.point -= 2;
-                        this._playScn.healthIMG.rotation -= 2;
-                        this._playScn.health -= 0.1;
-                        if (Collision._shockCounter % 60 === 0) {
+                    if (!obj.isColliding) {
+                        // check if it's a enemy hit
+                        if (obj.name === "enemy") {
+                            this._player.hitEnemy = true;
+                            this._playScn.point -= 10;
+                            this._playScn.healthIMG.rotation -= 2;
+                            this._playScn.health -= 10;
                             createjs.Sound.play("shocked").volume = 0.5;
-                            Collision._shockCounter = 0;
                         }
-                        Collision._shockCounter++;
+                        obj.isColliding = true;
                     }
                 }
                 else {
-                    //set this line after a while 
-                    //this is a drity fix
-                    if (Collision._counter % 120 === 0) {
-                        this._player.hitShield = false;
-                        Collision._counter = 0;
+                    obj.isColliding = false;
+                    this._player.hitEnemy = false;
+                }
+            }
+        };
+        Collision.prototype.checkHealthCollision = function (obj) {
+            var startPoint = new createjs.Point();
+            var endPoint = new createjs.Point();
+            var playerHalfWidth = this._player.width * 0.5;
+            var objHalfWidth = obj.width * 0.5;
+            var minDistance = playerHalfWidth + objHalfWidth;
+            startPoint.x = this._player.x;
+            startPoint.y = this._player.y;
+            endPoint.x = obj.x;
+            endPoint.y = obj.y;
+            if (!this._player.isDead) {
+                if (this.distance(startPoint, endPoint) < minDistance) {
+                    if (!obj.isColliding) {
+                        // check if it's an health hit
+                        if (obj.name === "goldChest") {
+                            this._player.hitMoney = true;
+                            this._playScn.point += 100;
+                            this._playScn.healthIMG.rotation += 10;
+                            if (this._playScn.health < 100) {
+                                this._playScn.health += 10;
+                            }
+                            if (this._playScn.health > 100) {
+                                this._playScn.health = 100;
+                            }
+                            createjs.Sound.play("heal");
+                        }
+                        obj.isColliding = true;
                     }
+                }
+                else {
+                    obj.isColliding = false;
                     this._player.hitMoney = false;
                 }
             }
-            Collision._counter++;
         };
         //check collision between bullet and objects
         Collision.prototype.bulletCollision = function (obj1, obj2) {
@@ -92,11 +101,22 @@ var managers;
             endPoint.y = obj2.y;
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
-                    //console.log("hit");
-                    obj2.speed.y = Math.round((Math.random() * 30) - 15);
-                    obj2.speed.x += 2;
-                    this._playScn.point += 10;
-                    createjs.Sound.play("ricochet");
+                    if (obj2.name === "enemy") {
+                        if (Collision._counter < 2) {
+                            obj2.speed.x += 0.5;
+                            obj2.x += obj2.width * 0.5;
+                            obj2.rotation = 60;
+                            this._playScn.point += 5;
+                            obj2.rotation = 0;
+                            obj2.image = assets.getResult("explosion");
+                            createjs.Sound.play("ricochet");
+                            Collision._counter += 5;
+                        }
+                        else {
+                            obj2.reset(config.Screen.WIDTH + obj2.width);
+                            Collision._counter = 0;
+                        }
+                    }
                 }
                 else {
                 }

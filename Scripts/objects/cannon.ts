@@ -5,6 +5,7 @@ module objects {
 
 
         public static isloaded: boolean;
+        public static shootCannon: boolean;
 
 
         constructor(player: Player) {
@@ -14,22 +15,25 @@ module objects {
             this.y = this._player.y;
             this.x = this._player.x;
             Cannon.isloaded = true;
+            Cannon.shootCannon = false;
         }
 
 
         //update objects in the scene
         public update(): void {
 
+
             this.y = this._player.y + 20;
             this.x = this._player.x + 50;
 
-            if (Cannon.isloaded) {
+            if (Cannon.shootCannon) {
                 if (this._player.isShooting) {
-                    //animation here 
-                    this.image = this.shuffleImages("shoot");
+                    this.image = Cannon.shuffleImages("shoot");
+
                 }
                 else {
-                    this.image = this.shuffleImages("");
+                    this.image = Cannon.shuffleImages("");
+
                 }
 
                 //equation to make corresponding bullet direction
@@ -43,7 +47,7 @@ module objects {
 
         }
 
-        public shuffleImages(val: string): Object {
+        public static shuffleImages(val: string): Object {
             var obj = new Array<Object>();
             obj[0] = assets.getResult("cannon");
             obj[1] = assets.getResult("cannon-shoot");

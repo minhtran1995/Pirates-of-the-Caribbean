@@ -18,16 +18,14 @@ module managers {
         private _playScn: scenes.Play;
 
         private static _counter: number;
-        private static _healCounter: number;
-        private static _shockCounter: number;
+
 
 
 
         constructor(player: objects.Player, playScene: scenes.Play) {
             this._player = player;
             Collision._counter = 0;
-            Collision._healCounter = 0;
-            Collision._shockCounter = 0;
+
             this._playScn = playScene;
 
         }
@@ -36,8 +34,10 @@ module managers {
             return Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
         }
 
+
+
         //check collision between player and objects
-        public check(obj: objects.GameObject): void {
+        public checkEnemyCollision(obj: objects.CaptainShield): void {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
 
@@ -54,65 +54,69 @@ module managers {
 
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
-                    // check if it's an health hit
-                    if (obj.name === "goldChest") {
-                        this._player.hitMoney = true;                       
-                        this._playScn.point += 1;
-                        this._playScn.healthIMG.rotation += 4;
-                        if (this._playScn.health < 100) {
-                            this._playScn.health += 0.5;
-                        }
-                        if (this._playScn.health > 100) {
-                            this._playScn.health = 100;
-                        }
-
-
-
-                        if (Collision._healCounter % 60 === 0) {
-                            createjs.Sound.play("heal");
-                            Collision._healCounter = 0;
-                        }
-
-                        //console.log(Collision._healCounter);
-                        Collision._healCounter++;
-
-
-
-                    }
-                    // check if it's a captainShield hit
-                    else if (obj.name === "enemy") {
-                        this._player.hitShield = true;
-                        this._playScn.point -= 2;
-                        this._playScn.healthIMG.rotation -= 2;
-                        this._playScn.health -= 0.1;
-
-
-                        if (Collision._shockCounter % 60 === 0) {
+                    if (!obj.isColliding) {
+                        // check if it's a enemy hit
+                        if (obj.name === "enemy") {
+                            this._player.hitEnemy = true;
+                            this._playScn.point -= 10;
+                            this._playScn.healthIMG.rotation -= 2;
+                            this._playScn.health -= 10;
                             createjs.Sound.play("shocked").volume = 0.5;
-                            Collision._shockCounter = 0;
                         }
-
-                        Collision._shockCounter++;
+                        obj.isColliding = true;
                     }
+                } else {
+                    obj.isColliding = false;
+                    this._player.hitEnemy = false;
                 }
-                else {
-                    //set this line after a while 
-                    //this is a drity fix
-                    if (Collision._counter % 120 === 0) {
-                        this._player.hitShield = false;
-                        Collision._counter = 0;
-                    }
-                    this._player.hitMoney = false;
 
-                }
             }
-
-
-            Collision._counter++;
         }
 
+        public checkHealthCollision(obj: objects.Health): void {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var playerHalfWidth: number = this._player.width * 0.5;
+            var objHalfWidth: number = obj.width * 0.5;
+
+            var minDistance: number = playerHalfWidth + objHalfWidth;
+
+            startPoint.x = this._player.x;
+            startPoint.y = this._player.y;
+
+            endPoint.x = obj.x;
+            endPoint.y = obj.y;
+
+            if (!this._player.isDead) {
+                if (this.distance(startPoint, endPoint) < minDistance) {
+                    if (!obj.isColliding) {
+                        // check if it's an health hit
+                        if (obj.name === "goldChest") {
+                            this._player.hitMoney = true;
+                            this._playScn.point += 100;
+                            this._playScn.healthIMG.rotation += 10;
+                            if (this._playScn.health < 100) {
+                                this._playScn.health += 10;
+                            }
+                            if (this._playScn.health > 100) {
+                                this._playScn.health = 100;
+                            }
+                            createjs.Sound.play("heal");
+                        }
+                        obj.isColliding = true;
+                    }
+                } else {
+                    obj.isColliding = false;
+                    this._player.hitMoney = false;
+                }
+
+            }
+        }
+
+
         //check collision between bullet and objects
-        public bulletCollision(obj1: objects.Bullet, obj2: objects.CaptainShield) {
+        public bulletCollision(obj1: objects.Bullet, obj2: objects.GameObject) {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
 
@@ -129,13 +133,25 @@ module managers {
 
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
-                    //console.log("hit");
-                    obj2.speed.y = Math.round((Math.random() * 30) - 15);
-                    obj2.speed.x += 2;
-                    this._playScn.point += 10;
-                    createjs.Sound.play("ricochet");
-                }
-                else {
+
+                    if (obj2.name === "enemy") {
+                        if (Collision._counter < 2) {
+                            obj2.speed.x += 0.5;
+                            obj2.x += obj2.width * 0.5;
+                            obj2.rotation = 60;
+                            this._playScn.point += 5;
+                            obj2.rotation = 0;
+                            obj2.image = assets.getResult("explosion");
+                            createjs.Sound.play("ricochet");
+                            Collision._counter += 5;
+                        }
+                        else {
+                            obj2.reset(config.Screen.WIDTH + obj2.width);
+                            Collision._counter = 0;
+                        }
+                    }
+
+                } else {
 
                 }
             }

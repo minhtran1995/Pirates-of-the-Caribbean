@@ -26,6 +26,8 @@ var objects;
         }
         //reset objects location
         CaptainShield.prototype.reset = function (value) {
+            this.image = assets.getResult("enemy");
+            this.rotation = 0;
             this.speed.x = Math.round((Math.random() * 4) + 1);
             var a = (440 - this.height * 0.5);
             var b = config.Screen.HEIGHT - a - this.height * 0.5;

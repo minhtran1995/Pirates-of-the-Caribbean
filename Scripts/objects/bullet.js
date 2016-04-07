@@ -32,6 +32,7 @@ var objects;
         Bullet.prototype.reset = function (value) {
             this.y = this._player.y;
             this.x = value;
+            this.image = null;
         };
         //check if objects in the right location
         Bullet.prototype._checkBound = function (value) {
@@ -42,6 +43,7 @@ var objects;
         //update objects in the scene
         Bullet.prototype.update = function () {
             if (this._player.isShooting) {
+                this.image = assets.getResult("bullet1");
                 this.x = stage.mouseX;
                 this.y = stage.mouseY;
                 //equation to make corresponding bullet direction

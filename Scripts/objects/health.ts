@@ -22,7 +22,7 @@ module objects {
         }
 
         //reset health location
-        protected reset(value: number): void {
+        public reset(value: number): void {
             var a = (440 - this.height * 0.5);
             var b = config.Screen.HEIGHT - a - this.height * 0.5;
 

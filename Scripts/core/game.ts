@@ -41,6 +41,7 @@ var assetData: objects.Asset[] = [
     { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
     { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
     { id: "reload", src: "../../Assets/sample/reload-resized.png" },
+    { id: "explosion", src: "../../Assets/sample/explosion-resized.png" },
 
 
 
@@ -88,9 +89,9 @@ var assetData: objects.Asset[] = [
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
 
-    //{ id: "heal", src: "../../Assets/audio/heal.mp3" },
-    //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
-    //{ id: "shocked", src: "../../Assets/audio/shocked.mp3" },
+    { id: "heal", src: "../../Assets/audio/heal.mp3" },
+    { id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
+    { id: "shocked", src: "../../Assets/audio/shocked.mp3" },
 
 
 

@@ -21,7 +21,9 @@ module objects {
         }
 
         //reset objects location
-        protected reset(value: number): void {
+        public reset(value: number): void {
+            this.image = assets.getResult("enemy");
+            this.rotation = 0;
             this.speed.x = Math.round((Math.random() * 4) + 1);
 
             var a = (440 - this.height * 0.5);
@@ -43,8 +45,7 @@ module objects {
         public update(): void {
 
             this.x -= this.speed.x;
-            
-            
+
             this._checkBound(this._leftBound);
         }
     }

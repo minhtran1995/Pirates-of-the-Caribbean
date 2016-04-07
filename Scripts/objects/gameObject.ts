@@ -16,6 +16,7 @@ module objects {
         public speed: createjs.Point;
         public width: number;
         public height: number;
+        public isColliding: boolean;
 
         protected _leftBound: number;
         protected _rightBound: number;
@@ -43,7 +44,7 @@ module objects {
         }
 
         //reset ojbect location
-        protected reset(value: number): void {
+        public reset(value: number): void {
             this.x = value;
         }
 

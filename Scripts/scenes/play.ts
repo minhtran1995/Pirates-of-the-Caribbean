@@ -85,7 +85,7 @@ module scenes {
             this.addChild(this._cannon);
 
             //adding captain shields
-            this._captainShieldCount = 1;//number of shields
+            this._captainShieldCount = 3;//number of shields
             this._captainShields = new Array<objects.CaptainShield>();
 
 
@@ -165,22 +165,19 @@ module scenes {
             //update shields locations and check collision
             this._captainShields.forEach(shield => {
                 shield.update();
-                this._collision.check(shield);
+                this._collision.checkEnemyCollision(shield);
                 this._collision.bulletCollision(this._bullet, shield);
             });
 
             //update health locations and check collision
             this._health.forEach(h => {
                 h.update();
-                this._collision.check(h);
+                this._collision.checkHealthCollision(h);
             });
 
 
-            //update lables here
+
             this._score.text = "Score: " + this.point.toFixed(2);
-            if (!this._player.isDead) {
-                this.point = this.point + 0.01;
-            }
             this._healthLabel.text = this.health.toFixed(2) + " %";
 
             if (this.point < 0) {

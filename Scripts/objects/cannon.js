@@ -14,18 +14,18 @@ var objects;
             this.y = this._player.y;
             this.x = this._player.x;
             Cannon.isloaded = true;
+            Cannon.shootCannon = false;
         }
         //update objects in the scene
         Cannon.prototype.update = function () {
             this.y = this._player.y + 20;
             this.x = this._player.x + 50;
-            if (Cannon.isloaded) {
+            if (Cannon.shootCannon) {
                 if (this._player.isShooting) {
-                    //animation here 
-                    this.image = this.shuffleImages("shoot");
+                    this.image = Cannon.shuffleImages("shoot");
                 }
                 else {
-                    this.image = this.shuffleImages("");
+                    this.image = Cannon.shuffleImages("");
                 }
                 //equation to make corresponding bullet direction
                 if (stage.mouseX <= this.x) {
@@ -36,7 +36,7 @@ var objects;
                 }
             }
         };
-        Cannon.prototype.shuffleImages = function (val) {
+        Cannon.shuffleImages = function (val) {
             var obj = new Array();
             obj[0] = assets.getResult("cannon");
             obj[1] = assets.getResult("cannon-shoot");

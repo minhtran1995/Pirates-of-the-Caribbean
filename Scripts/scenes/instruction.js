@@ -29,7 +29,7 @@ var scenes;
         Instruction.prototype.start = function () {
             this._setupBackground("blank");
             this._fadeIn(500);
-            this._label = new objects.Label("Instruction goes here \nW A S D to control\nLeft Click to shoot", "35px Merienda One", "#B40404", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
+            this._label = new objects.Label("Instruction goes here \nW A S D to control\nLeft Click to shoot\nSpaceBar to reload", "35px Merienda One", "#B40404", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
             this.addChild(this._label);
             // add the Start button to the instruction scene
             this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 260, true);

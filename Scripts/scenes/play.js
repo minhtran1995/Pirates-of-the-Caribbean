@@ -50,7 +50,7 @@ var scenes;
             this._cannon = new objects.Cannon(this._player);
             this.addChild(this._cannon);
             //adding captain shields
-            this._captainShieldCount = 1; //number of shields
+            this._captainShieldCount = 3; //number of shields
             this._captainShields = new Array();
             for (var shield = 0; shield < this._captainShieldCount; shield++) {
                 this._captainShields[shield] = new objects.CaptainShield();
@@ -105,19 +105,15 @@ var scenes;
             //update shields locations and check collision
             this._captainShields.forEach(function (shield) {
                 shield.update();
-                _this._collision.check(shield);
+                _this._collision.checkEnemyCollision(shield);
                 _this._collision.bulletCollision(_this._bullet, shield);
             });
             //update health locations and check collision
             this._health.forEach(function (h) {
                 h.update();
-                _this._collision.check(h);
+                _this._collision.checkHealthCollision(h);
             });
-            //update lables here
             this._score.text = "Score: " + this.point.toFixed(2);
-            if (!this._player.isDead) {
-                this.point = this.point + 0.01;
-            }
             this._healthLabel.text = this.health.toFixed(2) + " %";
             if (this.point < 0) {
                 this.point = 0;
