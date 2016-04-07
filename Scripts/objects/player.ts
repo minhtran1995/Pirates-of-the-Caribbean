@@ -142,6 +142,7 @@ module objects {
             window.onmouseup = function() {
                 Player.flag = false;
                 Player.counter = 0;
+                
             }
 
             if (this.isDead) {
@@ -169,9 +170,13 @@ module objects {
 
                 if (this.hitEnemy) {
                     this.image = this.shuffleImages("hit");
-                } else if (this.hitMoney) {
+                }
+
+                if (this.hitMoney) {
                     this.image = this.shuffleImages("health");
-                } else {
+                }
+
+                if (!this.hitMoney && !this.hitEnemy) {
                     this.playerAnimation();
                 }
 

@@ -85,7 +85,7 @@ module scenes {
             this.addChild(this._cannon);
 
             //adding captain shields
-            this._captainShieldCount = 3;//number of shields
+            this._captainShieldCount = 2;//number of shields
             this._captainShields = new Array<objects.CaptainShield>();
 
 
@@ -153,7 +153,7 @@ module scenes {
                 this._bullet.update();
             }
             else {
-                this._bullet.reset(this._player.x);
+                this._bullet.reset(-config.Screen.WIDTH);
             }
 
             //update player location

@@ -50,7 +50,7 @@ var scenes;
             this._cannon = new objects.Cannon(this._player);
             this.addChild(this._cannon);
             //adding captain shields
-            this._captainShieldCount = 3; //number of shields
+            this._captainShieldCount = 2; //number of shields
             this._captainShields = new Array();
             for (var shield = 0; shield < this._captainShieldCount; shield++) {
                 this._captainShields[shield] = new objects.CaptainShield();
@@ -96,7 +96,7 @@ var scenes;
                 this._bullet.update();
             }
             else {
-                this._bullet.reset(this._player.x);
+                this._bullet.reset(-config.Screen.WIDTH);
             }
             //update player location
             this._player.update();

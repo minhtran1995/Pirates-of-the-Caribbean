@@ -37,7 +37,7 @@ module objects {
         //check if objects in the right location
         protected _checkBound(value: number): void {
             if (this.x >= value) {
-                this.reset(this._player.x);
+                this.reset(-config.Screen.WIDTH);
             }
         }
 
@@ -57,12 +57,9 @@ module objects {
                     this.rotation = Math.atan((this.y - this._player.y) / (this.x - this._player.x)) * 180 / Math.PI;
                 }
             }
-            else {
-                this.y = this._player.y;
-                this.x = this._player.x;
-            }
+            
 
-
+            
 
 
         }

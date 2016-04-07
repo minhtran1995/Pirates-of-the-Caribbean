@@ -60,14 +60,29 @@ module managers {
                             this._player.hitEnemy = true;
                             this._playScn.point -= 10;
                             this._playScn.healthIMG.rotation -= 2;
-                            this._playScn.health -= 10;
+                            this._playScn.health -= 8;
                             createjs.Sound.play("shocked").volume = 0.5;
                         }
+                        else {
+                            this._player.hitEnemy = true;
+                        }
+
                         obj.isColliding = true;
                     }
                 } else {
                     obj.isColliding = false;
-                    this._player.hitEnemy = false;
+                    if (this._player.hitEnemy) {
+                        if (Collision._counter % 80 === 0) {
+                            this._player.hitEnemy = false;
+                            Collision._counter = 0;
+                        }
+                        else {
+                            this._player.hitEnemy = true;
+
+                        }
+                        Collision._counter++;
+                    }
+
                 }
 
             }
@@ -137,10 +152,10 @@ module managers {
                     if (obj2.name === "enemy") {
                         if (Collision._counter < 2) {
                             obj2.speed.x += 0.5;
-                            obj2.x += obj2.width * 0.5;
-                            obj2.rotation = 60;
-                            this._playScn.point += 5;
+                            obj2.x += obj2.width * 0.25;
                             obj2.rotation = 0;
+                            this._playScn.point += 5;
+                            
                             obj2.image = assets.getResult("explosion");
                             createjs.Sound.play("ricochet");
                             Collision._counter += 5;
