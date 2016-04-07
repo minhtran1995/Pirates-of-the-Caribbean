@@ -20,15 +20,25 @@ module objects {
             this.parrotArray[5] = assets.getResult("parrot5");
             this.parrotArray[6] = assets.getResult("parrot6");
             this.parrotArray[7] = assets.getResult("parrot7");
+
+            this.x = config.Screen.CENTER_X;
+            this.y = config.Screen.CENTER_Y;
+
+            this._leftBound = this.width * 0.5;
+            this._rightBound = config.Screen.WIDTH - this.width * 0.5
+            this._topBound = this.height * 0.5;
+            this._bottomBound = config.Screen.HEIGHT - this.height * 0.5;
         }
 
         //reset health location
         public reset(value: number): void {
-            var a = (440 - this.height * 0.5);
-            var b = config.Screen.HEIGHT - a - this.height * 0.5;
+
 
             this.x = value;
-            this.y = Math.round((Math.random() * b + a));
+            this.y = Math.round((Math.random() * config.Screen.HEIGHT));
+
+            this.speed.x = Math.random() * 3;
+            this.speed.y = Math.random() * 3;
         }
 
         //check if health item is in right location
@@ -41,18 +51,48 @@ module objects {
 
         //update my objects in the scene
         public update(): void {
-            this.x = config.Screen.CENTER_X;
+
 
             if (Parrot.delay % 180 === 0) {
                 if (this.scaleX === 1) {
                     //this will flip the image horizontally
                     this.scaleX = -1;
+
                 } else {
                     this.scaleX = 1;
                 }
+
                 Parrot.delay = 0;
+            }
+
+            if (this.x > this._rightBound || this.x < this._leftBound || this.y > this._bottomBound || this.y < this._topBound) {
+                if (this.x > this._rightBound) {
+                    this.speed.x = Math.random() * -2;
+                    this.speed.y = Math.random() * -2 + 1;
+                }
+                if (this.x < this._leftBound) {
+                    this.speed.x = Math.random() * 2;
+                    this.speed.y = Math.random() * -2 + 1;
+                }
+                if (this.y < this._topBound) {
+                    this.speed.x = Math.random() * -2 + 1;
+                    this.speed.y = Math.random() * 2;
+
+                }
+                if (this.y > this._bottomBound) {
+                    this.speed.x = Math.random() * -2 + 1;
+                    this.speed.y = Math.random() * -2;
+                }
+
+                this.x += this.speed.x;
+                this.y += this.speed.y;
+
+            } else {
+                this.x += this.speed.x;
+                this.y += this.speed.y;
 
             }
+
 
 
             if (Parrot.delay % 10 === 0) {

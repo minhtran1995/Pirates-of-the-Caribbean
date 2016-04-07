@@ -70,10 +70,10 @@ var scenes;
             this._parrot = new objects.Parrot();
             this.addChild(this._parrot);
             //reload button 
-            this._reloadButton = new objects.Button("reload", 50, 70, true);
+            this._reloadButton = new objects.Button("reload", 50, 130, true);
             this.addChild(this._reloadButton);
             this._reloadButton.on("click", this._reloadButtonClick, this);
-            this._reloadLabel = new objects.Label("Reload Pls !", "Bold 25px Merienda One", "#b30000", 150, 70, true);
+            this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One", "#FF0000", 50, 60, true);
             this.addChild(this._reloadLabel);
             //dead message
             this._deadLabel = new objects.Label("You are Dead !", "Bold 50px Merienda One", "#ff1a1a", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
@@ -107,6 +107,7 @@ var scenes;
             this._cannon.update();
             //update parrot
             this._parrot.update();
+            this._collision.bulletCollision(this._bullet, this._parrot);
             //update shields locations and check collision
             this._captainShields.forEach(function (shield) {
                 shield.update();
@@ -155,15 +156,16 @@ var scenes;
                 Play._counter++;
             }
             if (!objects.Cannon.isloaded) {
+                this._reloadLabel.text = "Reload Pls";
                 this._reloadButton.visible = true;
                 this._reloadButton.mouseEnabled = true;
-                this._reloadLabel.visible = true;
             }
             else {
+                this._reloadLabel.text = "Bullet :" + objects.Player.bulletCounter;
                 this._reloadButton.visible = false;
                 this._reloadButton.mouseEnabled = false;
-                this._reloadLabel.visible = false;
             }
+            this._reloadLabel.visible = true;
         };
         //EVENT HANDLERS ++++++++++++++++++++
         // LEFT_CAVE Button click event handler
@@ -173,6 +175,7 @@ var scenes;
             this._reloadButton.mouseEnabled = false;
             this._reloadLabel.visible = false;
             objects.Cannon.isloaded = true;
+            objects.Player.bulletCounter = 8;
         };
         return Play;
     })(objects.Scene);

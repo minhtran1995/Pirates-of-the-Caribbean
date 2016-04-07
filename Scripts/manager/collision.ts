@@ -150,14 +150,15 @@ module managers {
                 if (this.distance(startPoint, endPoint) < minDistance) {
 
                     if (obj2.name === "enemy") {
-                        if (Collision._counter < 2) {
+                        if (Collision._counter < 1) {
                             obj2.speed.x += 0.5;
                             obj2.x += obj2.width * 0.25;
                             obj2.rotation = 0;
                             this._playScn.point += 5;
-                            
+
                             obj2.image = assets.getResult("explosion");
                             createjs.Sound.play("ricochet");
+                            //set this lower to make enemies weaker
                             Collision._counter += 5;
                         }
                         else {
@@ -165,13 +166,34 @@ module managers {
                             Collision._counter = 0;
                         }
                     }
+                    else if (obj2.name === "parrot") {
+                        if (Collision._counter < 1) {
+                            createjs.Sound.play("parrotSound", 0, 0, 0, 2, 2);
+                            
+                            //health added
+                            if (this._playScn.health < 100) {
+                                if (this._playScn.health > 90)
+                                { this._playScn.health += 100 - this._playScn.health; }
+                                else {
+                                    this._playScn.health += 10;
+                                }
 
-                } else {
+                            }
 
+                            Collision._counter++;
+                            obj2.reset(config.Screen.WIDTH + obj2.width);
+
+
+                        }
+                        Collision._counter = 0;
+
+                    } else {
+
+                    }
                 }
+
+
             }
-
-
         }
     }
 }

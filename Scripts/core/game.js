@@ -75,9 +75,7 @@ var assetData = [
     { id: "menuBGM", src: "../../Assets/sample/menuBGM.mp3" },
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
-    { id: "heal", src: "../../Assets/audio/heal.mp3" },
-    { id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
-    { id: "shocked", src: "../../Assets/audio/shocked.mp3" },
+    { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
 ];
 //preload assets
 function preload() {

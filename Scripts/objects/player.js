@@ -42,6 +42,7 @@ var objects;
             this.hitEnemy = false;
             this.isShooting = false;
             this.isDead = false;
+            Player.bulletCounter = 8;
         }
         //check if player is in the allowed range
         Player.prototype._checkBounds = function () {
@@ -91,6 +92,7 @@ var objects;
                 if (e.which == 32) {
                     createjs.Sound.play("reloadSound");
                     objects.Cannon.isloaded = true;
+                    objects.Player.bulletCounter = 8;
                 }
             };
             if (Player.up) {
@@ -124,7 +126,10 @@ var objects;
                         console.log("Shoot");
                         Player.flag = true;
                         createjs.Sound.play("leftClick");
-                        objects.Cannon.isloaded = false;
+                        if (Player.bulletCounter < 2) {
+                            objects.Cannon.isloaded = false;
+                        }
+                        Player.bulletCounter--;
                     }
                     else {
                         console.log("Reload");

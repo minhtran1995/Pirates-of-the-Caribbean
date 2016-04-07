@@ -31,6 +31,7 @@ module objects {
         public isShooting: boolean;
         public isDead: boolean;
 
+
         //Static Variables++++++
         private static flag: boolean;
 
@@ -39,7 +40,7 @@ module objects {
         private static left: boolean;
         private static right: boolean;
         public static counter: number;
-
+        public static bulletCounter: number;
 
 
         constructor() {
@@ -72,6 +73,7 @@ module objects {
             this.hitEnemy = false;
             this.isShooting = false;
             this.isDead = false;
+            Player.bulletCounter = 8;
         }
 
 
@@ -115,6 +117,7 @@ module objects {
                 if (e.which == 32) {
                     createjs.Sound.play("reloadSound");
                     Cannon.isloaded = true;
+                    objects.Player.bulletCounter = 8;
                 }
             }
 
@@ -142,7 +145,7 @@ module objects {
             window.onmouseup = function() {
                 Player.flag = false;
                 Player.counter = 0;
-                
+
             }
 
             if (this.isDead) {
@@ -159,7 +162,11 @@ module objects {
                         console.log("Shoot");
                         Player.flag = true;
                         createjs.Sound.play("leftClick");
-                        Cannon.isloaded = false;
+
+                        if (Player.bulletCounter < 2) {
+                            Cannon.isloaded = false;
+                        }
+                        Player.bulletCounter--;
                     }
                     else {
                         console.log("Reload");
