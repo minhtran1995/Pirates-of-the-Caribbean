@@ -103,7 +103,7 @@ var assetData: objects.Asset[] = [
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
     { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
 
-    { id: "money", src: "../../Assets/sample/money.mp3" },
+    { id: "money", src: "../../Assets/sample/money-edited.mp3" },
     //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
     { id: "broken", src: "../../Assets/sample/broken.mp3" },
 
