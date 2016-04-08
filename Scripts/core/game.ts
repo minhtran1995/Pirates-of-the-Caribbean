@@ -77,7 +77,9 @@ var assetData: objects.Asset[] = [
     { id: "healed1", src: "../../Assets/images/ironmanHealed1.png" },
     { id: "healed2", src: "../../Assets/images/ironmanHealed2.png" },
     { id: "healed3", src: "../../Assets/images/ironmanHealed3.png" },
-    { id: "health", src: "../../Assets/images/health-fixed.png" },
+
+    //health image
+    { id: "health", src: "../../Assets/sample/health-resized.png" },
 
     //parrot
     { id: "parrot", src: "../../Assets/sample/parrot/parrot.png" },
@@ -101,9 +103,9 @@ var assetData: objects.Asset[] = [
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
     { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
 
-    //{ id: "heal", src: "../../Assets/audio/heal.mp3" },
+    { id: "money", src: "../../Assets/sample/money.mp3" },
     //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
-    //{ id: "shocked", src: "../../Assets/audio/shocked.mp3" },
+    { id: "broken", src: "../../Assets/sample/broken.mp3" },
 
 
 

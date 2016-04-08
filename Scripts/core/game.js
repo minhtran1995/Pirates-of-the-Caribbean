@@ -59,7 +59,8 @@ var assetData = [
     { id: "healed1", src: "../../Assets/images/ironmanHealed1.png" },
     { id: "healed2", src: "../../Assets/images/ironmanHealed2.png" },
     { id: "healed3", src: "../../Assets/images/ironmanHealed3.png" },
-    { id: "health", src: "../../Assets/images/health-fixed.png" },
+    //health image
+    { id: "health", src: "../../Assets/sample/health-resized.png" },
     //parrot
     { id: "parrot", src: "../../Assets/sample/parrot/parrot.png" },
     { id: "parrot1", src: "../../Assets/sample/parrot/parrot1.png" },
@@ -76,6 +77,9 @@ var assetData = [
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
     { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
+    { id: "money", src: "../../Assets/sample/money.mp3" },
+    //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
+    { id: "broken", src: "../../Assets/sample/broken.mp3" },
 ];
 //preload assets
 function preload() {

@@ -17,6 +17,7 @@ var managers;
         function Collision(player, playScene) {
             this._player = player;
             Collision._counter = 0;
+            Collision._healthHit = 0;
             this._playScn = playScene;
         }
         Collision.prototype.distance = function (startPoint, endPoint) {
@@ -42,7 +43,7 @@ var managers;
                             this._playScn.point -= 10;
                             this._playScn.healthIMG.rotation -= 2;
                             this._playScn.health -= 8;
-                            createjs.Sound.play("shocked").volume = 0.5;
+                            createjs.Sound.play("broken").volume = 1;
                         }
                         else {
                             this._player.hitEnemy = true;
@@ -83,20 +84,25 @@ var managers;
                             this._player.hitMoney = true;
                             this._playScn.point += 100;
                             this._playScn.healthIMG.rotation += 10;
-                            if (this._playScn.health < 100) {
-                                this._playScn.health += 10;
-                            }
-                            if (this._playScn.health > 100) {
-                                this._playScn.health = 100;
-                            }
-                            createjs.Sound.play("heal");
+                            createjs.Sound.play("money");
+                            //place it far far away so it will float black
+                            obj.reset((config.Screen.WIDTH + obj.width) * 2);
                         }
                         obj.isColliding = true;
                     }
                 }
                 else {
                     obj.isColliding = false;
-                    this._player.hitMoney = false;
+                    if (this._player.hitMoney) {
+                        if (Collision._healthHit % 80 === 0) {
+                            this._player.hitMoney = false;
+                            Collision._healthHit = 0;
+                        }
+                        else {
+                            this._player.hitMoney = true;
+                        }
+                        Collision._healthHit++;
+                    }
                 }
             }
         };

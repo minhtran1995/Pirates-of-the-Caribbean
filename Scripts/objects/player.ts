@@ -41,7 +41,7 @@ module objects {
         private static right: boolean;
         public static counter: number;
         public static bulletCounter: number;
-
+        private static didTheStuff: boolean;
 
         constructor() {
             super(assets.getResult("ironman"));
@@ -74,6 +74,8 @@ module objects {
             this.isShooting = false;
             this.isDead = false;
             Player.bulletCounter = 8;
+            
+            Player.didTheStuff = false;
         }
 
 
@@ -110,15 +112,25 @@ module objects {
 
 
             document.onkeydown = function(e) {
+
+
                 if (e.which == 87) { Player.up = true; }
                 if (e.which == 83) { Player.down = true; }
                 if (e.which == 65) { Player.left = true; }
                 if (e.which == 68) { Player.right = true; }
                 if (e.which == 32) {
-                    createjs.Sound.play("reloadSound");
+                    if (!Player.didTheStuff) {
+                        createjs.Sound.play("reloadSound");
+                        Player.didTheStuff = true;
+                    }
+
                     Cannon.isloaded = true;
                     objects.Player.bulletCounter = 8;
+                }else{
+                    Player.didTheStuff = false;
                 }
+                
+
             }
 
             if (Player.up) {

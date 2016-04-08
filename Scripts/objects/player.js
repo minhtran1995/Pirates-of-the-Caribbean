@@ -43,6 +43,7 @@ var objects;
             this.isShooting = false;
             this.isDead = false;
             Player.bulletCounter = 8;
+            Player.didTheStuff = false;
         }
         //check if player is in the allowed range
         Player.prototype._checkBounds = function () {
@@ -90,9 +91,15 @@ var objects;
                     Player.right = true;
                 }
                 if (e.which == 32) {
-                    createjs.Sound.play("reloadSound");
+                    if (!Player.didTheStuff) {
+                        createjs.Sound.play("reloadSound");
+                        Player.didTheStuff = true;
+                    }
                     objects.Cannon.isloaded = true;
                     objects.Player.bulletCounter = 8;
+                }
+                else {
+                    Player.didTheStuff = false;
                 }
             };
             if (Player.up) {
