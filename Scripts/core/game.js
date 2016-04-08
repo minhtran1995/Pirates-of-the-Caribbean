@@ -41,11 +41,12 @@ var assetData = [
     { id: "win", src: "../../Assets/images/win.jpg" },
     { id: "enemy", src: "../../Assets/sample/enemy-resized.png" },
     { id: "goldChest", src: "../../Assets/sample/goldChest-resized.png" },
-    //fly effect
-    { id: "ironman", src: "../../Assets/images/ironman.png" },
+    { id: "player", src: "../../Assets/sample/player-resized.png" },
+    /*
     { id: "ironman1", src: "../../Assets/images/ironman1.png" },
     { id: "ironman2", src: "../../Assets/images/ironman2.png" },
     { id: "ironman3", src: "../../Assets/images/ironman3.png" },
+    */
     { id: "ironmanShoot", src: "../../Assets/images/ironmanShoot.png" },
     { id: "arcReactorFixed", src: "../../Assets/images/arcReactor-fixed.png" },
     //hit effect
@@ -77,9 +78,12 @@ var assetData = [
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
     { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
+    { id: "outOfBullets", src: "../../Assets/sample/outOfBullets.mp3" },
     { id: "money", src: "../../Assets/sample/money-edited.mp3" },
     //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
     { id: "broken", src: "../../Assets/sample/broken.mp3" },
+    { id: "haha", src: "../../Assets/sample/haha.mp3" },
+    { id: "haha2", src: "../../Assets/sample/haha 2.mp3" },
 ];
 //preload assets
 function preload() {

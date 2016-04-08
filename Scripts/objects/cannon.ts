@@ -23,8 +23,8 @@ module objects {
         public update(): void {
 
 
-            this.y = this._player.y + 20;
-            this.x = this._player.x + 50;
+            this.y = this._player.y + 75;
+            this.x = this._player.x + 30;
 
             if (Cannon.shootCannon) {
                 if (this._player.isShooting) {

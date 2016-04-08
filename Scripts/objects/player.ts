@@ -44,7 +44,7 @@ module objects {
         private static didTheStuff: boolean;
 
         constructor() {
-            super(assets.getResult("ironman"));
+            super(assets.getResult("player"));
 
             this.y = 200;
             this.x = 0;
@@ -74,7 +74,7 @@ module objects {
             this.isShooting = false;
             this.isDead = false;
             Player.bulletCounter = 8;
-            
+
             Player.didTheStuff = false;
         }
 
@@ -126,10 +126,10 @@ module objects {
 
                     Cannon.isloaded = true;
                     objects.Player.bulletCounter = 8;
-                }else{
+                } else {
                     Player.didTheStuff = false;
                 }
-                
+
 
             }
 
@@ -181,6 +181,7 @@ module objects {
                         Player.bulletCounter--;
                     }
                     else {
+                        createjs.Sound.play("outOfBullets");
                         console.log("Reload");
                     }
 
@@ -210,7 +211,7 @@ module objects {
             }
             else {
                 if (Player.counter <= 2) {
-                    this.image = this.shuffleImages("shoot");
+                    //this.image = this.shuffleImages("shoot");
                     this.isShooting = true;
                     Cannon.shootCannon = true;
                 }
@@ -228,11 +229,13 @@ module objects {
         public shuffleImages(val: string): Object {
             var obj = new Array<Object>();
 
-            obj[0] = assets.getResult("ironman1");
+            obj[0] = assets.getResult("player");
+            ///////Unuused code
             obj[1] = assets.getResult("ironman2");
             obj[2] = assets.getResult("ironman3");
 
             obj[3] = assets.getResult("ironmanShoot");
+            ///////////////
 
             //healed animation
             obj[4] = assets.getResult("healed");
@@ -252,9 +255,10 @@ module objects {
 
 
 
-            var rand: number = Math.round(Math.random() * 2);
+            var rand;
 
             if (val === "") {
+                rand = 0;
                 return obj[rand];
             }
             else if (val === "shoot") {

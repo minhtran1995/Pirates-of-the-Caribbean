@@ -20,7 +20,7 @@ var objects;
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player() {
-            _super.call(this, assets.getResult("ironman"));
+            _super.call(this, assets.getResult("player"));
             this.y = 200;
             this.x = 0;
             this.width = this.getBounds().width;
@@ -139,6 +139,7 @@ var objects;
                         Player.bulletCounter--;
                     }
                     else {
+                        createjs.Sound.play("outOfBullets");
                         console.log("Reload");
                     }
                 };
@@ -160,7 +161,7 @@ var objects;
             }
             else {
                 if (Player.counter <= 2) {
-                    this.image = this.shuffleImages("shoot");
+                    //this.image = this.shuffleImages("shoot");
                     this.isShooting = true;
                     objects.Cannon.shootCannon = true;
                 }
@@ -173,10 +174,12 @@ var objects;
         //change player images - Animation
         Player.prototype.shuffleImages = function (val) {
             var obj = new Array();
-            obj[0] = assets.getResult("ironman1");
+            obj[0] = assets.getResult("player");
+            ///////Unuused code
             obj[1] = assets.getResult("ironman2");
             obj[2] = assets.getResult("ironman3");
             obj[3] = assets.getResult("ironmanShoot");
+            ///////////////
             //healed animation
             obj[4] = assets.getResult("healed");
             obj[5] = assets.getResult("healed1");
@@ -189,8 +192,9 @@ var objects;
             obj[11] = assets.getResult("ironmanHit3");
             //die
             obj[12] = assets.getResult("dead");
-            var rand = Math.round(Math.random() * 2);
+            var rand;
             if (val === "") {
+                rand = 0;
                 return obj[rand];
             }
             else if (val === "shoot") {

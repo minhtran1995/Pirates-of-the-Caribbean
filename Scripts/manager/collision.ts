@@ -114,6 +114,7 @@ module managers {
                             this._playScn.point += 100;
                             this._playScn.healthIMG.rotation += 10;
                             createjs.Sound.play("money");
+                            createjs.Sound.play("haha");
                             //place it far far away so it will float black
                             obj.reset((config.Screen.WIDTH + obj.width) * 2);
                         }
@@ -177,7 +178,7 @@ module managers {
                     else if (obj2.name === "parrot") {
                         if (Collision._counter < 1) {
                             createjs.Sound.play("parrotSound", 0, 0, 0, 2, 2);
-
+                            createjs.Sound.play("haha2");
                             //health added
                             if (this._playScn.health < 100) {
                                 if (this._playScn.health > 90)
