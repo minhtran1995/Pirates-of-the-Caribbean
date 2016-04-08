@@ -28,6 +28,8 @@ var win;
 var assetData = [
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
+    { id: "InstructionButton", src: "../../Assets/sample/instructionButton.png" },
+    { id: "ExitButton", src: "../../Assets/sample/exitButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },

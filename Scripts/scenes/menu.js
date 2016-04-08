@@ -34,10 +34,20 @@ var scenes;
             //volume here
             1);
             // add the Start button to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 260, true);
+            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 150, true);
             this.addChild(this._startButton);
             // Start Button event listener
             this._startButton.on("click", this._startButtonClick, this);
+            // add the _instructionButton button to the MENU scene
+            this._instructionButton = new objects.Button("InstructionButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 200, true);
+            this.addChild(this._instructionButton);
+            // Start Button event listener
+            this._instructionButton.on("click", this.__instructionButtonClick, this);
+            // add the _instructionButton button to the MENU scene
+            this._exitButton = new objects.Button("ExitButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 260, true);
+            this.addChild(this._exitButton);
+            // Start Button event listener
+            this._exitButton.on("click", this.__exitButtonClick, this);
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -45,11 +55,24 @@ var scenes;
         Menu.prototype.update = function () {
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        // LEFT_CAVE Button click event handler
         Menu.prototype._startButtonClick = function (event) {
             this._fadeOut(500, function () {
                 // Switch to the instruction Scene
+                scene = config.Scene.PLAY;
+                changeScene();
+            });
+        };
+        Menu.prototype.__instructionButtonClick = function (event) {
+            this._fadeOut(500, function () {
+                // Switch to the instruction Scene
                 scene = config.Scene.INSTRUCTION;
+                changeScene();
+            });
+        };
+        Menu.prototype.__exitButtonClick = function (event) {
+            this._fadeOut(500, function () {
+                // Switch to the instruction Scene
+                scene = config.Scene.END;
                 changeScene();
             });
         };
