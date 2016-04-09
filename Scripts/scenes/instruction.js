@@ -47,7 +47,7 @@ var scenes;
         Instruction.prototype._startButtonClick = function (event) {
             this._fadeOut(500, function () {
                 // Switch to the play Scene
-                scene = config.Scene.PLAY;
+                scene = config.Scene.LEVEL1;
                 changeScene();
             });
         };

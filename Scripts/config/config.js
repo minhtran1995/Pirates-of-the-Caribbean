@@ -19,7 +19,7 @@ var config;
         Scene.LOADING = 0;
         Scene.MENU = 1;
         Scene.INSTRUCTION = 2;
-        Scene.PLAY = 3;
+        Scene.LEVEL1 = 3;
         Scene.INSTRUCTION2 = 4;
         Scene.LEVEL2 = 5;
         Scene.END = 6;

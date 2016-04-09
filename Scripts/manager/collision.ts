@@ -15,7 +15,7 @@ module managers {
     //Collision class
     export class Collision {
         private _player: objects.Player;
-        
+
 
         private static _counter: number;
 
@@ -28,7 +28,7 @@ module managers {
             this._player = player;
             Collision._counter = 0;
             Collision._healthHit = 0;
-            
+
 
         }
 
@@ -39,7 +39,7 @@ module managers {
 
 
         //check collision between player and objects
-        public checkEnemyCollision(obj: objects.CaptainShield): void {
+        public checkEnemyCollision(obj: objects.Enemy): void {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
 
@@ -165,8 +165,24 @@ module managers {
 
                             obj2.image = assets.getResult("explosion");
                             createjs.Sound.play("ricochet");
-                            //set this lower to make enemies weaker
+                            //set this lower to make enemies stronger
                             Collision._counter += 5;
+                        }
+                        else {
+                            obj2.reset(config.Screen.WIDTH + obj2.width);
+                            Collision._counter = 0;
+                        }
+                    } else if (obj2.name === "enemyLevel2") {
+                        if (Collision._counter < 6) {
+                            obj2.speed.x += 0.5;
+                            obj2.x += obj2.width * 0.25;
+                            obj2.rotation = 0;
+                            scoreValue += 5;
+
+                            obj2.image = assets.getResult("explosion");
+                            createjs.Sound.play("ricochet");
+                            //set this lower to make enemies stronger
+                            Collision._counter += 2;
                         }
                         else {
                             obj2.reset(config.Screen.WIDTH + obj2.width);

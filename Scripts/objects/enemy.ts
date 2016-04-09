@@ -1,6 +1,6 @@
 /*
  ***************************************************************************************
- * Source file name : city.ts                                                          *
+ * Source file name : captainShield.ts                                                 *
  * Author's name : Duc Minh Tran (300771859)                                           *
  * Last Modified by : Duc Minh Tran (300771859)                                        *
  * Last Modified date : March 27 2016                                                  *
@@ -12,33 +12,41 @@
 */
 
 module objects {
-    export class City extends objects.GameObject {
+    export class Enemy extends objects.GameObject {
 
         constructor() {
-            super("night");
-            this.speed.x = 2;
-            this.reset(0);
-            this.regX = 0;
-            this.regY = 0;
+            super("enemy");
+            this.name = "enemy";
+            this.reset(this._rightBound);
         }
 
         //reset objects location
         public reset(value: number): void {
+            this.image = assets.getResult("enemy");
+            this.rotation = 0;
+            this.speed.x = Math.round((Math.random() * 4) + 1);
+
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
+
             this.x = value;
+            this.y = Math.round((Math.random() * b + a));
+
         }
         //check if objects in the right location
         protected _checkBound(value: number): void {
 
             if (this.x <= value) {
-                this.reset(0);
+                this.reset(this._rightBound);
             }
         }
 
         //update objects in the scene
         public update(): void {
-            //console.log(this.x+" "+ this.y)            
+
             this.x -= this.speed.x;
-            this._checkBound(-2000);
+
+            this._checkBound(this._leftBound);
         }
     }
 }

@@ -1,6 +1,6 @@
 /*
  ***************************************************************************************
- * Source file name : city.ts                                                          *
+ * Source file name : captainShield.ts                                                 *
  * Author's name : Duc Minh Tran (300771859)                                           *
  * Last Modified by : Duc Minh Tran (300771859)                                        *
  * Last Modified date : March 27 2016                                                  *
@@ -17,33 +17,36 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var objects;
 (function (objects) {
-    var City = (function (_super) {
-        __extends(City, _super);
-        function City() {
-            _super.call(this, "night");
-            this.speed.x = 2;
-            this.reset(0);
-            this.regX = 0;
-            this.regY = 0;
+    var Enemy = (function (_super) {
+        __extends(Enemy, _super);
+        function Enemy() {
+            _super.call(this, "enemy");
+            this.name = "enemy";
+            this.reset(this._rightBound);
         }
         //reset objects location
-        City.prototype.reset = function (value) {
+        Enemy.prototype.reset = function (value) {
+            this.image = assets.getResult("enemy");
+            this.rotation = 0;
+            this.speed.x = Math.round((Math.random() * 4) + 1);
+            var a = (440 - this.height * 0.5);
+            var b = config.Screen.HEIGHT - a - this.height * 0.5;
             this.x = value;
+            this.y = Math.round((Math.random() * b + a));
         };
         //check if objects in the right location
-        City.prototype._checkBound = function (value) {
+        Enemy.prototype._checkBound = function (value) {
             if (this.x <= value) {
-                this.reset(0);
+                this.reset(this._rightBound);
             }
         };
         //update objects in the scene
-        City.prototype.update = function () {
-            //console.log(this.x+" "+ this.y)            
+        Enemy.prototype.update = function () {
             this.x -= this.speed.x;
-            this._checkBound(-2000);
+            this._checkBound(this._leftBound);
         };
-        return City;
+        return Enemy;
     })(objects.GameObject);
-    objects.City = City;
+    objects.Enemy = Enemy;
 })(objects || (objects = {}));
-//# sourceMappingURL=city.js.map
+//# sourceMappingURL=enemy.js.map

@@ -27,7 +27,7 @@ var scene: number;
 var loading: scenes.Loading;
 var menu: scenes.Menu;
 var instruction: scenes.Instruction;
-var play: scenes.Play;
+var level1: scenes.Level1;
 var instruction2: scenes.Instruction2;
 var level2: scenes.Level2;
 var end: scenes.End;
@@ -220,12 +220,12 @@ function changeScene(): void {
             currentScene = instruction;
             console.log("Starting instruction Scene");
             break;
-        case config.Scene.PLAY:
+        case config.Scene.LEVEL1:
             // show the PLAY scene
             stage.removeAllChildren();
-            play = new scenes.Play();
-            currentScene = play;
-            console.log("Starting PLAY Scene");
+            level1 = new scenes.Level1();
+            currentScene = level1;
+            console.log("Starting level1 Scene");
             break;
         case config.Scene.INSTRUCTION2:
             // show the PLAY scene

@@ -54,7 +54,7 @@ module objects {
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
 
-            this._topBounds = 400;
+            this._topBounds = 350;
             this._bottomBounds = config.Screen.HEIGHT - this.height * 0.5;
 
             this._leftBounds = this.width * 0.5;

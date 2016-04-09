@@ -16,7 +16,7 @@ var scenes;
         Level2.prototype.start = function () {
             //init static variable
             Level2._counter = 0;
-            Level2._counter1 = 0;
+            Level2._labelDisplayCounter = 0;
             //adding scrolling background 
             this.level2Ocean = new objects.Level2Ocean();
             this.addChild(this.level2Ocean);
@@ -36,11 +36,12 @@ var scenes;
             this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
             //adding captain shields
-            this._captainShieldCount = 2; //number of shields
-            this._captainShields = new Array();
-            for (var shield = 0; shield < this._captainShieldCount; shield++) {
-                this._captainShields[shield] = new objects.CaptainShield();
-                this.addChild(this._captainShields[shield]);
+            this._enemyCount = 3; //number of shields
+            this._enemy = new Array();
+            for (var e = 0; e < this._enemyCount; e++) {
+                this._enemy[e] = new objects.Enemy();
+                this._enemy[e].name = "enemyLevel2";
+                this.addChild(this._enemy[e]);
             }
             //init collision manager
             this._collision = new managers.Collision(this._player);
@@ -95,7 +96,7 @@ var scenes;
             this._parrot.update();
             this._collision.bulletCollision(this._bullet, this._parrot);
             //update shields locations and check collision
-            this._captainShields.forEach(function (shield) {
+            this._enemy.forEach(function (shield) {
                 shield.update();
                 _this._collision.checkEnemyCollision(shield);
                 _this._collision.bulletCollision(_this._bullet, shield);
@@ -140,25 +141,25 @@ var scenes;
                     Level2._counter = 0;
                 }
                 //disabled all enemies and money
-                for (var i = 0; i < this._captainShieldCount; i++) {
-                    this._captainShields[i].reset(config.Screen.WIDTH + this._captainShields[i].width);
+                for (var i = 0; i < this._enemyCount; i++) {
+                    this._enemy[i].reset(config.Screen.WIDTH + this._enemy[i].width);
                 }
                 for (var i = 0; i < this._healthCount; i++) {
                     this._health[i].reset(config.Screen.WIDTH + this._health[i].width);
                 }
                 //blink label
-                if (Level2._counter1 < 30) {
+                if (Level2._labelDisplayCounter < 30) {
                     this._messageLabel.text = "Level Completed";
                     this._messageLabel.visible = false;
                 }
-                else if (Level2._counter1 >= 30 && Level2._counter1 < 60) {
+                else if (Level2._labelDisplayCounter >= 30 && Level2._labelDisplayCounter < 60) {
                     this._messageLabel.visible = true;
                 }
                 else {
-                    Level2._counter1 = 0;
+                    Level2._labelDisplayCounter = 0;
                 }
                 Level2._counter++;
-                Level2._counter1++;
+                Level2._labelDisplayCounter++;
             }
             if (!objects.Cannon.isloaded) {
                 this._reloadLabel.text = "Reload Pls";

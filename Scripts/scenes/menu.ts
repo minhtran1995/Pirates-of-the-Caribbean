@@ -91,7 +91,7 @@ module scenes {
 
             this._fadeOut(500, () => {
                 // Switch to the instruction Scene
-                scene = config.Scene.PLAY;
+                scene = config.Scene.LEVEL1;
                 changeScene();
             });
 

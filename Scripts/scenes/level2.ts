@@ -3,8 +3,8 @@ module scenes {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private level2Ocean: objects.Level2Ocean;
         private _health: objects.Health[];
-        private _captainShields: objects.CaptainShield[];
-        private _captainShieldCount: number;
+        private _enemy: objects.Enemy[];
+        private _enemyCount: number;
         private _healthCount: number;
 
         //game objects
@@ -31,7 +31,7 @@ module scenes {
         private _reloadButton: objects.Button;
 
         private static _counter;
-        private static _counter1;
+        private static _labelDisplayCounter;
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -45,7 +45,7 @@ module scenes {
         public start(): void {
             //init static variable
             Level2._counter = 0;
-            Level2._counter1 = 0;
+            Level2._labelDisplayCounter = 0;
 
             //adding scrolling background 
             this.level2Ocean = new objects.Level2Ocean();
@@ -71,13 +71,15 @@ module scenes {
             this.addChild(this._cannon);
 
             //adding captain shields
-            this._captainShieldCount = 2;//number of shields
-            this._captainShields = new Array<objects.CaptainShield>();
+            this._enemyCount = 3;//number of shields
+            this._enemy = new Array<objects.Enemy>();
 
 
-            for (var shield = 0; shield < this._captainShieldCount; shield++) {
-                this._captainShields[shield] = new objects.CaptainShield();
-                this.addChild(this._captainShields[shield]);
+            for (var e = 0; e < this._enemyCount; e++) {
+                this._enemy[e] = new objects.Enemy();
+                this._enemy[e].name = "enemyLevel2";
+
+                this.addChild(this._enemy[e]);
             }
 
             //init collision manager
@@ -156,7 +158,7 @@ module scenes {
             this._collision.bulletCollision(this._bullet, this._parrot);
 
             //update shields locations and check collision
-            this._captainShields.forEach(shield => {
+            this._enemy.forEach(shield => {
                 shield.update();
                 this._collision.checkEnemyCollision(shield);
                 this._collision.bulletCollision(this._bullet, shield);
@@ -216,27 +218,27 @@ module scenes {
                 }
 
                 //disabled all enemies and money
-                for (var i = 0; i < this._captainShieldCount; i++) {
-                    this._captainShields[i].reset(config.Screen.WIDTH + this._captainShields[i].width)
+                for (var i = 0; i < this._enemyCount; i++) {
+                    this._enemy[i].reset(config.Screen.WIDTH + this._enemy[i].width)
                 }
                 for (var i = 0; i < this._healthCount; i++) {
                     this._health[i].reset(config.Screen.WIDTH + this._health[i].width)
                 }
 
                 //blink label
-                if (Level2._counter1 < 30) {
+                if (Level2._labelDisplayCounter < 30) {
                     this._messageLabel.text = "Level Completed";
                     this._messageLabel.visible = false;
-                } else if (Level2._counter1 >= 30 && Level2._counter1 < 60) {
+                } else if (Level2._labelDisplayCounter >= 30 && Level2._labelDisplayCounter < 60) {
                     this._messageLabel.visible = true;
                 }
                 else {
-                    Level2._counter1 = 0;
+                    Level2._labelDisplayCounter = 0;
                 }
 
 
                 Level2._counter++;
-                Level2._counter1++;
+                Level2._labelDisplayCounter++;
             }
 
 

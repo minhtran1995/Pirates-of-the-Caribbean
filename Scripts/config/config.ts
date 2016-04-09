@@ -18,7 +18,7 @@ module config {
         public static LOADING: number = 0;
         public static MENU: number = 1;
         public static INSTRUCTION: number = 2;
-        public static PLAY: number = 3;
+        public static LEVEL1: number = 3;
         public static INSTRUCTION2: number = 4;
         public static LEVEL2: number = 5;
         public static END: number = 6;
