@@ -15,6 +15,8 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Level1.prototype.start = function () {
+            createjs.Sound.stop();
+            createjs.Sound.play("bgm", 0, 0, 0, -1);
             //init static variable
             Level1._counter = 0;
             Level1._labelDisplayCounter = 0;
@@ -23,11 +25,11 @@ var scenes;
             this.addChild(this._level1Ocean);
             this._setupBackground('blank');
             //health count
-            this._health = new Array();
-            this._healthCount = 1;
-            for (var h = 0; h < this._healthCount; h++) {
-                this._health[h] = new objects.Health();
-                this.addChild(this._health[h]);
+            this._money = new Array();
+            this._moneyCount = 1;
+            for (var h = 0; h < this._moneyCount; h++) {
+                this._money[h] = new objects.Money("goldChest");
+                this.addChild(this._money[h]);
             }
             //player object
             this._player = new objects.Player();
@@ -46,11 +48,9 @@ var scenes;
             //init collision manager
             this._collision = new managers.Collision(this._player);
             //score label
-            scoreValue = 0;
             this._score = new objects.Label("Score: ", "30px Merienda One", "#adffff", 10, 0, false);
             this.addChild(this._score);
             //health label
-            livesValue = 100;
             this._healthLabel = new objects.Label("%", "35px Merienda One", "#adffff", config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
             //parrot
@@ -102,9 +102,9 @@ var scenes;
                 _this._collision.bulletCollision(_this._bullet, shield);
             });
             //update health locations and check collision
-            this._health.forEach(function (h) {
+            this._money.forEach(function (h) {
                 h.update();
-                _this._collision.checkHealthCollision(h);
+                _this._collision.checkMoneyCollision(h);
             });
             this._score.text = "Score: " + scoreValue.toFixed(2);
             this._healthLabel.text = livesValue.toFixed(2) + " %";
@@ -128,7 +128,7 @@ var scenes;
                 Level1._counter++;
             }
             //desired score to win
-            if (scoreValue > 100) {
+            if (scoreValue > 20) {
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };
@@ -144,9 +144,10 @@ var scenes;
                 for (var i = 0; i < this._enemyCount; i++) {
                     this._enemy[i].reset(config.Screen.WIDTH + this._enemy[i].width);
                 }
-                for (var i = 0; i < this._healthCount; i++) {
-                    this._health[i].reset(config.Screen.WIDTH + this._health[i].width);
+                for (var i = 0; i < this._moneyCount; i++) {
+                    this._money[i].reset(config.Screen.WIDTH + this._money[i].width);
                 }
+                this._parrot.reset(config.Screen.WIDTH + this._parrot.width);
                 //blink label
                 if (Level1._labelDisplayCounter < 30) {
                     this._messageLabel.text = "Level Completed";

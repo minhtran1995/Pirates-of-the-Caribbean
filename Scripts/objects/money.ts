@@ -4,48 +4,47 @@
  * Author's name : Duc Minh Tran (300771859)                                           *
  * Last Modified by : Duc Minh Tran (300771859)                                        *
  * Last Modified date : March 27 2016                                                  *
- * Program description : This is a webgame that use  a Side Scroller background        *
- *                                                                                     *
+ * Program description : This is a webgame that use  a Side Scroller background        * 
+ *                                                                                     *  
  * Revision History : 1 - Update Internal Documentation                                *
  *                                                                                     *
  ***************************************************************************************
 */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var objects;
-(function (objects) {
-    var Health = (function (_super) {
-        __extends(Health, _super);
-        function Health() {
-            _super.call(this, "goldChest");
+
+module objects {
+    export class Money extends objects.GameObject {
+
+        constructor(val:string) {
+            super(val);
             this.speed.x = 2;
             this.reset(this._rightBound);
             this.name = "goldChest";
         }
+
         //reset health location
-        Health.prototype.reset = function (value) {
+        public reset(value: number): void {
             var a = (440 - this.height * 0.5);
             var b = config.Screen.HEIGHT - a - this.height * 0.5;
+
             this.x = value;
             this.y = Math.round((Math.random() * b + a));
-        };
+        }
+
         //check if health item is in right location
-        Health.prototype._checkBound = function (value) {
+        protected _checkBound(value: number): void {
             //check if the top of island is top of scene
             if (this.x <= value) {
                 this.reset(this._rightBound);
             }
-        };
+        }
+
         //update my objects in the scene
-        Health.prototype.update = function () {
+        public update(): void {
             this.x -= this.speed.x;
             this._checkBound((-config.Screen.WIDTH) * 2);
-        };
-        return Health;
-    })(objects.GameObject);
-    objects.Health = Health;
-})(objects || (objects = {}));
-//# sourceMappingURL=health.js.map
+
+        }
+
+
+    }
+}

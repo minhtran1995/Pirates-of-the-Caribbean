@@ -5,10 +5,10 @@ module scenes {
     export class Level1 extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _level1Ocean: objects.Level1Ocean;
-        private _health: objects.Health[];
+        private _money: objects.Money[];
         private _enemy: objects.Enemy[];
         private _enemyCount: number;
-        private _healthCount: number;
+        private _moneyCount: number;
 
         //game objects
         private _bullet: objects.Bullet;
@@ -46,6 +46,9 @@ module scenes {
 
         // Start Method
         public start(): void {
+            createjs.Sound.stop();
+            createjs.Sound.play("bgm",0,0,0,-1);
+
             //init static variable
             Level1._counter = 0;
             Level1._labelDisplayCounter = 0;
@@ -57,11 +60,11 @@ module scenes {
             this._setupBackground('blank');
 
             //health count
-            this._health = new Array<objects.Health>();
-            this._healthCount = 1;
-            for (var h = 0; h < this._healthCount; h++) {
-                this._health[h] = new objects.Health();
-                this.addChild(this._health[h]);
+            this._money = new Array<objects.Money>();
+            this._moneyCount = 1;
+            for (var h = 0; h < this._moneyCount; h++) {
+                this._money[h] = new objects.Money("goldChest");
+                this.addChild(this._money[h]);
             }
 
             //player object
@@ -87,14 +90,12 @@ module scenes {
             this._collision = new managers.Collision(this._player);
 
             //score label
-            scoreValue = 0;
             this._score = new objects.Label("Score: ", "30px Merienda One",
                 "#adffff",
                 10, 0, false);
             this.addChild(this._score);
 
             //health label
-            livesValue = 100;
             this._healthLabel = new objects.Label("%", "35px Merienda One",
                 "#adffff",
                 config.Screen.WIDTH - 230, 0, false);
@@ -166,9 +167,9 @@ module scenes {
             });
 
             //update health locations and check collision
-            this._health.forEach(h => {
+            this._money.forEach(h => {
                 h.update();
-                this._collision.checkHealthCollision(h);
+                this._collision.checkMoneyCollision(h);
             });
 
 
@@ -202,7 +203,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 100) {
+            if (scoreValue > 20) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
@@ -221,9 +222,10 @@ module scenes {
                 for (var i = 0; i < this._enemyCount; i++) {
                     this._enemy[i].reset(config.Screen.WIDTH + this._enemy[i].width)
                 }
-                for (var i = 0; i < this._healthCount; i++) {
-                    this._health[i].reset(config.Screen.WIDTH + this._health[i].width)
+                for (var i = 0; i < this._moneyCount; i++) {
+                    this._money[i].reset(config.Screen.WIDTH + this._money[i].width)
                 }
+                this._parrot.reset(config.Screen.WIDTH + this._parrot.width);
 
                 //blink label
                 if (Level1._labelDisplayCounter < 30) {

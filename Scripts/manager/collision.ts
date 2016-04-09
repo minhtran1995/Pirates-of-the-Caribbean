@@ -58,7 +58,7 @@ module managers {
                 if (this.distance(startPoint, endPoint) < minDistance) {
                     if (!obj.isColliding) {
                         // check if it's a enemy hit
-                        if (obj.name === "enemy") {
+                        if (obj.name === "enemy" || obj.name === "enemyLevel2") {
                             this._player.hitEnemy = true;
                             scoreValue -= 10;
                             livesValue -= 8;
@@ -89,7 +89,7 @@ module managers {
             }
         }
 
-        public checkHealthCollision(obj: objects.Health): void {
+        public checkMoneyCollision(obj: objects.Money): void {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
 
@@ -110,6 +110,15 @@ module managers {
                         // check if it's an health hit
                         if (obj.name === "goldChest") {
                             this._player.hitMoney = true;
+                            scoreValue += 100;
+                            createjs.Sound.play("money");
+                            createjs.Sound.play("haha");
+                            //place it far far away so it will float black
+                            obj.reset((config.Screen.WIDTH + obj.width) * 2);
+                        }
+                        if (obj.name === "gunTreasure") {
+                            this._player.hitMoney = true;
+                            this._player.hitGunTreasure = true;
                             scoreValue += 100;
                             createjs.Sound.play("money");
                             createjs.Sound.play("haha");

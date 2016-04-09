@@ -41,6 +41,7 @@ var assetData = [
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
     { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
     { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
+    { id: "biggerCannon", src: "../../Assets/sample/biggerCannon-resized.png" },
     { id: "reload", src: "../../Assets/sample/reload-resized.png" },
     { id: "explosion", src: "../../Assets/sample/explosion-resized.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
@@ -81,7 +82,7 @@ var assetData = [
     { id: "parrot7", src: "../../Assets/sample/parrot/parrot7.png" },
     { id: "blank", src: "../../Assets/images/blank.png" },
     //audio
-    { id: "bmg", src: "../../Assets/sample/bmg.mp3" },
+    { id: "bgm", src: "../../Assets/sample/bgm.mp3" },
     { id: "menuBGM", src: "../../Assets/sample/menuBGM.mp3" },
     { id: "leftClick", src: "../../Assets/sample/leftClick.mp3" },
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
@@ -167,8 +168,10 @@ function changeScene() {
             console.log("Starting instruction Scene");
             break;
         case config.Scene.LEVEL1:
-            // show the PLAY scene
+            // show the LEVEL1 scene            
             stage.removeAllChildren();
+            livesValue = 100;
+            scoreValue = 0;
             level1 = new scenes.Level1();
             currentScene = level1;
             console.log("Starting level1 Scene");
@@ -181,8 +184,10 @@ function changeScene() {
             console.log("Starting INSTRUCTION2 Scene");
             break;
         case config.Scene.LEVEL2:
-            // show the PLAY scene
+            // show the LEVEL2 scene
             stage.removeAllChildren();
+            livesValue = 100;
+            scoreValue = 0;
             level2 = new scenes.Level2();
             currentScene = level2;
             console.log("Starting level2 Scene");

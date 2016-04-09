@@ -37,7 +37,7 @@ var managers;
                 if (this.distance(startPoint, endPoint) < minDistance) {
                     if (!obj.isColliding) {
                         // check if it's a enemy hit
-                        if (obj.name === "enemy") {
+                        if (obj.name === "enemy" || obj.name === "enemyLevel2") {
                             this._player.hitEnemy = true;
                             scoreValue -= 10;
                             livesValue -= 8;
@@ -64,7 +64,7 @@ var managers;
                 }
             }
         };
-        Collision.prototype.checkHealthCollision = function (obj) {
+        Collision.prototype.checkMoneyCollision = function (obj) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
             var playerHalfWidth = this._player.width * 0.5;
@@ -80,6 +80,15 @@ var managers;
                         // check if it's an health hit
                         if (obj.name === "goldChest") {
                             this._player.hitMoney = true;
+                            scoreValue += 100;
+                            createjs.Sound.play("money");
+                            createjs.Sound.play("haha");
+                            //place it far far away so it will float black
+                            obj.reset((config.Screen.WIDTH + obj.width) * 2);
+                        }
+                        if (obj.name === "gunTreasure") {
+                            this._player.hitMoney = true;
+                            this._player.hitGunTreasure = true;
                             scoreValue += 100;
                             createjs.Sound.play("money");
                             createjs.Sound.play("haha");

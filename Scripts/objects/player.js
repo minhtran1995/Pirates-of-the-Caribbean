@@ -40,6 +40,7 @@ var objects;
             Player.counter = 0;
             this.hitMoney = false;
             this.hitEnemy = false;
+            this.hitGunTreasure = false;
             this.isShooting = false;
             this.isDead = false;
             Player.bulletCounter = 8;

@@ -2,10 +2,11 @@ module scenes {
     export class Level2 extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private level2Ocean: objects.Level2Ocean;
-        private _health: objects.Health[];
+        private _money: objects.Money[];
         private _enemy: objects.Enemy[];
         private _enemyCount: number;
-        private _healthCount: number;
+        private _moneyCount: number;
+        private _gunTreasure: objects.Money;
 
         //game objects
         private _bullet: objects.Bullet;
@@ -43,6 +44,9 @@ module scenes {
 
         // Start Method
         public start(): void {
+            createjs.Sound.stop();
+            createjs.Sound.play("bgm", 0, 0, 0, -1);
+
             //init static variable
             Level2._counter = 0;
             Level2._labelDisplayCounter = 0;
@@ -53,13 +57,18 @@ module scenes {
 
             this._setupBackground('blank');
 
-            //health count
-            this._health = new Array<objects.Health>();
-            this._healthCount = 1;
-            for (var h = 0; h < this._healthCount; h++) {
-                this._health[h] = new objects.Health();
-                this.addChild(this._health[h]);
+            //money count
+            this._money = new Array<objects.Money>();
+            this._moneyCount = 1;
+            for (var h = 0; h < this._moneyCount; h++) {
+                this._money[h] = new objects.Money("goldChest");
+                this.addChild(this._money[h]);
             }
+
+            //gun treasure
+            this._gunTreasure = new objects.Money("biggerCannon");
+            this._gunTreasure.name = "gunTreasure";
+            this.addChild(this._gunTreasure);
 
             //player object
             this._player = new objects.Player();
@@ -86,14 +95,12 @@ module scenes {
             this._collision = new managers.Collision(this._player);
 
             //score label
-            scoreValue = 0;
             this._score = new objects.Label("Score: ", "30px Merienda One",
                 "#adffff",
                 10, 0, false);
             this.addChild(this._score);
 
-            //health label
-            livesValue = 100;
+            //health label            
             this._healthLabel = new objects.Label("%", "35px Merienda One",
                 "#adffff",
                 config.Screen.WIDTH - 230, 0, false);
@@ -165,10 +172,13 @@ module scenes {
             });
 
             //update health locations and check collision
-            this._health.forEach(h => {
+            this._money.forEach(h => {
                 h.update();
-                this._collision.checkHealthCollision(h);
+                this._collision.checkMoneyCollision(h);
             });
+
+            //check if player pick up the cannin
+            this._collision.checkMoneyCollision(this._gunTreasure);
 
 
 
@@ -204,26 +214,33 @@ module scenes {
             //desired score to win
             if (scoreValue > 250) {
 
+                this._gunTreasure.update();
+
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
                 };
 
-                if (Level2._counter === 300) {
-                    this._fadeOut(500, () => {
-                        // Switch to the lvl 3 Scene                
-                        scene = config.Scene.MENU;
-                        changeScene();
-                    });
-                    Level2._counter = 0;
+                if (this._player.hitGunTreasure) {
+                    if (Level2._counter === 180) {
+                        this._fadeOut(500, () => {
+                            // Switch to the lvl 3 Scene                
+                            scene = config.Scene.MENU;
+                            changeScene();
+                        });
+                        Level2._counter = 0;
+                    }
+                    Level2._counter++;
                 }
+
 
                 //disabled all enemies and money
                 for (var i = 0; i < this._enemyCount; i++) {
                     this._enemy[i].reset(config.Screen.WIDTH + this._enemy[i].width)
                 }
-                for (var i = 0; i < this._healthCount; i++) {
-                    this._health[i].reset(config.Screen.WIDTH + this._health[i].width)
+                for (var i = 0; i < this._moneyCount; i++) {
+                    this._money[i].reset(config.Screen.WIDTH + this._money[i].width)
                 }
+                this._parrot.reset(config.Screen.WIDTH + this._parrot.width);
 
                 //blink label
                 if (Level2._labelDisplayCounter < 30) {
@@ -237,7 +254,7 @@ module scenes {
                 }
 
 
-                Level2._counter++;
+
                 Level2._labelDisplayCounter++;
             }
 

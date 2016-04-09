@@ -27,6 +27,7 @@ module objects {
 
         public hitMoney: boolean;
         public hitEnemy: boolean;
+        public hitGunTreasure: boolean;
 
         public isShooting: boolean;
         public isDead: boolean;
@@ -71,6 +72,7 @@ module objects {
 
             this.hitMoney = false;
             this.hitEnemy = false;
+            this.hitGunTreasure = false;
             this.isShooting = false;
             this.isDead = false;
             Player.bulletCounter = 8;
