@@ -8,8 +8,8 @@ module objects {
         public static shootCannon: boolean;
 
 
-        constructor(player: Player) {
-            super("cannon");
+        constructor(player: Player,cannonID:string) {
+            super(cannonID);
             this.name = "cannon";
             this._player = player;
             this.y = this._player.y;

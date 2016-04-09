@@ -28,8 +28,14 @@ var loading: scenes.Loading;
 var menu: scenes.Menu;
 var instruction: scenes.Instruction;
 var play: scenes.Play;
+var instruction2: scenes.Instruction2;
+var level2: scenes.Level2;
 var end: scenes.End;
 var win: scenes.Win;
+
+var livesValue: number;
+var scoreValue: number;
+var highScoreValue: number = 0;
 
 var assetData: objects.Asset[] = [
 
@@ -41,6 +47,8 @@ var assetData: objects.Asset[] = [
 
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
+    { id: "level2Ocean", src: "../../Assets/sample/Level2Ocean-resized-looped.jpg" },
+
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
     { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
     { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
@@ -218,6 +226,20 @@ function changeScene(): void {
             play = new scenes.Play();
             currentScene = play;
             console.log("Starting PLAY Scene");
+            break;
+        case config.Scene.INSTRUCTION2:
+            // show the PLAY scene
+            stage.removeAllChildren();
+            instruction2 = new scenes.Instruction2();
+            currentScene = instruction2;
+            console.log("Starting INSTRUCTION2 Scene");
+            break;
+        case config.Scene.LEVEL2:
+            // show the PLAY scene
+            stage.removeAllChildren();
+            level2 = new scenes.Level2();
+            currentScene = level2;
+            console.log("Starting level2 Scene");
             break;
         case config.Scene.END:
             // show the END scene

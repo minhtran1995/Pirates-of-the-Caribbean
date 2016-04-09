@@ -14,11 +14,10 @@ var managers;
 (function (managers) {
     //Collision class
     var Collision = (function () {
-        function Collision(player, playScene) {
+        function Collision(player) {
             this._player = player;
             Collision._counter = 0;
             Collision._healthHit = 0;
-            this._playScn = playScene;
         }
         Collision.prototype.distance = function (startPoint, endPoint) {
             return Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
@@ -40,9 +39,8 @@ var managers;
                         // check if it's a enemy hit
                         if (obj.name === "enemy") {
                             this._player.hitEnemy = true;
-                            this._playScn.point -= 10;
-                            this._playScn.healthIMG.rotation -= 2;
-                            this._playScn.health -= 8;
+                            scoreValue -= 10;
+                            livesValue -= 8;
                             createjs.Sound.play("broken").volume = 1;
                         }
                         else {
@@ -82,8 +80,7 @@ var managers;
                         // check if it's an health hit
                         if (obj.name === "goldChest") {
                             this._player.hitMoney = true;
-                            this._playScn.point += 100;
-                            this._playScn.healthIMG.rotation += 10;
+                            scoreValue += 100;
                             createjs.Sound.play("money");
                             createjs.Sound.play("haha");
                             //place it far far away so it will float black
@@ -121,11 +118,11 @@ var managers;
             if (!this._player.isDead) {
                 if (this.distance(startPoint, endPoint) < minDistance) {
                     if (obj2.name === "enemy") {
-                        if (Collision._counter < 1) {
+                        if (Collision._counter < 3) {
                             obj2.speed.x += 0.5;
                             obj2.x += obj2.width * 0.25;
                             obj2.rotation = 0;
-                            this._playScn.point += 5;
+                            scoreValue += 5;
                             obj2.image = assets.getResult("explosion");
                             createjs.Sound.play("ricochet");
                             //set this lower to make enemies weaker
@@ -141,12 +138,12 @@ var managers;
                             createjs.Sound.play("parrotSound", 0, 0, 0, 2, 2);
                             createjs.Sound.play("haha2");
                             //health added
-                            if (this._playScn.health < 100) {
-                                if (this._playScn.health > 90) {
-                                    this._playScn.health += 100 - this._playScn.health;
+                            if (livesValue < 100) {
+                                if (livesValue > 90) {
+                                    livesValue += 100 - livesValue;
                                 }
                                 else {
-                                    this._playScn.health += 10;
+                                    livesValue += 10;
                                 }
                             }
                             Collision._counter++;

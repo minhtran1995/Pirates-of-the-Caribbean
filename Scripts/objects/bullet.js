@@ -19,8 +19,8 @@ var objects;
 (function (objects) {
     var Bullet = (function (_super) {
         __extends(Bullet, _super);
-        function Bullet(player) {
-            _super.call(this, "bullet1");
+        function Bullet(player, bulletID) {
+            _super.call(this, bulletID);
             this.name = "bullet";
             this._player = player;
             this.speed.x = config.Screen.WIDTH - this._player.x;

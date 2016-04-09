@@ -16,8 +16,8 @@ module objects {
 
         private _player: Player;
         private doneTheStuff: boolean;
-        constructor(player: Player) {
-            super("bullet1");
+        constructor(player: Player, bulletID: string) {
+            super(bulletID);
             this.name = "bullet";
             this._player = player;
             this.speed.x = config.Screen.WIDTH - this._player.x;
@@ -57,9 +57,9 @@ module objects {
                     this.rotation = Math.atan((this.y - this._player.y) / (this.x - this._player.x)) * 180 / Math.PI;
                 }
             }
-            
 
-            
+
+
 
 
         }

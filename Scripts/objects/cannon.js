@@ -7,8 +7,8 @@ var objects;
 (function (objects) {
     var Cannon = (function (_super) {
         __extends(Cannon, _super);
-        function Cannon(player) {
-            _super.call(this, "cannon");
+        function Cannon(player, cannonID) {
+            _super.call(this, cannonID);
             this.name = "cannon";
             this._player = player;
             this.y = this._player.y;

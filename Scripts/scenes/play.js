@@ -31,6 +31,7 @@ var scenes;
         Play.prototype.start = function () {
             //init static variable
             Play._counter = 0;
+            Play._counter1 = 0;
             //adding scrolling background
             this._city = new objects.City();
             this.addChild(this._city);
@@ -44,10 +45,10 @@ var scenes;
             }
             //player object
             this._player = new objects.Player();
-            this._bullet = new objects.Bullet(this._player);
+            this._bullet = new objects.Bullet(this._player, "bullet1");
             this.addChild(this._bullet);
             this.addChild(this._player);
-            this._cannon = new objects.Cannon(this._player);
+            this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
             //adding captain shields
             this._captainShieldCount = 2; //number of shields
@@ -57,13 +58,13 @@ var scenes;
                 this.addChild(this._captainShields[shield]);
             }
             //init collision manager
-            this._collision = new managers.Collision(this._player, this);
+            this._collision = new managers.Collision(this._player);
             //score label
-            this.point = 0;
+            scoreValue = 0;
             this._score = new objects.Label("Score: ", "30px Merienda One", "#adffff", 10, 0, false);
             this.addChild(this._score);
             //health label
-            this.health = 100;
+            livesValue = 100;
             this._healthLabel = new objects.Label("%", "35px Merienda One", "#adffff", config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
             //parrot
@@ -76,9 +77,9 @@ var scenes;
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One", "#FF0000", 50, 60, true);
             this.addChild(this._reloadLabel);
             //dead message
-            this._deadLabel = new objects.Label("You are Dead !", "Bold 50px Merienda One", "#ff1a1a", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
-            this._deadLabel.visible = false;
-            this.addChild(this._deadLabel);
+            this._messageLabel = new objects.Label("You are Dead !", "Bold 50px Merienda One", "#ff1a1a", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
+            this._messageLabel.visible = false;
+            this.addChild(this._messageLabel);
             //adding health symbol
             this.healthIMG = new createjs.Bitmap(assets.getResult("health"));
             this.healthIMG.x = config.Screen.WIDTH - this.healthIMG.getBounds().width * 0.5;
@@ -119,18 +120,18 @@ var scenes;
                 h.update();
                 _this._collision.checkHealthCollision(h);
             });
-            this._score.text = "Score: " + this.point.toFixed(2);
-            this._healthLabel.text = this.health.toFixed(2) + " %";
-            if (this.point < 0) {
-                this.point = 0;
+            this._score.text = "Score: " + scoreValue.toFixed(2);
+            this._healthLabel.text = livesValue.toFixed(2) + " %";
+            if (scoreValue < 0) {
+                scoreValue = 0;
             }
             //when player is dead, change to lose scene
-            if (this.health <= 0) {
-                this.health = 0;
+            if (livesValue <= 0) {
+                livesValue = 0;
                 this._player.isDead = true;
                 this._bullet.reset(-this._bullet.width);
-                this._deadLabel.visible = true;
-                if (Play._counter === 240) {
+                this._messageLabel.visible = true;
+                if (Play._counter === 500) {
                     this._fadeOut(500, function () {
                         // Switch to the lose Scene
                         scene = config.Scene.END;
@@ -141,19 +142,38 @@ var scenes;
                 Play._counter++;
             }
             //desired score to win
-            if (this.point > 5000) {
+            if (scoreValue > 100) {
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };
-                if (Play._counter === 180) {
+                if (Play._counter === 300) {
                     this._fadeOut(500, function () {
-                        // Switch to the win Scene                
-                        scene = config.Scene.WIN;
+                        // Switch to the lvl 2 Scene                
+                        scene = config.Scene.INSTRUCTION2;
                         changeScene();
                     });
                     Play._counter = 0;
                 }
+                //disabled all enemies and money
+                for (var i = 0; i < this._captainShieldCount; i++) {
+                    this._captainShields[i].reset(config.Screen.WIDTH + this._captainShields[i].width);
+                }
+                for (var i = 0; i < this._healthCount; i++) {
+                    this._health[i].reset(config.Screen.WIDTH + this._health[i].width);
+                }
+                //blink label
+                if (Play._counter1 < 30) {
+                    this._messageLabel.text = "Level Completed";
+                    this._messageLabel.visible = false;
+                }
+                else if (Play._counter1 >= 30 && Play._counter1 < 60) {
+                    this._messageLabel.visible = true;
+                }
+                else {
+                    Play._counter1 = 0;
+                }
                 Play._counter++;
+                Play._counter1++;
             }
             if (!objects.Cannon.isloaded) {
                 this._reloadLabel.text = "Reload Pls";
