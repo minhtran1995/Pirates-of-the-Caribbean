@@ -211,16 +211,10 @@ module objects {
 
                 if (this.hitEnemy) {
                     this.image = this.shuffleImages("hit");
-                    window.onmousedown = function() {
-                        console.log("Mouse disabled");
-                    };
                 }
 
                 if (this.hitMoney) {
                     this.image = this.shuffleImages("money");
-                    window.onmousedown = function() {
-                        console.log("Mouse disabled");
-                    };
                 }
 
                 if (!this.hitMoney && !this.hitEnemy) {
