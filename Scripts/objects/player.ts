@@ -22,6 +22,7 @@ module objects {
         private _leftBounds: number;
         private _rightBounds: number;
 
+        private _deadSoundPlayed: boolean;
 
 
 
@@ -31,7 +32,6 @@ module objects {
 
         public isShooting: boolean;
         public isDead: boolean;
-
 
         //Static Variables++++++
         private static flag: boolean;
@@ -43,6 +43,8 @@ module objects {
         public static counter: number;
         public static bulletCounter: number;
         public static moneyCounter: number;
+        public static deadCounter: number;
+        public static delay: number = 1;
         private static didTheStuff: boolean;
 
         constructor() {
@@ -71,6 +73,7 @@ module objects {
 
             Player.counter = 0;
             Player.moneyCounter = 2;
+            Player.deadCounter = 13
 
             this.hitMoney = false;
             this.hitEnemy = false;
@@ -80,6 +83,8 @@ module objects {
             Player.bulletCounter = 8;
 
             Player.didTheStuff = false;
+
+            this._deadSoundPlayed = false;
         }
 
 
@@ -116,8 +121,6 @@ module objects {
 
 
             document.onkeydown = function(e) {
-
-
                 if (e.which == 87) { Player.up = true; }
                 if (e.which == 83) { Player.down = true; }
                 if (e.which == 65) { Player.left = true; }
@@ -137,20 +140,23 @@ module objects {
 
             }
 
-            if (Player.up) {
-                this.y--;
-            }
+            //player can control this only when they are alive
+            if (!this.isDead) {
+                if (Player.up) {
+                    this.y--;
+                }
 
-            if (Player.down) {
-                this.y++;
-            }
+                if (Player.down) {
+                    this.y++;
+                }
 
-            if (Player.left) {
-                this.x--;
-            }
+                if (Player.left) {
+                    this.x--;
+                }
 
-            if (Player.right) {
-                this.x++;
+                if (Player.right) {
+                    this.x++;
+                }
             }
 
             //make sure bullet dont appear when player is idle
@@ -161,14 +167,29 @@ module objects {
 
 
             if (this.isDead) {
-                this.y = this._bottomBounds - this.height;
-                this.image = this.shuffleImages("dead");
+                this.y = this._bottomBounds - this.height * 0.5;
+
+                if (Player.delay <= 120) {
+                    if (Player.delay % 10 === 0) {
+                        this.image = this.shuffleImages("dead");
+                    }
+                    Player.delay++;
+                }
+
+                if (!this._deadSoundPlayed) {
+                    createjs.Sound.play("abandon_ship", 0, 0, 0, 2);
+                    createjs.Sound.play("sink");
+                    this._deadSoundPlayed = true;
+                };
+
+
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
                 };
             }
             else {
+                Player.delay = 0;
                 window.onmousedown = function() {
                     if (Cannon.isloaded) {
                         console.log("Shoot");
@@ -216,7 +237,6 @@ module objects {
             }
             else {
                 if (Player.counter <= 2) {
-                    //this.image = this.shuffleImages("shoot");
                     this.isShooting = true;
                     Cannon.shootCannon = true;
                 }
@@ -257,7 +277,19 @@ module objects {
             obj[12] = assets.getResult("hitEnemy4");
 
             //die
-            obj[13] = assets.getResult("dead");
+            obj[13] = assets.getResult("sinking");
+            obj[14] = assets.getResult("sinking1");
+            obj[15] = assets.getResult("sinking2");
+            obj[16] = assets.getResult("sinking3");
+            obj[17] = assets.getResult("sinking4");
+            obj[18] = assets.getResult("sinking5");
+            obj[19] = assets.getResult("sinking6");
+            obj[20] = assets.getResult("sinking7");
+            obj[21] = assets.getResult("sinking8");
+            obj[22] = assets.getResult("sinking9");
+            obj[23] = assets.getResult("sinking10");
+            obj[24] = assets.getResult("sinking11");
+            obj[25] = assets.getResult("sinking12");
 
 
 
@@ -284,7 +316,12 @@ module objects {
                 return obj[number];
             }
             else if (val === "dead") {
-                return obj[13];
+                if (Player.deadCounter > 25) {
+                    Player.deadCounter = 13;
+                } else {
+                    Player.deadCounter++;
+                }
+                return obj[Player.deadCounter];
             }
         }
 

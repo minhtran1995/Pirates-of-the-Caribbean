@@ -26,6 +26,7 @@ module scenes {
         private _healthLabel: objects.Label;
         private _messageLabel: objects.Label;
         private _reloadLabel: objects.Label;
+        private _levelLabel: objects.Label;
 
 
         //Game buttons
@@ -105,6 +106,13 @@ module scenes {
                 "#adffff",
                 config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
+
+
+            //level label
+            this._levelLabel = new objects.Label("Level Two", "Bold 45px Merienda One",
+                "#ff1a1a",
+                config.Screen.CENTER_X, 20, true);
+            this.addChild(this._levelLabel);
 
             //parrot
             this._parrot = new objects.Parrot();
@@ -212,7 +220,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 250) {
+            if (scoreValue > 500) {
 
                 this._gunTreasure.update();
 

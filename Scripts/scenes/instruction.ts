@@ -33,7 +33,7 @@ module scenes {
             this._fadeIn(500);
 
             this._label = new objects.Label(
-                "Instruction goes here \nW A S D to control\nLeft Click to shoot\nSpaceBar to reload", "35px Merienda One",
+                "Instruction LEVEL1 goes here \nW A S D to control\nLeft Click to shoot\nSpaceBar to reload", "35px Merienda One",
                 "#B40404",
                 config.Screen.CENTER_X,
                 config.Screen.CENTER_Y, true);

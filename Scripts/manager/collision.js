@@ -41,7 +41,7 @@ var managers;
                         if (obj.name === "enemy" || obj.name === "enemyLevel2") {
                             this._player.hitEnemy = true;
                             scoreValue -= 10;
-                            livesValue -= 8;
+                            livesValue -= 50;
                             createjs.Sound.play("broken").volume = 1;
                         }
                         else {

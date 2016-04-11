@@ -90,7 +90,19 @@ var assetData: objects.Asset[] = [
     { id: "hitEnemy4", src: "../../Assets/sample/collision/sprite 4-resized.png" },
 
     //die animation
-    { id: "dead", src: "../../Assets/images/dead.png" },
+    { id: "sinking", src: "../../Assets/sample/player ship sinking/sprite 0-resized.png" },
+    { id: "sinking1", src: "../../Assets/sample/player ship sinking/sprite 1-resized.png" },
+    { id: "sinking2", src: "../../Assets/sample/player ship sinking/sprite 2-resized.png" },
+    { id: "sinking3", src: "../../Assets/sample/player ship sinking/sprite 3-resized.png" },
+    { id: "sinking5", src: "../../Assets/sample/player ship sinking/sprite 4-resized.png" },
+    { id: "sinking6", src: "../../Assets/sample/player ship sinking/sprite 5-resized.png" },
+    { id: "sinking7", src: "../../Assets/sample/player ship sinking/sprite 6-resized.png" },
+    { id: "sinking8", src: "../../Assets/sample/player ship sinking/sprite 7-resized.png" },
+    { id: "sinking9", src: "../../Assets/sample/player ship sinking/sprite 8-resized.png" },
+    { id: "sinking10", src: "../../Assets/sample/player ship sinking/sprite 9-resized.png" },
+    { id: "sinking11", src: "../../Assets/sample/player ship sinking/sprite 91-resized.png" },
+    { id: "sinking12", src: "../../Assets/sample/player ship sinking/sprite 92-resized.png" },
+
 
     //money effect
     { id: "money1", src: "../../Assets/sample/coins/player-resized1.png" },
@@ -127,10 +139,12 @@ var assetData: objects.Asset[] = [
     { id: "outOfBullets", src: "../../Assets/sample/outOfBullets.mp3" },
 
     { id: "money", src: "../../Assets/sample/money-edited.mp3" },
-    //{ id: "ricochet", src: "../../Assets/audio/ricochet.mp3" },
     { id: "broken", src: "../../Assets/sample/broken.mp3" },
     { id: "haha", src: "../../Assets/sample/haha.mp3" },
     { id: "haha2", src: "../../Assets/sample/haha 2.mp3" },
+    { id: "haha2", src: "../../Assets/sample/haha 2.mp3" },
+    { id: "abandon_ship", src: "../../Assets/sample/abandon_ship-amplified.mp3" },
+    { id: "sink", src: "../../Assets/sample/sink.mp3" },
 
 
 

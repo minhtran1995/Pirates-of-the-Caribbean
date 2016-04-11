@@ -39,6 +39,7 @@ var objects;
             Player.right = false;
             Player.counter = 0;
             Player.moneyCounter = 2;
+            Player.deadCounter = 13;
             this.hitMoney = false;
             this.hitEnemy = false;
             this.hitGunTreasure = false;
@@ -46,6 +47,7 @@ var objects;
             this.isDead = false;
             Player.bulletCounter = 8;
             Player.didTheStuff = false;
+            this._deadSoundPlayed = false;
         }
         //check if player is in the allowed range
         Player.prototype._checkBounds = function () {
@@ -104,17 +106,20 @@ var objects;
                     Player.didTheStuff = false;
                 }
             };
-            if (Player.up) {
-                this.y--;
-            }
-            if (Player.down) {
-                this.y++;
-            }
-            if (Player.left) {
-                this.x--;
-            }
-            if (Player.right) {
-                this.x++;
+            //player can control this only when they are alive
+            if (!this.isDead) {
+                if (Player.up) {
+                    this.y--;
+                }
+                if (Player.down) {
+                    this.y++;
+                }
+                if (Player.left) {
+                    this.x--;
+                }
+                if (Player.right) {
+                    this.x++;
+                }
             }
             //make sure bullet dont appear when player is idle
             window.onmouseup = function () {
@@ -122,13 +127,25 @@ var objects;
                 Player.counter = 0;
             };
             if (this.isDead) {
-                this.y = this._bottomBounds - this.height;
-                this.image = this.shuffleImages("dead");
+                this.y = this._bottomBounds - this.height * 0.5;
+                if (Player.delay <= 120) {
+                    if (Player.delay % 10 === 0) {
+                        this.image = this.shuffleImages("dead");
+                    }
+                    Player.delay++;
+                }
+                if (!this._deadSoundPlayed) {
+                    createjs.Sound.play("abandon_ship", 0, 0, 0, 2);
+                    createjs.Sound.play("sink");
+                    this._deadSoundPlayed = true;
+                }
+                ;
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };
             }
             else {
+                Player.delay = 0;
                 window.onmousedown = function () {
                     if (objects.Cannon.isloaded) {
                         console.log("Shoot");
@@ -168,7 +185,6 @@ var objects;
             }
             else {
                 if (Player.counter <= 2) {
-                    //this.image = this.shuffleImages("shoot");
                     this.isShooting = true;
                     objects.Cannon.shootCannon = true;
                 }
@@ -199,7 +215,19 @@ var objects;
             obj[11] = assets.getResult("hitEnemy3");
             obj[12] = assets.getResult("hitEnemy4");
             //die
-            obj[13] = assets.getResult("dead");
+            obj[13] = assets.getResult("sinking");
+            obj[14] = assets.getResult("sinking1");
+            obj[15] = assets.getResult("sinking2");
+            obj[16] = assets.getResult("sinking3");
+            obj[17] = assets.getResult("sinking4");
+            obj[18] = assets.getResult("sinking5");
+            obj[19] = assets.getResult("sinking6");
+            obj[20] = assets.getResult("sinking7");
+            obj[21] = assets.getResult("sinking8");
+            obj[22] = assets.getResult("sinking9");
+            obj[23] = assets.getResult("sinking10");
+            obj[24] = assets.getResult("sinking11");
+            obj[25] = assets.getResult("sinking12");
             var number;
             if (val === "") {
                 number = 0;
@@ -222,9 +250,16 @@ var objects;
                 return obj[number];
             }
             else if (val === "dead") {
-                return obj[13];
+                if (Player.deadCounter > 25) {
+                    Player.deadCounter = 13;
+                }
+                else {
+                    Player.deadCounter++;
+                }
+                return obj[Player.deadCounter];
             }
         };
+        Player.delay = 1;
         return Player;
     })(createjs.Bitmap);
     objects.Player = Player;

@@ -53,6 +53,9 @@ var scenes;
             //health label
             this._healthLabel = new objects.Label("%", "35px Merienda One", "#adffff", config.Screen.WIDTH - 230, 0, false);
             this.addChild(this._healthLabel);
+            //level label
+            this._levelLabel = new objects.Label("Level One", "Bold 45px Merienda One", "#ff1a1a", config.Screen.CENTER_X, 20, true);
+            this.addChild(this._levelLabel);
             //parrot
             this._parrot = new objects.Parrot();
             this.addChild(this._parrot);
