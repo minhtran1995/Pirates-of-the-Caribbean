@@ -15,7 +15,6 @@
 module scenes {
     export class Menu extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
-
         private _startButton: objects.Button;
         private _instructionButton: objects.Button;
         private _exitButton: objects.Button;

@@ -19,7 +19,8 @@ module managers {
 
         private static _counter: number;
 
-        private static _healthHit: number;
+        private static _enemyHit: number;
+        private static _moneyHit: number;
 
 
 
@@ -27,9 +28,8 @@ module managers {
         constructor(player: objects.Player) {
             this._player = player;
             Collision._counter = 0;
-            Collision._healthHit = 0;
-
-
+            Collision._enemyHit = 1;
+            Collision._moneyHit = 1;
         }
 
         public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
@@ -73,15 +73,15 @@ module managers {
                 } else {
                     obj.isColliding = false;
                     if (this._player.hitEnemy) {
-                        if (Collision._counter % 80 === 0) {
+                        if (Collision._enemyHit % 120 === 0) {
                             this._player.hitEnemy = false;
-                            Collision._counter = 0;
+                            Collision._enemyHit = 0;
                         }
                         else {
                             this._player.hitEnemy = true;
 
                         }
-                        Collision._counter++;
+                        Collision._enemyHit++;
                     }
 
                 }
@@ -122,22 +122,26 @@ module managers {
                             scoreValue += 100;
                             createjs.Sound.play("money");
                             createjs.Sound.play("haha");
-                            //place it far far away so it will float black
-                            obj.reset((config.Screen.WIDTH + obj.width) * 2);
+                            //place it far so it wont float black                            
+                            obj.reset((config.Screen.WIDTH + obj.width) * 4);
+
+
                         }
                         obj.isColliding = true;
                     }
                 } else {
                     obj.isColliding = false;
                     if (this._player.hitMoney) {
-                        if (Collision._healthHit % 80 === 0) {
+                        //animation length
+
+                        if (Collision._moneyHit % 120 === 0) {
                             this._player.hitMoney = false;
-                            Collision._healthHit = 0;
+                            Collision._moneyHit = 0;
                         }
                         else {
                             this._player.hitMoney = true;
                         }
-                        Collision._healthHit++;
+                        Collision._moneyHit++;
                     }
 
                 }

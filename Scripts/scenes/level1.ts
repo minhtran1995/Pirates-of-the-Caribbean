@@ -47,7 +47,7 @@ module scenes {
         // Start Method
         public start(): void {
             createjs.Sound.stop();
-            createjs.Sound.play("bgm",0,0,0,-1);
+            createjs.Sound.play("bgm", 0, 0, 0, -1);
 
             //init static variable
             Level1._counter = 0;
@@ -203,7 +203,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 20) {
+            if (scoreValue > 200) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");

@@ -128,7 +128,7 @@ var scenes;
                 Level1._counter++;
             }
             //desired score to win
-            if (scoreValue > 20) {
+            if (scoreValue > 200) {
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };

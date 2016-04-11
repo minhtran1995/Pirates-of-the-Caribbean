@@ -79,21 +79,26 @@ var assetData: objects.Asset[] = [
     { id: "ironman3", src: "../../Assets/images/ironman3.png" },
     */
 
-    { id: "ironmanShoot", src: "../../Assets/images/ironmanShoot.png" },
+    { id: "cannonShoot", src: "../../Assets/images/ironmanShoot.png" },
     { id: "arcReactorFixed", src: "../../Assets/images/arcReactor-fixed.png" },
 
-    //hit effect
-    { id: "ironmanHit", src: "../../Assets/images/getHit.png" },
-    { id: "ironmanHit1", src: "../../Assets/images/getHit1.png" },
-    { id: "ironmanHit2", src: "../../Assets/images/getHit2.png" },
-    { id: "ironmanHit3", src: "../../Assets/images/getHit3.png" },
+    //hitEnemy effect
+    { id: "hitEnemy", src: "../../Assets/sample/collision/sprite 0-resized.png" },
+    { id: "hitEnemy1", src: "../../Assets/sample/collision/sprite 1-resized.png" },
+    { id: "hitEnemy2", src: "../../Assets/sample/collision/sprite 2-resized.png" },
+    { id: "hitEnemy3", src: "../../Assets/sample/collision/sprite 3-resized.png" },
+    { id: "hitEnemy4", src: "../../Assets/sample/collision/sprite 4-resized.png" },
+
+    //die animation
     { id: "dead", src: "../../Assets/images/dead.png" },
 
-    //healing effect
-    { id: "healed", src: "../../Assets/images/ironmanHealed.png" },
-    { id: "healed1", src: "../../Assets/images/ironmanHealed1.png" },
-    { id: "healed2", src: "../../Assets/images/ironmanHealed2.png" },
-    { id: "healed3", src: "../../Assets/images/ironmanHealed3.png" },
+    //money effect
+    { id: "money1", src: "../../Assets/sample/coins/player-resized1.png" },
+    { id: "money2", src: "../../Assets/sample/coins/player-resized2.png" },
+    { id: "money3", src: "../../Assets/sample/coins/player-resized3.png" },
+    { id: "money4", src: "../../Assets/sample/coins/player-resized4.png" },
+    { id: "money5", src: "../../Assets/sample/coins/player-resized5.png" },
+    { id: "money6", src: "../../Assets/sample/coins/player-resized6.png" },
 
     //health image
     { id: "health", src: "../../Assets/sample/health-resized.png" },

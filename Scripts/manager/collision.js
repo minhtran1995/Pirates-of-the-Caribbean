@@ -17,7 +17,8 @@ var managers;
         function Collision(player) {
             this._player = player;
             Collision._counter = 0;
-            Collision._healthHit = 0;
+            Collision._enemyHit = 1;
+            Collision._moneyHit = 1;
         }
         Collision.prototype.distance = function (startPoint, endPoint) {
             return Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
@@ -52,14 +53,14 @@ var managers;
                 else {
                     obj.isColliding = false;
                     if (this._player.hitEnemy) {
-                        if (Collision._counter % 80 === 0) {
+                        if (Collision._enemyHit % 120 === 0) {
                             this._player.hitEnemy = false;
-                            Collision._counter = 0;
+                            Collision._enemyHit = 0;
                         }
                         else {
                             this._player.hitEnemy = true;
                         }
-                        Collision._counter++;
+                        Collision._enemyHit++;
                     }
                 }
             }
@@ -92,8 +93,8 @@ var managers;
                             scoreValue += 100;
                             createjs.Sound.play("money");
                             createjs.Sound.play("haha");
-                            //place it far far away so it will float black
-                            obj.reset((config.Screen.WIDTH + obj.width) * 2);
+                            //place it far so it wont float black                            
+                            obj.reset((config.Screen.WIDTH + obj.width) * 4);
                         }
                         obj.isColliding = true;
                     }
@@ -101,14 +102,15 @@ var managers;
                 else {
                     obj.isColliding = false;
                     if (this._player.hitMoney) {
-                        if (Collision._healthHit % 80 === 0) {
+                        //animation length
+                        if (Collision._moneyHit % 120 === 0) {
                             this._player.hitMoney = false;
-                            Collision._healthHit = 0;
+                            Collision._moneyHit = 0;
                         }
                         else {
                             this._player.hitMoney = true;
                         }
-                        Collision._healthHit++;
+                        Collision._moneyHit++;
                     }
                 }
             }

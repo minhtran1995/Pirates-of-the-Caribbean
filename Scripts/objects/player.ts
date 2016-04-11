@@ -42,6 +42,7 @@ module objects {
         private static right: boolean;
         public static counter: number;
         public static bulletCounter: number;
+        public static moneyCounter: number;
         private static didTheStuff: boolean;
 
         constructor() {
@@ -69,6 +70,7 @@ module objects {
             Player.right = false;
 
             Player.counter = 0;
+            Player.moneyCounter = 2;
 
             this.hitMoney = false;
             this.hitEnemy = false;
@@ -151,16 +153,12 @@ module objects {
                 this.x++;
             }
 
-
-
-            //this.y = stage.mouseY;
-            //this.x = stage.mouseX;
-
+            //make sure bullet dont appear when player is idle
             window.onmouseup = function() {
                 Player.flag = false;
                 Player.counter = 0;
-
             }
+
 
             if (this.isDead) {
                 this.y = this._bottomBounds - this.height;
@@ -192,10 +190,16 @@ module objects {
 
                 if (this.hitEnemy) {
                     this.image = this.shuffleImages("hit");
+                    window.onmousedown = function() {
+                        console.log("Mouse disabled");
+                    };
                 }
 
                 if (this.hitMoney) {
-                    this.image = this.shuffleImages("health");
+                    this.image = this.shuffleImages("money");
+                    window.onmousedown = function() {
+                        console.log("Mouse disabled");
+                    };
                 }
 
                 if (!this.hitMoney && !this.hitEnemy) {
@@ -209,7 +213,6 @@ module objects {
         public playerAnimation(): void {
             if (!Player.flag) {
                 this.image = this.shuffleImages("");
-
             }
             else {
                 if (Player.counter <= 2) {
@@ -231,51 +234,57 @@ module objects {
         public shuffleImages(val: string): Object {
             var obj = new Array<Object>();
 
+            //normal player
             obj[0] = assets.getResult("player");
-            ///////Unuused code
-            obj[1] = assets.getResult("ironman2");
-            obj[2] = assets.getResult("ironman3");
 
-            obj[3] = assets.getResult("ironmanShoot");
-            ///////////////
-
-            //healed animation
-            obj[4] = assets.getResult("healed");
-            obj[5] = assets.getResult("healed1");
-            obj[6] = assets.getResult("healed2");
-            obj[7] = assets.getResult("healed3");
+            //player shoot
+            obj[1] = assets.getResult("cannonShoot");
 
 
-            //hit animation
-            obj[8] = assets.getResult("ironmanHit");
-            obj[9] = assets.getResult("ironmanHit1");
-            obj[10] = assets.getResult("ironmanHit2");
-            obj[11] = assets.getResult("ironmanHit3");
+            //money animation
+            obj[2] = assets.getResult("money1");
+            obj[3] = assets.getResult("money2");
+            obj[4] = assets.getResult("money3");
+            obj[5] = assets.getResult("money4");
+            obj[6] = assets.getResult("money5");
+            obj[7] = assets.getResult("money6");
+
+            //hitEnemy animation
+            obj[8] = assets.getResult("hitEnemy");
+            obj[9] = assets.getResult("hitEnemy1");
+            obj[10] = assets.getResult("hitEnemy2");
+            obj[11] = assets.getResult("hitEnemy3");
+            obj[12] = assets.getResult("hitEnemy4");
 
             //die
-            obj[12] = assets.getResult("dead");
+            obj[13] = assets.getResult("dead");
 
 
 
-            var rand;
+
+            var number;
 
             if (val === "") {
-                rand = 0;
-                return obj[rand];
+                number = 0;
+                return obj[number];
             }
             else if (val === "shoot") {
-                return obj[3];
+                return obj[1];
             }
-            else if (val === "health") {
-                rand = Math.round(Math.random() * 3) + 4;
-                return obj[rand];
+            else if (val === "money") {
+                if (Player.moneyCounter > 7) {
+                    Player.moneyCounter = 2;
+                } else {
+                    Player.moneyCounter++;
+                }
+                return obj[Player.moneyCounter];
             }
             else if (val === "hit") {
-                rand = Math.round(Math.random() * 3) + 8;
-                return obj[rand];
+                number = Math.round(Math.random() * 4) + 8;
+                return obj[number];
             }
             else if (val === "dead") {
-                return obj[12];
+                return obj[13];
             }
         }
 

@@ -27,6 +27,8 @@ var objects;
                 else {
                     this.image = Cannon.shuffleImages("");
                 }
+            }
+            if (!this._player.isDead) {
                 //equation to make corresponding bullet direction
                 if (stage.mouseX <= this.x) {
                     this.rotation = Math.atan((this.y - stage.mouseY) / (this.x - stage.mouseX)) * 180 / Math.PI + 180;
