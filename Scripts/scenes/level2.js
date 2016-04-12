@@ -42,7 +42,7 @@ var scenes;
             this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
             //adding captain enemies
-            this._enemyCount = 0; //number of enemies
+            this._enemyCount = 3; //number of enemies
             this._enemy = new Array();
             for (var e = 0; e < this._enemyCount; e++) {
                 this._enemy[e] = new objects.Enemy();
@@ -118,6 +118,8 @@ var scenes;
                 else {
                     this._collision.objectVerticalCollision(this._squid[this._squidCount - 1], this._squid[0]);
                 }
+                this._collision.checkEnemyCollision(this._squid[i]);
+                this._collision.bulletCollision(this._bullet, this._squid[i]);
             }
             //update shields locations and check collision
             this._enemy.forEach(function (shield) {

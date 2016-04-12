@@ -44,6 +44,12 @@ var managers;
                             livesValue -= 8;
                             createjs.Sound.play("broken").volume = 1;
                         }
+                        if (obj.name === "squid") {
+                            this._player.hitEnemy = true;
+                            scoreValue -= 5;
+                            livesValue -= 5;
+                            createjs.Sound.play("broken").volume = 1;
+                        }
                         else {
                             this._player.hitEnemy = true;
                         }
@@ -197,6 +203,16 @@ var managers;
                             obj2.reset(config.Screen.WIDTH + obj2.width);
                         }
                         Collision._counter = 0;
+                    }
+                    else if (obj2.name === "squid") {
+                        obj2.name = "deadSquid";
+                        obj2.image = assets.getResult("squid3");
+                        createjs.Sound.play("parrotSound", 0, 0, 0, 2, 2);
+                        createjs.Sound.play("haha2");
+                        scoreValue += 5;
+                        obj2.speed.x = Math.round(Math.random() * 10 + 5);
+                        obj2.speed.y = Math.round(Math.random() * 20 - 10);
+                        obj2.rotation = Math.round(Math.random() * 360);
                     }
                     else {
                     }

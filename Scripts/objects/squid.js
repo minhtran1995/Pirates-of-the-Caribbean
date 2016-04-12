@@ -32,6 +32,8 @@ var objects;
         Squid.prototype.reset = function (value) {
             this.y = value;
             this.x = this.XLocation[Math.round(Math.random() * 3)];
+            this.name = "squid";
+            this.speed.x = 0;
             this.speed.y = Math.random() * 7 + 3;
             this.image = assets.getResult("squid1");
         };
@@ -51,9 +53,10 @@ var objects;
             else {
                 this.y = this.y - this.speed.y;
             }
-            if (this.y >= this._bottomBound + 100) {
+            if (this.y >= this._bottomBound + 100 || this.x >= this._rightBound + this.width) {
                 this.reset(this._bottomBound + 100);
             }
+            this.x += this.speed.x;
         };
         Squid.delay = 0;
         return Squid;

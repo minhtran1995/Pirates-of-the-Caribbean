@@ -83,7 +83,7 @@ module scenes {
             this.addChild(this._cannon);
 
             //adding captain enemies
-            this._enemyCount = 0;//number of enemies
+            this._enemyCount = 3;//number of enemies
             this._enemy = new Array<objects.Enemy>();
 
 
@@ -193,6 +193,8 @@ module scenes {
                 } else {
                     this._collision.objectVerticalCollision(this._squid[this._squidCount - 1], this._squid[0]);
                 }
+                this._collision.checkEnemyCollision(this._squid[i]);
+                this._collision.bulletCollision(this._bullet, this._squid[i]);
             }
             //update shields locations and check collision
             this._enemy.forEach(shield => {
