@@ -58,7 +58,7 @@ var scenes;
         Menu.prototype._startButtonClick = function (event) {
             this._fadeOut(500, function () {
                 // Switch to the instruction Scene
-                scene = config.Scene.LEVEL1;
+                scene = config.Scene.LEVEL2;
                 changeScene();
             });
         };

@@ -40,6 +40,7 @@ var objects;
             Player.counter = 0;
             Player.moneyCounter = 2;
             Player.deadCounter = 19;
+            Player.moneyAnimationDelay = 1;
             this.hitMoney = false;
             this.hitEnemy = false;
             this.hitGunTreasure = false;
@@ -167,18 +168,23 @@ var objects;
                     //reset everything that associate with money animation    
                     this.hitMoney = false;
                     Player.moneyCounter = 2;
-                    Player.moneyAnimationDelay = 0;
+                    Player.moneyAnimationDelay = 1;
                     managers.Collision._moneyHit = 1;
                 }
                 if (this.hitMoney) {
-                    if (Player.moneyAnimationDelay < 120) {
+                    if (Player.moneyAnimationDelay <= 120) {
                         if (Player.moneyAnimationDelay % 10 === 0) {
-                            this.image = this.shuffleImages("money");
+                            if (Player.moneyAnimationDelay === 120) {
+                                this.image = this.shuffleImages("money");
+                                Player.moneyAnimationDelay = 0;
+                                Player.moneyCounter = 2;
+                            }
+                            else {
+                                this.image = this.shuffleImages("money");
+                            }
+                            console.log("reached");
                         }
                         Player.moneyAnimationDelay++;
-                    }
-                    else {
-                        Player.moneyAnimationDelay = 0;
                     }
                 }
                 //////// DO NOT TOUCH THIS

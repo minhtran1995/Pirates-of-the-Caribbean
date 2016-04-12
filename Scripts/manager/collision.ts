@@ -257,7 +257,7 @@ module managers {
         }
 
         //check collision between bullet and objects
-        public ObjectCollision(obj1: objects.GameObject, obj2: objects.GameObject) {
+        public objectVerticalCollision(obj1: objects.GameObject, obj2: objects.GameObject) {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
 

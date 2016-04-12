@@ -83,7 +83,7 @@ module scenes {
             this.addChild(this._cannon);
 
             //adding captain enemies
-            this._enemyCount = 3;//number of enemies
+            this._enemyCount = 0;//number of enemies
             this._enemy = new Array<objects.Enemy>();
 
 
@@ -189,9 +189,9 @@ module scenes {
             for (var i = 0; i < this._squidCount; i++) {
                 this._squid[i].update();
                 if (i > 0) {
-                    this._collision.ObjectCollision(this._squid[i], this._squid[i - 1]);
+                    this._collision.objectVerticalCollision(this._squid[i], this._squid[i - 1]);
                 } else {
-                    this._collision.ObjectCollision(this._squid[this._squidCount - 1], this._squid[0]);
+                    this._collision.objectVerticalCollision(this._squid[this._squidCount - 1], this._squid[0]);
                 }
             }
             //update shields locations and check collision

@@ -204,7 +204,7 @@ var managers;
             }
         };
         //check collision between bullet and objects
-        Collision.prototype.ObjectCollision = function (obj1, obj2) {
+        Collision.prototype.objectVerticalCollision = function (obj1, obj2) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
             var obj1HalfHeight = obj1.height * 0.5;
