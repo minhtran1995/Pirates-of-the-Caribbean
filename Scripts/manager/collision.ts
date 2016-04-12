@@ -20,7 +20,9 @@ module managers {
         private static _counter: number;
 
         private static _enemyHit: number;
-        private static _moneyHit: number;
+
+
+        public static _moneyHit: number;
 
 
 
@@ -128,8 +130,8 @@ module managers {
                         }
                         else {
                             this._player.hitMoney = true;
+                            Collision._moneyHit++;
                         }
-                        Collision._moneyHit++;
                     }
                 }
             }
@@ -197,7 +199,6 @@ module managers {
                             scoreValue += 5;
 
                             obj2.image = assets.getResult("explosion");
-                            createjs.Sound.play("ricochet");
                             //set this lower to make enemies stronger
                             Collision._counter += 5;
                         }
@@ -247,10 +248,49 @@ module managers {
                     } else {
 
                     }
+
+
                 }
 
 
             }
         }
+
+        //check collision between bullet and objects
+        public ObjectCollision(obj1: objects.GameObject, obj2: objects.GameObject) {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var obj1HalfHeight: number = obj1.height * 0.5;
+            var obj2HalfHeight: number = obj2.height * 0.5;
+
+            var minDistance: number = obj1HalfHeight + obj2HalfHeight;
+
+            startPoint.x = obj1.x;
+            startPoint.y = obj1.y;
+
+            endPoint.x = obj2.x;
+            endPoint.y = obj2.y;
+            if (this.distance(startPoint, endPoint) < minDistance) {
+                if (obj2.name = "squid") {
+                    if (obj1.speed.y > 0 && obj2.speed.y > 0) {
+                        obj2.speed.y = -obj2.speed.y * 1.5;
+                        obj2.image = assets.getResult("squid2");
+                    } else if (obj1.speed.y < 0 && obj2.speed.y > 0) {
+                        obj2.speed.y = -obj2.speed.y * 1.5;
+                        obj2.image = assets.getResult("squid2");
+
+                    }
+                    else if (obj1.speed.y > 0 && obj2.speed.y < 0) {
+                        obj1.speed.y = -obj1.speed.y * 1.5;
+                        obj1.image = assets.getResult("squid2");
+                    }
+
+                }
+            }
+
+
+        }
     }
 }
+

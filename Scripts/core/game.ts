@@ -132,6 +132,10 @@ var assetData: objects.Asset[] = [
     { id: "parrot6", src: "../../Assets/sample/parrot/parrot6.png" },
     { id: "parrot7", src: "../../Assets/sample/parrot/parrot7.png" },
 
+    //squid
+    { id: "squid1", src: "../../Assets/sample/squid/Squid1.png" },
+    { id: "squid2", src: "../../Assets/sample/squid/Squid2.png" },
+    { id: "squid3", src: "../../Assets/sample/squid/Squid3.png" },
 
 
     { id: "blank", src: "../../Assets/images/blank.png" },

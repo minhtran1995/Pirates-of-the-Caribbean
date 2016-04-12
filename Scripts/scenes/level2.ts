@@ -6,6 +6,7 @@ module scenes {
         private _enemy: objects.Enemy[];
         private _enemyCount: number;
         private _moneyCount: number;
+        private _squidCount: number;
         private _gunTreasure: objects.Money;
 
         //game objects
@@ -14,6 +15,7 @@ module scenes {
         private _cannon: objects.Cannon;
         private _collision: managers.Collision;
         private _parrot: objects.Parrot;
+        private _squid: objects.Squid[];
 
         //score and health
         private _score: objects.Label;
@@ -80,8 +82,8 @@ module scenes {
             this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
 
-            //adding captain shields
-            this._enemyCount = 3;//number of shields
+            //adding captain enemies
+            this._enemyCount = 3;//number of enemies
             this._enemy = new Array<objects.Enemy>();
 
 
@@ -117,6 +119,16 @@ module scenes {
             //parrot
             this._parrot = new objects.Parrot();
             this.addChild(this._parrot);
+
+            //squid
+            this._squid = new Array<objects.Squid>();
+            this._squidCount = 3;
+            for (var i = 0; i < this._squidCount; i++) {
+                this._squid[i] = new objects.Squid();
+                this.addChild(this._squid[i]);
+            }
+
+
 
             //reload button 
             this._reloadButton = new objects.Button("reload",
@@ -172,6 +184,16 @@ module scenes {
             this._parrot.update();
             this._collision.bulletCollision(this._bullet, this._parrot);
 
+
+            //update squid movements
+            for (var i = 0; i < this._squidCount; i++) {
+                this._squid[i].update();
+                if (i > 0) {
+                    this._collision.ObjectCollision(this._squid[i], this._squid[i - 1]);
+                } else {
+                    this._collision.ObjectCollision(this._squid[this._squidCount - 1], this._squid[0]);
+                }
+            }
             //update shields locations and check collision
             this._enemy.forEach(shield => {
                 shield.update();
@@ -248,6 +270,11 @@ module scenes {
                 for (var i = 0; i < this._moneyCount; i++) {
                     this._money[i].reset(config.Screen.WIDTH + this._money[i].width)
                 }
+                for (var i = 0; i < this._squidCount; i++) {
+                    this._squid[i].reset(config.Screen.WIDTH + this._squid[i].width)
+                }
+
+
                 this._parrot.reset(config.Screen.WIDTH + this._parrot.width);
 
                 //blink label

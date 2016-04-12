@@ -45,7 +45,7 @@ module objects {
         public static moneyCounter: number;
         public static deadCounter: number;
         public static delay: number = 1;
-        public static moneyAnimationDelay: number = 1;
+        public static moneyAnimationDelay: number;
         private static didTheStuff: boolean;
 
         constructor() {
@@ -212,22 +212,25 @@ module objects {
 
                 if (this.hitEnemy) {
                     this.image = this.shuffleImages("hit");
-                    //I Want to play only 1 animation at a time    
+                    //I Want to play only 1 animation at a time
+                    //reset everything that associate with money animation    
+                    this.hitMoney = false;
                     Player.moneyCounter = 2;
-                    Player.moneyAnimationDelay = 1;
-
+                    Player.moneyAnimationDelay = 0;
+                    managers.Collision._moneyHit = 1;
 
                 }
 
                 if (this.hitMoney) {
-                    if (Player.moneyAnimationDelay <= 120) {
+                    if (Player.moneyAnimationDelay < 120) {
                         if (Player.moneyAnimationDelay % 10 === 0) {
                             this.image = this.shuffleImages("money");
                         }
                         Player.moneyAnimationDelay++;
                     } else {
-                        Player.moneyAnimationDelay = 1;
+                        Player.moneyAnimationDelay = 0;
                     }
+
                 }
 
                 //////// DO NOT TOUCH THIS
