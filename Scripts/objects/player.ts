@@ -45,6 +45,7 @@ module objects {
         public static moneyCounter: number;
         public static deadCounter: number;
         public static delay: number = 1;
+        public static moneyAnimationDelay: number = 1;
         private static didTheStuff: boolean;
 
         constructor() {
@@ -73,7 +74,7 @@ module objects {
 
             Player.counter = 0;
             Player.moneyCounter = 2;
-            Player.deadCounter = 13
+            Player.deadCounter = 19;
 
             this.hitMoney = false;
             this.hitEnemy = false;
@@ -189,7 +190,7 @@ module objects {
                 };
             }
             else {
-                Player.delay = 0;
+                Player.delay = 1;
                 window.onmousedown = function() {
                     if (Cannon.isloaded) {
                         console.log("Shoot");
@@ -211,36 +212,45 @@ module objects {
 
                 if (this.hitEnemy) {
                     this.image = this.shuffleImages("hit");
+                    //I Want to play only 1 animation at a time    
+                    Player.moneyCounter = 2;
+                    Player.moneyAnimationDelay = 1;
+
+
                 }
 
                 if (this.hitMoney) {
-                    this.image = this.shuffleImages("money");
+                    if (Player.moneyAnimationDelay <= 120) {
+                        if (Player.moneyAnimationDelay % 10 === 0) {
+                            this.image = this.shuffleImages("money");
+                        }
+                        Player.moneyAnimationDelay++;
+                    } else {
+                        Player.moneyAnimationDelay = 1;
+                    }
                 }
 
-                if (!this.hitMoney && !this.hitEnemy) {
-                    this.playerAnimation();
+                //////// DO NOT TOUCH THIS
+                if (Player.flag) {
+                    if (Player.counter <= 2) {
+                        this.isShooting = true;
+                        Cannon.shootCannon = true;
+                    }
+                    else {
+                        this.isShooting = false;
+                    }
+                    Player.counter++;
+                } else {
+                    this.isShooting = false;
+                    Cannon.shootCannon = false;
                 }
-
+                ////////////////////////
             }
+
             this._checkBounds();
         }
 
-        public playerAnimation(): void {
-            if (!Player.flag) {
-                this.image = this.shuffleImages("");
-            }
-            else {
-                if (Player.counter <= 2) {
-                    this.isShooting = true;
-                    Cannon.shootCannon = true;
-                }
-                else {
-                    this.isShooting = false;
-                }
 
-                Player.counter++;
-            }
-        }
 
 
 
@@ -262,28 +272,34 @@ module objects {
             obj[5] = assets.getResult("money4");
             obj[6] = assets.getResult("money5");
             obj[7] = assets.getResult("money6");
+            obj[8] = assets.getResult("money7");
+            obj[9] = assets.getResult("money8");
+            obj[10] = assets.getResult("money9");
+            obj[11] = assets.getResult("money10");
+            obj[12] = assets.getResult("money11");
+            obj[13] = assets.getResult("money12");
 
             //hitEnemy animation
-            obj[8] = assets.getResult("hitEnemy");
-            obj[9] = assets.getResult("hitEnemy1");
-            obj[10] = assets.getResult("hitEnemy2");
-            obj[11] = assets.getResult("hitEnemy3");
-            obj[12] = assets.getResult("hitEnemy4");
+            obj[14] = assets.getResult("hitEnemy");
+            obj[15] = assets.getResult("hitEnemy1");
+            obj[16] = assets.getResult("hitEnemy2");
+            obj[17] = assets.getResult("hitEnemy3");
+            obj[18] = assets.getResult("hitEnemy4");
 
             //die
-            obj[13] = assets.getResult("sinking");
-            obj[14] = assets.getResult("sinking1");
-            obj[15] = assets.getResult("sinking2");
-            obj[16] = assets.getResult("sinking3");
-            obj[17] = assets.getResult("sinking4");
-            obj[18] = assets.getResult("sinking5");
-            obj[19] = assets.getResult("sinking6");
-            obj[20] = assets.getResult("sinking7");
-            obj[21] = assets.getResult("sinking8");
-            obj[22] = assets.getResult("sinking9");
-            obj[23] = assets.getResult("sinking10");
-            obj[24] = assets.getResult("sinking11");
-            obj[25] = assets.getResult("sinking12");
+            obj[19] = assets.getResult("sinking");
+            obj[20] = assets.getResult("sinking1");
+            obj[21] = assets.getResult("sinking2");
+            obj[22] = assets.getResult("sinking3");
+            obj[23] = assets.getResult("sinking4");
+            obj[24] = assets.getResult("sinking5");
+            obj[25] = assets.getResult("sinking6");
+            obj[26] = assets.getResult("sinking7");
+            obj[27] = assets.getResult("sinking8");
+            obj[28] = assets.getResult("sinking9");
+            obj[29] = assets.getResult("sinking10");
+            obj[30] = assets.getResult("sinking11");
+            obj[31] = assets.getResult("sinking12");
 
 
 
@@ -298,7 +314,7 @@ module objects {
                 return obj[1];
             }
             else if (val === "money") {
-                if (Player.moneyCounter > 7) {
+                if (Player.moneyCounter > 13) {
                     Player.moneyCounter = 2;
                 } else {
                     Player.moneyCounter++;
@@ -306,12 +322,12 @@ module objects {
                 return obj[Player.moneyCounter];
             }
             else if (val === "hit") {
-                number = Math.round(Math.random() * 4) + 8;
+                number = Math.round(Math.random() * 4) + 14;
                 return obj[number];
             }
             else if (val === "dead") {
-                if (Player.deadCounter > 25) {
-                    Player.deadCounter = 13;
+                if (Player.deadCounter > 31) {
+                    Player.deadCounter = 19;
                 } else {
                     Player.deadCounter++;
                 }

@@ -116,34 +116,54 @@ module managers {
                             //place it far far away so it will float black
                             obj.reset((config.Screen.WIDTH + obj.width) * 2);
                         }
-                        if (obj.name === "gunTreasure") {
-                            this._player.hitMoney = true;
-                            this._player.hitGunTreasure = true;
-                            scoreValue += 100;
-                            createjs.Sound.play("money");
-                            createjs.Sound.play("haha");
-                            //place it far so it wont float black                            
-                            obj.reset((config.Screen.WIDTH + obj.width) * 4);
-
-
-                        }
                         obj.isColliding = true;
                     }
                 } else {
                     obj.isColliding = false;
                     if (this._player.hitMoney) {
-                        //animation length
-
+                        //animation length                        
                         if (Collision._moneyHit % 120 === 0) {
                             this._player.hitMoney = false;
-                            Collision._moneyHit = 0;
+                            Collision._moneyHit = 1;
                         }
                         else {
                             this._player.hitMoney = true;
                         }
                         Collision._moneyHit++;
                     }
+                }
+            }
+        }
 
+        public checkGunTreasureCollision(obj: objects.Money): void {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var playerHalfWidth: number = this._player.width * 0.5;
+            var objHalfWidth: number = obj.width * 0.5;
+
+            var minDistance: number = playerHalfWidth + objHalfWidth;
+
+            startPoint.x = this._player.x;
+            startPoint.y = this._player.y;
+
+            endPoint.x = obj.x;
+            endPoint.y = obj.y;
+
+            if (!this._player.isDead) {
+                if (this.distance(startPoint, endPoint) < minDistance) {
+                    if (!obj.isColliding) {
+                        if (obj.name === "gunTreasure") {
+                            this._player.hitGunTreasure = true;
+                            scoreValue += 100;
+                            createjs.Sound.play("haha");
+                            //place it far so it wont float black                            
+                            obj.reset((config.Screen.WIDTH + obj.width) * 4);
+                        }
+                        obj.isColliding = true;
+                    }
+                } else {
+                    obj.isColliding = false;
                 }
 
             }
@@ -213,8 +233,9 @@ module managers {
                                 else {
                                     livesValue += 10;
                                 }
-
                             }
+                            //also fix the player ship
+                            this._player.image = assets.getResult("player");
 
                             Collision._counter++;
                             obj2.reset(config.Screen.WIDTH + obj2.width);

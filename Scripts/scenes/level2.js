@@ -113,8 +113,8 @@ var scenes;
                 h.update();
                 _this._collision.checkMoneyCollision(h);
             });
-            //check if player pick up the cannin
-            this._collision.checkMoneyCollision(this._gunTreasure);
+            //check if player pick up the cannon
+            this._collision.checkGunTreasureCollision(this._gunTreasure);
             this._score.text = "Score: " + scoreValue.toFixed(2);
             this._healthLabel.text = livesValue.toFixed(2) + " %";
             if (scoreValue < 0) {
@@ -137,7 +137,7 @@ var scenes;
                 Level2._counter++;
             }
             //desired score to win
-            if (scoreValue > 500) {
+            if (scoreValue > 1000) {
                 this._gunTreasure.update();
                 window.onmousedown = function () {
                     console.log("Mouse disabled");

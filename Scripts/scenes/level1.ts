@@ -212,7 +212,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 200) {
+            if (scoreValue > 10) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
