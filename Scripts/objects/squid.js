@@ -41,7 +41,7 @@ var objects;
         Squid.prototype.update = function () {
             //update squid location right away
             if (!this.doneTheStuff) {
-                this.reset(this._bottomBound + 100);
+                this.reset(this._bottomBound * 2.5);
                 this.doneTheStuff = true;
             }
             this.rotation = 90;
@@ -53,8 +53,9 @@ var objects;
             else {
                 this.y = this.y - this.speed.y;
             }
-            if (this.y >= this._bottomBound + 100 || this.x >= this._rightBound + this.width) {
-                this.reset(this._bottomBound + 100);
+            //maximum squid depth
+            if (this.y > this._bottomBound * 3 || this.x >= this._rightBound + this.width) {
+                this.reset(this._bottomBound * 2.5);
             }
             this.x += this.speed.x;
         };

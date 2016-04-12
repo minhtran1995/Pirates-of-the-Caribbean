@@ -121,13 +121,20 @@ var scenes;
                 this._collision.checkEnemyCollision(this._squid[i]);
                 this._collision.bulletCollision(this._bullet, this._squid[i]);
             }
-            //update shields locations and check collision
-            this._enemy.forEach(function (shield) {
-                shield.update();
-                _this._collision.checkEnemyCollision(shield);
-                _this._collision.bulletCollision(_this._bullet, shield);
-            });
-            //update health locations and check collision
+            //update enemy locations and check collision
+            for (var i = 0; i < this._enemyCount; i++) {
+                this._enemy[i].update();
+                if (i > 0) {
+                    this._collision.objectHorizontalCollision(this._enemy[i], this._enemy[i - 1]);
+                }
+                else {
+                    this._collision.objectHorizontalCollision(this._enemy[this._enemyCount - 1], this._enemy[0]);
+                }
+                this._collision.checkEnemyCollision(this._enemy[i]);
+                this._collision.bulletCollision(this._bullet, this._enemy[i]);
+            }
+            ;
+            //update money locations and check collision
             this._money.forEach(function (h) {
                 h.update();
                 _this._collision.checkMoneyCollision(h);

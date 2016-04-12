@@ -182,7 +182,6 @@ var objects;
                             else {
                                 this.image = this.shuffleImages("money");
                             }
-                            console.log("reached");
                         }
                         Player.moneyAnimationDelay++;
                     }

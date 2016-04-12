@@ -212,14 +212,13 @@ var managers;
                         scoreValue += 5;
                         obj2.speed.x = Math.round(Math.random() * 10 + 5);
                         obj2.speed.y = Math.round(Math.random() * 20 - 10);
-                        obj2.rotation = Math.round(Math.random() * 360);
                     }
                     else {
                     }
                 }
             }
         };
-        //check collision between bullet and objects
+        //check collision between squids
         Collision.prototype.objectVerticalCollision = function (obj1, obj2) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
@@ -244,6 +243,24 @@ var managers;
                         obj1.speed.y = -obj1.speed.y * 1.5;
                         obj1.image = assets.getResult("squid2");
                     }
+                }
+            }
+        };
+        //check collision between enemies
+        Collision.prototype.objectHorizontalCollision = function (obj1, obj2) {
+            var startPoint = new createjs.Point();
+            var endPoint = new createjs.Point();
+            var obj1HalfWidth = obj1.width * 0.5;
+            var obj2HalfWidth = obj2.width * 0.5;
+            var minDistance = obj1HalfWidth + obj2HalfWidth;
+            startPoint.x = obj1.x;
+            startPoint.y = obj1.y;
+            endPoint.x = obj2.x;
+            endPoint.y = obj2.y;
+            if (this.distance(startPoint, endPoint) < minDistance) {
+                if (obj2.name === "enemyLevel2" || obj2.name === "enemy") {
+                    obj2.speed.x = obj1.speed.x;
+                    obj2.x = obj2.x + (minDistance - this.distance(startPoint, endPoint)) * 1.1;
                 }
             }
         };

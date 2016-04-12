@@ -261,8 +261,6 @@ module managers {
                         scoreValue += 5;
                         obj2.speed.x = Math.round(Math.random() * 10 + 5);
                         obj2.speed.y = Math.round(Math.random() * 20 - 10);
-                        obj2.rotation = Math.round(Math.random() * 360);
-
 
                     }
                     else {
@@ -276,7 +274,7 @@ module managers {
             }
         }
 
-        //check collision between bullet and objects
+        //check collision between squids
         public objectVerticalCollision(obj1: objects.GameObject, obj2: objects.GameObject) {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();
@@ -308,9 +306,30 @@ module managers {
 
                 }
             }
+        }
 
 
+        //check collision between enemies
+        public objectHorizontalCollision(obj1: objects.GameObject, obj2: objects.GameObject) {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var obj1HalfWidth: number = obj1.width * 0.5;
+            var obj2HalfWidth: number = obj2.width * 0.5;
+
+            var minDistance: number = obj1HalfWidth + obj2HalfWidth;
+
+            startPoint.x = obj1.x;
+            startPoint.y = obj1.y;
+
+            endPoint.x = obj2.x;
+            endPoint.y = obj2.y;
+            if (this.distance(startPoint, endPoint) < minDistance) {
+                if (obj2.name === "enemyLevel2" || obj2.name === "enemy") {
+                    obj2.speed.x = obj1.speed.x;
+                    obj2.x = obj2.x + (minDistance - this.distance(startPoint, endPoint)) * 1.1;
+                }
+            }
         }
     }
 }
-
