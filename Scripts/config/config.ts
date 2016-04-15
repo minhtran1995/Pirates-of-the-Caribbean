@@ -21,8 +21,10 @@ module config {
         public static LEVEL1: number = 3;
         public static INSTRUCTION2: number = 4;
         public static LEVEL2: number = 5;
-        public static END: number = 6;
-        public static WIN: number = 7;
+        public static INSTRUCTION3: number = 6;
+        public static LEVEL3: number = 7;
+        public static END: number = 8;
+        public static WIN: number = 9;
     }
 
 

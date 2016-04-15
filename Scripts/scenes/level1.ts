@@ -33,7 +33,10 @@ module scenes {
 
         //Game buttons
         private _reloadButton: objects.Button;
+        private _skipButton: objects.Button;
 
+
+        //static counter
         private static _counter;
         private static _labelDisplayCounter;
 
@@ -122,6 +125,13 @@ module scenes {
 
 
 
+            //skip button
+            this._skipButton = new objects.Button("SkipButton",
+                config.Screen.WIDTH - 100, 100, true);
+            this.addChild(this._skipButton);
+            this._skipButton.on("click", this._skipButtonClick, this);
+
+            //reload label
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One",
                 "#FF0000",
                 50, 60, true);
@@ -218,7 +228,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 250) {
+            if (scoreValue > 300) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
@@ -277,7 +287,7 @@ module scenes {
 
         //EVENT HANDLERS ++++++++++++++++++++
 
-        // LEFT_CAVE Button click event handler
+        // relaod Button click event handler
         private _reloadButtonClick(event: createjs.MouseEvent) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;
@@ -285,6 +295,22 @@ module scenes {
             this._reloadLabel.visible = false;
             objects.Cannon.isloaded = true;
             objects.Player.bulletCounter = 8;
+        }
+
+        private _skipButtonClick(event: createjs.MouseEvent) {
+            //disable sound effect
+            window.onmousedown = function() {
+                console.log("Mouse disabled");
+            };
+            scoreValue = 9999;
+
+
+            this._fadeOut(500, () => {
+                // Switch to the lvl 2 Scene                
+                scene = config.Scene.INSTRUCTION2;
+                changeScene();
+            });
+            Level1._counter = 0;
         }
 
     }

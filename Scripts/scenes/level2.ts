@@ -33,6 +33,7 @@ module scenes {
 
         //Game buttons
         private _reloadButton: objects.Button;
+        private _skipButton: objects.Button;
 
         private static _counter;
         private static _labelDisplayCounter;
@@ -137,7 +138,13 @@ module scenes {
             this._reloadButton.on("click", this._reloadButtonClick, this);
 
 
+            //skip button
+            this._skipButton = new objects.Button("SkipButton",
+                config.Screen.WIDTH - 100, 100, true);
+            this.addChild(this._skipButton);
+            this._skipButton.on("click", this._skipButtonClick, this);
 
+            //reload label
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One",
                 "#FF0000",
                 50, 60, true);
@@ -238,7 +245,7 @@ module scenes {
 
                 if (Level2._counter === 240) {
                     this._fadeOut(500, () => {
-                        // Switch to the lose Scene
+                        // Switch to the instruction3 Scene
                         scene = config.Scene.END;
                         changeScene();
                     });
@@ -251,7 +258,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 1000) {
+            if (scoreValue > 700) {
 
                 this._gunTreasure.update();
 
@@ -263,7 +270,7 @@ module scenes {
                     if (Level2._counter === 180) {
                         this._fadeOut(500, () => {
                             // Switch to the lvl 3 Scene                
-                            scene = config.Scene.MENU;
+                            scene = config.Scene.INSTRUCTION3;
                             changeScene();
                         });
                         Level2._counter = 0;
@@ -330,6 +337,24 @@ module scenes {
             this._reloadLabel.visible = false;
             objects.Cannon.isloaded = true;
             objects.Player.bulletCounter = 8;
+        }
+
+        private _skipButtonClick(event: createjs.MouseEvent) {
+            //disable sound effect
+            window.onmousedown = function() {
+                console.log("Mouse disabled");
+            };
+
+            scoreValue = 9999;
+
+
+
+            this._fadeOut(500, () => {
+                // Switch to the lvl 2 Scene                
+                scene = config.Scene.INSTRUCTION3;
+                changeScene();
+            });
+            Level2._counter = 0;
         }
 
     }

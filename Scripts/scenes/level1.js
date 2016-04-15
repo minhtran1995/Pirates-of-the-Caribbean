@@ -63,6 +63,11 @@ var scenes;
             this._reloadButton = new objects.Button("reload", 50, 130, true);
             this.addChild(this._reloadButton);
             this._reloadButton.on("click", this._reloadButtonClick, this);
+            //skip button
+            this._skipButton = new objects.Button("SkipButton", config.Screen.WIDTH - 100, 100, true);
+            this.addChild(this._skipButton);
+            this._skipButton.on("click", this._skipButtonClick, this);
+            //reload label
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One", "#FF0000", 50, 60, true);
             this.addChild(this._reloadLabel);
             //dead message
@@ -138,7 +143,7 @@ var scenes;
                 Level1._counter++;
             }
             //desired score to win
-            if (scoreValue > 250) {
+            if (scoreValue > 300) {
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };
@@ -185,7 +190,7 @@ var scenes;
             this._reloadLabel.visible = true;
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        // LEFT_CAVE Button click event handler
+        // relaod Button click event handler
         Level1.prototype._reloadButtonClick = function (event) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;
@@ -193,6 +198,19 @@ var scenes;
             this._reloadLabel.visible = false;
             objects.Cannon.isloaded = true;
             objects.Player.bulletCounter = 8;
+        };
+        Level1.prototype._skipButtonClick = function (event) {
+            //disable sound effect
+            window.onmousedown = function () {
+                console.log("Mouse disabled");
+            };
+            scoreValue = 9999;
+            this._fadeOut(500, function () {
+                // Switch to the lvl 2 Scene                
+                scene = config.Scene.INSTRUCTION2;
+                changeScene();
+            });
+            Level1._counter = 0;
         };
         return Level1;
     })(objects.Scene);

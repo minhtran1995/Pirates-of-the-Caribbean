@@ -30,6 +30,8 @@ var instruction: scenes.Instruction;
 var level1: scenes.Level1;
 var instruction2: scenes.Instruction2;
 var level2: scenes.Level2;
+var instruction3: scenes.Instruction3;
+var level3: scenes.Level3;
 var end: scenes.End;
 var win: scenes.Win;
 
@@ -44,6 +46,8 @@ var assetData: objects.Asset[] = [
     { id: "InstructionButton", src: "../../Assets/sample/instructionButton.png" },
     { id: "ExitButton", src: "../../Assets/sample/exitButton.png" },
 
+
+    { id: "SkipButton", src: "../../Assets/sample/skipButton.png" },
 
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
@@ -73,11 +77,16 @@ var assetData: objects.Asset[] = [
 
     { id: "player", src: "../../Assets/sample/player-resized.png" },
 
-    /*
-    { id: "ironman1", src: "../../Assets/images/ironman1.png" },
-    { id: "ironman2", src: "../../Assets/images/ironman2.png" },
-    { id: "ironman3", src: "../../Assets/images/ironman3.png" },
-    */
+    //Level 3 RAIN
+    { id: "level3Ocean0", src: "../../Assets/sample/rain/rainBG1.png" },
+    { id: "level3Ocean1", src: "../../Assets/sample/rain/rainBG2.png" },
+    { id: "level3Ocean2", src: "../../Assets/sample/rain/rainBG3.png" },
+    { id: "level3Ocean3", src: "../../Assets/sample/rain/rainBG4.png" },
+    { id: "level3Ocean4", src: "../../Assets/sample/rain/rainBG5.png" },
+    { id: "level3Ocean5", src: "../../Assets/sample/rain/rainBG6.png" },
+    { id: "level3Ocean6", src: "../../Assets/sample/rain/rainBG7.png" },
+    { id: "level3Ocean7", src: "../../Assets/sample/rain/rainBG8.png" },
+
 
     { id: "cannonShoot", src: "../../Assets/images/ironmanShoot.png" },
     { id: "arcReactorFixed", src: "../../Assets/images/arcReactor-fixed.png" },
@@ -148,6 +157,9 @@ var assetData: objects.Asset[] = [
     { id: "reloadSound", src: "../../Assets/sample/reload.mp3" },
     { id: "parrotSound", src: "../../Assets/sample/parrotSound.mp3" },
     { id: "outOfBullets", src: "../../Assets/sample/outOfBullets.mp3" },
+    { id: "level3BGM", src: "../../Assets/sample/Teminite - Firepower.mp3" },
+    { id: "level3Rain", src: "../../Assets/sample/rainlvl3.mp3" },
+
 
     { id: "money", src: "../../Assets/sample/money-edited.mp3" },
     { id: "broken", src: "../../Assets/sample/broken.mp3" },
@@ -276,6 +288,22 @@ function changeScene(): void {
             level2 = new scenes.Level2();
             currentScene = level2;
             console.log("Starting level2 Scene");
+            break;
+        case config.Scene.INSTRUCTION3:
+            // show the PLAY scene
+            stage.removeAllChildren();
+            instruction3 = new scenes.Instruction3();
+            currentScene = instruction3;
+            console.log("Starting INSTRUCTION3 Scene");
+            break;
+        case config.Scene.LEVEL3:
+            // show the LEVEL2 scene
+            stage.removeAllChildren();
+            livesValue = 100;
+            scoreValue = 0;
+            level3 = new scenes.Level3();
+            currentScene = level3;
+            console.log("Starting level3 Scene");
             break;
         case config.Scene.END:
             // show the END scene
