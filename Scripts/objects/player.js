@@ -110,16 +110,16 @@ var objects;
             //player can control this only when they are alive
             if (!this.isDead) {
                 if (Player.up) {
-                    this.y--;
+                    this.y -= 1.5;
                 }
                 if (Player.down) {
-                    this.y++;
+                    this.y += 1.5;
                 }
                 if (Player.left) {
-                    this.x--;
+                    this.x -= 3;
                 }
                 if (Player.right) {
-                    this.x++;
+                    this.x += 3;
                 }
             }
             //make sure bullet dont appear when player is idle

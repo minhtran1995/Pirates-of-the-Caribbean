@@ -71,6 +71,47 @@ var managers;
                 }
             }
         };
+        //check collision between player and objects
+        Collision.prototype.checkBossCollision = function (obj) {
+            var startPoint = new createjs.Point();
+            var endPoint = new createjs.Point();
+            var playerHalfWidth = this._player.width * 0.5;
+            var objHalfWidth = obj.width * 0.5;
+            var minDistance = playerHalfWidth + objHalfWidth;
+            startPoint.x = this._player.x;
+            startPoint.y = this._player.y;
+            endPoint.x = obj.x;
+            endPoint.y = obj.y;
+            if (!this._player.isDead) {
+                if (this.distance(startPoint, endPoint) < minDistance) {
+                    if (!obj.isColliding) {
+                        if (obj.name === "boss") {
+                            this._player.hitEnemy = true;
+                            scoreValue -= 5;
+                            livesValue -= 15;
+                            createjs.Sound.play("broken").volume = 1;
+                        }
+                        else {
+                            this._player.hitEnemy = true;
+                        }
+                        obj.isColliding = true;
+                    }
+                }
+                else {
+                    obj.isColliding = false;
+                    if (this._player.hitEnemy) {
+                        if (Collision._enemyHit % 30 === 0) {
+                            this._player.hitEnemy = false;
+                            Collision._enemyHit = 0;
+                        }
+                        else {
+                            this._player.hitEnemy = true;
+                        }
+                        Collision._enemyHit++;
+                    }
+                }
+            }
+        };
         Collision.prototype.checkMoneyCollision = function (obj) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();

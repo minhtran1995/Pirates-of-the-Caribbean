@@ -48,7 +48,8 @@ module objects {
             }
 
             if (!Level3Ocean.switch) {
-                Level3Ocean.counter++
+                Level3Ocean.counter++;
+                //console.log(Level3Ocean.counter);
             }
 
         }

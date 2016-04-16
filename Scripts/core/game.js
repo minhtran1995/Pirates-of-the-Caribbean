@@ -112,6 +112,8 @@ var assetData = [
     { id: "squid1", src: "../../Assets/sample/squid/Squid1.png" },
     { id: "squid2", src: "../../Assets/sample/squid/Squid2.png" },
     { id: "squid3", src: "../../Assets/sample/squid/Squid3.png" },
+    //boss
+    { id: "boss", src: "../../Assets/sample/boss/sea monster-resized.png" },
     { id: "blank", src: "../../Assets/images/blank.png" },
     //audio
     { id: "bgm", src: "../../Assets/sample/bgm.mp3" },

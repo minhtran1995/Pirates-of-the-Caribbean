@@ -36,8 +36,12 @@ var scenes;
             this._bullet = new objects.Bullet(this._player, "bullet1");
             this.addChild(this._bullet);
             this.addChild(this._player);
+            //mount cannon
             this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
+            //boss
+            this._boss = new objects.Boss();
+            this.addChild(this._boss);
             //init collision manager
             this._collision = new managers.Collision(this._player);
             //score label
@@ -96,6 +100,10 @@ var scenes;
                 h.update();
                 _this._collision.checkMoneyCollision(h);
             });
+            //check collision with boss
+            this._collision.checkBossCollision(this._boss);
+            //update boss movement
+            this._boss.update();
             this._score.text = "Score: " + scoreValue.toFixed(2);
             this._healthLabel.text = livesValue.toFixed(2) + " %";
             if (scoreValue < 0) {

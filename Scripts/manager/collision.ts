@@ -97,6 +97,64 @@ module managers {
             }
         }
 
+
+
+        //check collision between player and objects
+        public checkBossCollision(obj: objects.GameObject): void {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var playerHalfWidth: number = this._player.width * 0.5;
+            var objHalfWidth: number = obj.width * 0.5;
+
+            var minDistance: number = playerHalfWidth + objHalfWidth;
+
+            startPoint.x = this._player.x;
+            startPoint.y = this._player.y;
+
+            endPoint.x = obj.x;
+            endPoint.y = obj.y;
+
+            if (!this._player.isDead) {
+                if (this.distance(startPoint, endPoint) < minDistance) {
+                    if (!obj.isColliding) {
+                        if (obj.name === "boss") {
+                            this._player.hitEnemy = true;
+                            scoreValue -= 5;
+                            livesValue -= 15;
+                            createjs.Sound.play("broken").volume = 1;
+                        }
+                        else {
+                            this._player.hitEnemy = true;
+                        }
+
+                        obj.isColliding = true;
+                    }
+                } else {
+                    obj.isColliding = false;
+                    if (this._player.hitEnemy) {
+                        if (Collision._enemyHit % 30 === 0) {
+                            this._player.hitEnemy = false;
+                            Collision._enemyHit = 0;
+                        }
+                        else {
+                            this._player.hitEnemy = true;
+                            console.log("reached");
+                        }
+                        Collision._enemyHit++;
+                    }
+
+                }
+
+            }
+        }
+
+
+
+
+
+
+
         public checkMoneyCollision(obj: objects.Money): void {
             var startPoint: createjs.Point = new createjs.Point();
             var endPoint: createjs.Point = new createjs.Point();

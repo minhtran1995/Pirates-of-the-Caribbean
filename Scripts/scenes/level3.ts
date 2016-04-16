@@ -11,6 +11,7 @@ module scenes {
         private _cannon: objects.Cannon;
         private _collision: managers.Collision;
         private _parrot: objects.Parrot;
+        private _boss: objects.Boss;
 
         //score and health
         private _score: objects.Label;
@@ -71,10 +72,13 @@ module scenes {
             this.addChild(this._bullet);
             this.addChild(this._player);
 
+            //mount cannon
             this._cannon = new objects.Cannon(this._player, "cannon");
             this.addChild(this._cannon);
 
-
+            //boss
+            this._boss = new objects.Boss();
+            this.addChild(this._boss);
 
 
             //init collision manager
@@ -168,9 +172,12 @@ module scenes {
                 this._collision.checkMoneyCollision(h);
             });
 
+            //check collision with boss
+            this._collision.checkBossCollision(this._boss);
 
 
-
+            //update boss movement
+            this._boss.update();
 
             this._score.text = "Score: " + scoreValue.toFixed(2);
             this._healthLabel.text = livesValue.toFixed(2) + " %";
