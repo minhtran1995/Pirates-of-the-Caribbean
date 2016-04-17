@@ -12,6 +12,8 @@ module scenes {
         private _collision: managers.Collision;
         private _parrot: objects.Parrot;
         private _boss: objects.Boss;
+        private _tracker: objects.Tracker;
+
 
         //score and health
         private _score: objects.Label;
@@ -25,6 +27,7 @@ module scenes {
         private _messageLabel: objects.Label;
         private _reloadLabel: objects.Label;
         private _levelLabel: objects.Label;
+        private _trackerLabel: objects.Label;
 
 
         //Game buttons
@@ -43,7 +46,7 @@ module scenes {
         // Start Method
         public start(): void {
             createjs.Sound.stop();
-            createjs.Sound.play("level3BGM", 0, 0, 0, -1, 0.3);
+            createjs.Sound.play("level3BGM", 0, 0, 0, -1, 0.7);
             createjs.Sound.play("level3Rain", 0, 0, 0, -1);
 
             //init static variable
@@ -80,6 +83,17 @@ module scenes {
             this._boss = new objects.Boss();
             this.addChild(this._boss);
 
+            //boss tracker
+            this._tracker = new objects.Tracker(this._boss);
+            this.addChild(this._tracker);
+
+            //tracker label
+            this._trackerLabel = new objects.Label("m", "30px Merienda One",
+                "#adffff",
+                this._tracker.x,
+                this._tracker.y - this._tracker.getBounds().height,
+                true);
+            this.addChild(this._trackerLabel);
 
             //init collision manager
             this._collision = new managers.Collision(this._player);
@@ -179,6 +193,16 @@ module scenes {
             //update boss movement
             this._boss.update();
 
+            //update tracker location
+            this._tracker.update();
+
+            //update tracker label
+            this._trackerLabel.x = this._tracker.x - 50;
+            this._trackerLabel.y = this._tracker.y - this._tracker.getBounds().height;
+            this._trackerLabel.text = "" + (this._boss.y - config.Screen.HEIGHT) + " m";
+
+
+            //
             this._score.text = "Score: " + scoreValue.toFixed(2);
             this._healthLabel.text = livesValue.toFixed(2) + " %";
 

@@ -150,6 +150,8 @@ var assetData: objects.Asset[] = [
     //boss
     { id: "boss", src: "../../Assets/sample/boss/sea monster-resized.png" },
 
+    //boss tracker
+    { id: "tracker", src: "../../Assets/sample/hailHydra-resized.png" },
 
 
     { id: "blank", src: "../../Assets/images/blank.png" },

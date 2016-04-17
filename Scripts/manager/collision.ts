@@ -116,7 +116,7 @@ module managers {
             endPoint.y = obj.y;
 
             if (!this._player.isDead) {
-                if (this.distance(startPoint, endPoint) < minDistance) {
+                if (this.distance(startPoint, endPoint) < minDistance - 50) {
                     if (!obj.isColliding) {
                         if (obj.name === "boss") {
                             this._player.hitEnemy = true;
@@ -133,15 +133,8 @@ module managers {
                 } else {
                     obj.isColliding = false;
                     if (this._player.hitEnemy) {
-                        if (Collision._enemyHit % 30 === 0) {
-                            this._player.hitEnemy = false;
-                            Collision._enemyHit = 0;
-                        }
-                        else {
-                            this._player.hitEnemy = true;
-                            console.log("reached");
-                        }
-                        Collision._enemyHit++;
+                        this._player.hitEnemy = false;
+                        Collision._enemyHit = 0;
                     }
 
                 }
@@ -178,7 +171,7 @@ module managers {
                             this._player.hitMoney = true;
                             scoreValue += 100;
                             createjs.Sound.play("money");
-                            createjs.Sound.play("haha");
+                            createjs.Sound.play("haha", 0, 0, 0, 0, 0.5);
                             //place it far far away so it will float black
                             obj.reset((config.Screen.WIDTH + obj.width) * 2);
                         }
