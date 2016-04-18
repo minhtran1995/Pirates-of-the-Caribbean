@@ -35,6 +35,7 @@ var level3: scenes.Level3;
 var end: scenes.End;
 var win: scenes.Win;
 
+
 var livesValue: number = 100;
 var scoreValue: number = 0;
 var highScoreValue: number = 0;
@@ -327,7 +328,7 @@ function changeScene(): void {
             currentScene = win;
             console.log("Starting win Scene");
             break;
-    }
+            }
 
 }
 

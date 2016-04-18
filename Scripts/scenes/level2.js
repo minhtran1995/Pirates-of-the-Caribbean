@@ -221,7 +221,7 @@ var scenes;
             this._reloadLabel.visible = true;
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        // LEFT_CAVE Button click event handler
+        // reload Button click event handler
         Level2.prototype._reloadButtonClick = function (event) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;

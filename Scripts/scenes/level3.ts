@@ -34,6 +34,7 @@ module scenes {
 
         //Game buttons
         private _reloadButton: objects.Button;
+        private _skipButton: objects.Button;
 
         private static _counter;
         private static _labelDisplayCounter;
@@ -141,6 +142,12 @@ module scenes {
             this.addChild(this._reloadButton);
             this._reloadButton.on("click", this._reloadButtonClick, this);
 
+
+            //skip button
+            this._skipButton = new objects.Button("SkipButton",
+                config.Screen.WIDTH - 100, 100, true);
+            this.addChild(this._skipButton);
+            this._skipButton.on("click", this._skipButtonClick, this);
 
 
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One",
@@ -309,7 +316,7 @@ module scenes {
 
         //EVENT HANDLERS ++++++++++++++++++++
 
-        // LEFT_CAVE Button click event handler
+        // reload Button click event handler
         private _reloadButtonClick(event: createjs.MouseEvent) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;
@@ -319,5 +326,23 @@ module scenes {
             objects.Player.bulletCounter = 8;
         }
 
+        private _skipButtonClick(event: createjs.MouseEvent) {
+            //disable sound effect
+            window.onmousedown = function() {
+                console.log("Mouse disabled");
+            };
+
+            objects.Boss.health = 0;
+            objects.Boss.isDead = true;
+
+            /*
+                        this._fadeOut(500, () => {
+                            // Switch to the lvl 2 Scene                
+                            scene = config.Scene.INSTRUCTION3;
+                            changeScene();
+                        });
+                        */
+            Level3._counter = 0;
+        }
     }
 }

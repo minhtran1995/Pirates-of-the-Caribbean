@@ -329,7 +329,7 @@ module scenes {
 
         //EVENT HANDLERS ++++++++++++++++++++
 
-        // LEFT_CAVE Button click event handler
+        // reload Button click event handler
         private _reloadButtonClick(event: createjs.MouseEvent) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;

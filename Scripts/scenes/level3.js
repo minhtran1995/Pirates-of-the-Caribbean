@@ -69,6 +69,10 @@ var scenes;
             this._reloadButton = new objects.Button("reload", 50, 130, true);
             this.addChild(this._reloadButton);
             this._reloadButton.on("click", this._reloadButtonClick, this);
+            //skip button
+            this._skipButton = new objects.Button("SkipButton", config.Screen.WIDTH - 100, 100, true);
+            this.addChild(this._skipButton);
+            this._skipButton.on("click", this._skipButtonClick, this);
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One", "#FF0000", 50, 60, true);
             this.addChild(this._reloadLabel);
             //dead message
@@ -191,7 +195,7 @@ var scenes;
             this._reloadLabel.visible = true;
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        // LEFT_CAVE Button click event handler
+        // reload Button click event handler
         Level3.prototype._reloadButtonClick = function (event) {
             createjs.Sound.play("reloadSound");
             this._reloadButton.visible = false;
@@ -199,6 +203,22 @@ var scenes;
             this._reloadLabel.visible = false;
             objects.Cannon.isloaded = true;
             objects.Player.bulletCounter = 8;
+        };
+        Level3.prototype._skipButtonClick = function (event) {
+            //disable sound effect
+            window.onmousedown = function () {
+                console.log("Mouse disabled");
+            };
+            objects.Boss.health = 0;
+            objects.Boss.isDead = true;
+            /*
+                        this._fadeOut(500, () => {
+                            // Switch to the lvl 2 Scene
+                            scene = config.Scene.INSTRUCTION3;
+                            changeScene();
+                        });
+                        */
+            Level3._counter = 0;
         };
         return Level3;
     })(objects.Scene);
