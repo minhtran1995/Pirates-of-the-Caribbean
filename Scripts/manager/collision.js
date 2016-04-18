@@ -75,21 +75,29 @@ var managers;
         Collision.prototype.checkBossCollision = function (obj) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
+            //calculate min-width
             var playerHalfWidth = this._player.width * 0.5;
             var objHalfWidth = obj.width * 0.5;
-            var minDistance = playerHalfWidth + objHalfWidth;
+            var minWidthDistance = playerHalfWidth + objHalfWidth;
+            //calculate min-height
+            var playerHalfHeight = this._player.height * 0.5;
+            var objHalfHeight = obj.height * 0.5;
+            var minHeightDistance = playerHalfHeight + objHalfHeight;
             startPoint.x = this._player.x;
             startPoint.y = this._player.y;
             endPoint.x = obj.x;
             endPoint.y = obj.y;
             if (!this._player.isDead) {
-                if (this.distance(startPoint, endPoint) < minDistance - 50) {
+                if (this.distance(startPoint, endPoint) < (minHeightDistance + minWidthDistance) * 0.5) {
                     if (!obj.isColliding) {
                         if (obj.name === "boss") {
                             this._player.hitEnemy = true;
-                            scoreValue -= 5;
-                            livesValue -= 15;
+                            scoreValue -= 15;
+                            livesValue -= 20;
                             createjs.Sound.play("broken").volume = 1;
+                        }
+                        else if (obj.name === "deadBoss") {
+                            this._player.hitEnemy = false;
                         }
                         else {
                             this._player.hitEnemy = true;
@@ -179,15 +187,20 @@ var managers;
         Collision.prototype.bulletCollision = function (obj1, obj2) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
+            //calculate min-width
             var obj1HalfWidth = obj1.width * 0.5;
             var obj2HalfWidth = obj2.width * 0.5;
-            var minDistance = obj1HalfWidth + obj2HalfWidth;
+            var minWidthDistance = obj1HalfWidth + obj2HalfWidth;
+            //calculate min-height
+            var obj1HalfHeight = obj1.height * 0.5;
+            var obj2HalfHeight = obj2.height * 0.5;
+            var minHeightDistance = obj1HalfHeight + obj2HalfHeight;
             startPoint.x = obj1.x;
             startPoint.y = obj1.y;
             endPoint.x = obj2.x;
             endPoint.y = obj2.y;
             if (!this._player.isDead) {
-                if (this.distance(startPoint, endPoint) < minDistance) {
+                if (this.distance(startPoint, endPoint) < (minHeightDistance + minWidthDistance) * 0.5) {
                     if (obj2.name === "enemy") {
                         if (Collision._counter < 3) {
                             obj2.speed.x += 0.5;
@@ -242,11 +255,28 @@ var managers;
                     else if (obj2.name === "squid") {
                         obj2.name = "deadSquid";
                         obj2.image = assets.getResult("squid3");
-                        createjs.Sound.play("parrotSound", 0, 0, 0, 2, 2);
+                        createjs.Sound.play("squidDying");
                         createjs.Sound.play("haha2");
                         scoreValue += 5;
                         obj2.speed.x = Math.round(Math.random() * 10 + 5);
                         obj2.speed.y = Math.round(Math.random() * 20 - 10);
+                    }
+                    else if (obj2.name === "boss") {
+                        var rand = Math.round(Math.random() * 1);
+                        if (rand === 1) {
+                            obj2.image = assets.getResult("boss");
+                        }
+                        else {
+                            obj2.image = assets.getResult("boss1");
+                        }
+                        objects.Boss.health -= (100 / 3);
+                        scoreValue += 200 / 3;
+                        if (Math.round(objects.Boss.health) % 50 === 0) {
+                        }
+                        if (objects.Boss.health <= 0) {
+                            objects.Boss.isDead = true;
+                            createjs.Sound.play("monsterRoar", 0, 0, 0, 0, 1);
+                        }
                     }
                     else {
                     }

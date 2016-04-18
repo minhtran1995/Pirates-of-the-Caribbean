@@ -168,7 +168,7 @@ var scenes;
                 Level2._counter++;
             }
             //desired score to win
-            if (scoreValue > 700) {
+            if (scoreValue >= 2000) {
                 this._gunTreasure.update();
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
@@ -235,7 +235,7 @@ var scenes;
             window.onmousedown = function () {
                 console.log("Mouse disabled");
             };
-            scoreValue = 9999;
+            scoreValue = 2000;
             this._fadeOut(500, function () {
                 // Switch to the lvl 2 Scene                
                 scene = config.Scene.INSTRUCTION3;

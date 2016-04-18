@@ -5,6 +5,7 @@ module objects {
         private static delay = 0;
 
         public static health: number;
+        public static isDead: Boolean;
 
         private _rotationSpeed: number;
 
@@ -25,6 +26,8 @@ module objects {
             this.y = 4.1 * config.Screen.HEIGHT;
 
             Boss.health = 1000;
+            Boss.isDead = false;
+
         }
 
         //reset health location
@@ -54,80 +57,93 @@ module objects {
         public update(): void {
 
 
-            if (this.scaleX === 1) {
+            if (!Boss.isDead) {
+                //this.x = config.Screen.CENTER_X;
+                //this.y = config.Screen.CENTER_Y + 200;
 
-                if (this.y < config.Screen.HEIGHT + 50) {
-                    this.speed.x = 5;
+                if (this.scaleX === 1) {
+
+                    if (this.y < config.Screen.HEIGHT + 50) {
+                        this.speed.x = 5;
+                    }
+
+                    this.x -= this.speed.x;
+                    this.y -= this.speed.y;
+                    this.rotation += this._rotationSpeed;
+
+                    if (this.y < this._topBound + 100) {
+                        this.rotation = 30;
+                        this.speed.y = -7;
+                        this._rotationSpeed = -1.5;
+                    }
+
+
+
+                    if (this.y > 4 * config.Screen.HEIGHT) {
+                        this.speed.y = 10;
+                        this._rotationSpeed = 2;
+                        this.rotation = 0;
+
+                        //make the boss jump in to a new location
+                        this.reset();
+                    }
+
+                    if (this.rotation > 60) {
+                        this.rotation = 60;
+                    }
+
+                    if (this.rotation < -60) {
+                        this.rotation = -60;
+                    }
                 }
 
-                this.x -= this.speed.x;
-                this.y -= this.speed.y;
-                this.rotation += this._rotationSpeed;
 
-                if (this.y < this._topBound + 100) {
-                    this.rotation = 30;
-                    this.speed.y = -7;
-                    this._rotationSpeed = -1.5;
+                if (this.scaleX === -1) {
+
+                    if (this.y < config.Screen.HEIGHT + 50) {
+                        this.speed.x = 5;
+                    }
+
+                    this.x += this.speed.x;
+                    this.y -= this.speed.y;
+
+                    this.rotation += this._rotationSpeed;
+
+                    if (this.y < this._topBound + 100) {
+                        this.rotation = -30
+                        this.speed.y = -7;
+                        this._rotationSpeed = 1.5;
+                    }
+
+
+                    if (this.y > 4 * config.Screen.HEIGHT) {
+                        this.speed.y = 10;
+                        this._rotationSpeed = -2;
+                        this.rotation = 0;
+
+                        //make the boss jump in to a new location
+                        this.reset();
+                    }
+
+                    if (this.rotation > 90) {
+                        this.rotation = 90;
+                    }
+
+                    if (this.rotation < -60) {
+                        this.rotation = -60;
+                    }
                 }
 
+                //sconsole.log(this.x + " " + this.y);
 
-
-                if (this.y > 4 * config.Screen.HEIGHT) {
-                    this.speed.y = 10;
-                    this._rotationSpeed = 2;
-                    this.rotation = 0;
-
-                    //make the boss jump in to a new location
-                    this.reset();
-                }
-
-                if (this.rotation > 60) {
-                    this.rotation = 60;
-                }
-
-                if (this.rotation < -60) {
-                    this.rotation = -60;
-                }
+            } else {
+                this.x = config.Screen.CENTER_X;
+                this.y = config.Screen.HEIGHT - 50;
+                this.name = "deadBoss";
+                this.rotation = 0;
+                this.image = assets.getResult("boss");
+                Boss.health = 0;
             }
-
-
-            if (this.scaleX === -1) {
-
-                if (this.y < config.Screen.HEIGHT + 50) {
-                    this.speed.x = 5;
-                }
-
-                this.x += this.speed.x;
-                this.y -= this.speed.y;
-
-                this.rotation += this._rotationSpeed;
-
-                if (this.y < this._topBound + 100) {
-                    this.rotation = -30
-                    this.speed.y = -7;
-                    this._rotationSpeed = 1.5;
-                }
-
-
-                if (this.y > 4 * config.Screen.HEIGHT) {
-                    this.speed.y = 10;
-                    this._rotationSpeed = -2;
-                    this.rotation = 0;
-
-                    //make the boss jump in to a new location
-                    this.reset();
-                }
-
-                if (this.rotation > 90) {
-                    this.rotation = 90;
-                }
-
-                if (this.rotation < -60) {
-                    this.rotation = -60;
-                }
-            }
-
-            //sconsole.log(this.x + " " + this.y);
 
         }
 

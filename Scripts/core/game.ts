@@ -35,8 +35,8 @@ var level3: scenes.Level3;
 var end: scenes.End;
 var win: scenes.Win;
 
-var livesValue: number;
-var scoreValue: number;
+var livesValue: number = 100;
+var scoreValue: number = 0;
 var highScoreValue: number = 0;
 
 var assetData: objects.Asset[] = [
@@ -149,6 +149,8 @@ var assetData: objects.Asset[] = [
 
     //boss
     { id: "boss", src: "../../Assets/sample/boss/sea monster-resized.png" },
+    { id: "boss1", src: "../../Assets/sample/boss/sea monster1-resized.png" },
+
 
     //boss tracker
     { id: "tracker", src: "../../Assets/sample/hailHydra-resized.png" },
@@ -167,6 +169,7 @@ var assetData: objects.Asset[] = [
     { id: "level3BGM", src: "../../Assets/sample/Teminite - Firepower.mp3" },
     { id: "level3Rain", src: "../../Assets/sample/rainlvl3.mp3" },
 
+    { id: "squidDying", src: "../../Assets/sample/squid_dying.mp3" },
 
     { id: "money", src: "../../Assets/sample/money-edited.mp3" },
     { id: "broken", src: "../../Assets/sample/broken.mp3" },
@@ -175,6 +178,8 @@ var assetData: objects.Asset[] = [
     { id: "haha2", src: "../../Assets/sample/haha 2.mp3" },
     { id: "abandon_ship", src: "../../Assets/sample/abandon_ship-amplified.mp3" },
     { id: "sink", src: "../../Assets/sample/sink.mp3" },
+    { id: "monsterRoar", src: "../../Assets/sample/monsterRoar-edited.mp3" },
+
 
 
 
@@ -259,6 +264,8 @@ function changeScene(): void {
             break;
         case config.Scene.MENU:
             // show the MENU scene
+            scoreValue = 0;
+            livesValue = 100;
             stage.removeAllChildren();
             menu = new scenes.Menu();
             currentScene = menu;
@@ -274,8 +281,6 @@ function changeScene(): void {
         case config.Scene.LEVEL1:
             // show the LEVEL1 scene            
             stage.removeAllChildren();
-            livesValue = 100;
-            scoreValue = 0;
             level1 = new scenes.Level1();
             currentScene = level1;
             console.log("Starting level1 Scene");
@@ -290,8 +295,6 @@ function changeScene(): void {
         case config.Scene.LEVEL2:
             // show the LEVEL2 scene
             stage.removeAllChildren();
-            livesValue = 100;
-            scoreValue = 0;
             level2 = new scenes.Level2();
             currentScene = level2;
             console.log("Starting level2 Scene");
@@ -306,8 +309,6 @@ function changeScene(): void {
         case config.Scene.LEVEL3:
             // show the LEVEL2 scene
             stage.removeAllChildren();
-            livesValue = 100;
-            scoreValue = 0;
             level3 = new scenes.Level3();
             currentScene = level3;
             console.log("Starting level3 Scene");

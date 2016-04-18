@@ -28,6 +28,8 @@ module scenes {
         private _reloadLabel: objects.Label;
         private _levelLabel: objects.Label;
         private _trackerLabel: objects.Label;
+        private _bossHealthLabel: objects.Label;
+
 
 
         //Game buttons
@@ -94,6 +96,14 @@ module scenes {
                 this._tracker.y - this._tracker.getBounds().height,
                 true);
             this.addChild(this._trackerLabel);
+
+            //boss health label
+            this._bossHealthLabel = new objects.Label("Boss Health: " + objects.Boss.health, "Bold 35px Merienda One",
+                "#ff9900",
+                config.Screen.CENTER_X,
+                70,
+                true);
+            this.addChild(this._bossHealthLabel);
 
             //init collision manager
             this._collision = new managers.Collision(this._player);
@@ -189,6 +199,9 @@ module scenes {
             //check collision with boss
             this._collision.checkBossCollision(this._boss);
 
+            //check collision of bullet with boss
+            this._collision.bulletCollision(this._bullet, this._boss);
+
 
             //update boss movement
             this._boss.update();
@@ -201,6 +214,8 @@ module scenes {
             this._trackerLabel.y = this._tracker.y - this._tracker.getBounds().height;
             this._trackerLabel.text = "" + (this._boss.y - config.Screen.HEIGHT) + " m";
 
+            //update boss health
+            this._bossHealthLabel.text = "Boss Health: " + Math.round(objects.Boss.health);
 
             //
             this._score.text = "Score: " + scoreValue.toFixed(2);
@@ -232,33 +247,29 @@ module scenes {
                 //console.log(Play._counter);
             }
 
-            //desired score to win
-            if (scoreValue > 1000) {
-
-
+            //desired condition to win
+            if (objects.Boss.health <= 0) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
                 };
 
-                if (this._player.hitGunTreasure) {
-                    if (Level3._counter === 180) {
-                        this._fadeOut(500, () => {
-                            // Switch to the lvl 3 Scene                
-                            scene = config.Scene.MENU;
-                            changeScene();
-                        });
-                        Level3._counter = 0;
-                    }
-                    Level3._counter++;
-                }
-
-
+                this.removeChild(this._tracker);
+                this.removeChild(this._trackerLabel);
 
                 for (var i = 0; i < this._moneyCount; i++) {
                     this._money[i].reset(config.Screen.WIDTH + this._money[i].width)
                 }
 
+
+                if (Level3._counter === 240) {
+                    this._fadeOut(500, () => {
+                        // Switch to the lvl 3 Scene                
+                        scene = config.Scene.WIN;
+                        changeScene();
+                    });
+                    Level3._counter = 0;
+                }
 
 
                 this._parrot.reset(config.Screen.WIDTH + this._parrot.width);
@@ -275,7 +286,7 @@ module scenes {
                 }
 
 
-
+                Level3._counter++;
                 Level3._labelDisplayCounter++;
             }
 
@@ -290,7 +301,6 @@ module scenes {
                 this._reloadLabel.text = "Bullet :" + objects.Player.bulletCounter;
                 this._reloadButton.visible = false;
                 this._reloadButton.mouseEnabled = false;
-
             }
             this._reloadLabel.visible = true;
 

@@ -258,7 +258,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 700) {
+            if (scoreValue >= 2000) {
 
                 this._gunTreasure.update();
 
@@ -345,7 +345,7 @@ module scenes {
                 console.log("Mouse disabled");
             };
 
-            scoreValue = 9999;
+            scoreValue = 2000;
 
 
 

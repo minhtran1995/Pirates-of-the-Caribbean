@@ -143,7 +143,7 @@ var scenes;
                 Level1._counter++;
             }
             //desired score to win
-            if (scoreValue > 300) {
+            if (scoreValue >= 300) {
                 window.onmousedown = function () {
                     console.log("Mouse disabled");
                 };
@@ -204,7 +204,7 @@ var scenes;
             window.onmousedown = function () {
                 console.log("Mouse disabled");
             };
-            scoreValue = 9999;
+            scoreValue = 300;
             this._fadeOut(500, function () {
                 // Switch to the lvl 2 Scene                
                 scene = config.Scene.INSTRUCTION2;

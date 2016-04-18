@@ -228,7 +228,7 @@ module scenes {
             }
 
             //desired score to win
-            if (scoreValue > 300) {
+            if (scoreValue >= 300) {
 
                 window.onmousedown = function() {
                     console.log("Mouse disabled");
@@ -302,7 +302,7 @@ module scenes {
             window.onmousedown = function() {
                 console.log("Mouse disabled");
             };
-            scoreValue = 9999;
+            scoreValue = 300;
 
 
             this._fadeOut(500, () => {
