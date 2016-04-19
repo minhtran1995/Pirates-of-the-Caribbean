@@ -48,7 +48,7 @@ var assetData = [
     { id: "reload", src: "../../Assets/sample/reload-resized.png" },
     { id: "explosion", src: "../../Assets/sample/explosion-resized.png" },
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
-    { id: "end", src: "../../Assets/images/End-fixed.jpg" },
+    { id: "end", src: "../../Assets/images/End-fixed.png" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
     { id: "win", src: "../../Assets/images/win.jpg" },
     { id: "enemy", src: "../../Assets/sample/enemy-resized.png" },

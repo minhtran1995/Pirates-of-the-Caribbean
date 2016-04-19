@@ -36,7 +36,7 @@ module scenes {
             this._fadeIn(500);
 
             this._label = new objects.Label(
-                "Instruction Level2 goes here"+
+                "Instruction Level2"+
                 "\nW A S D to control\nLeft Click to shoot\nSpaceBar to reload\nPick Up the cannon to win\nDont Go too Far,Squid will bite you",
                 
                 

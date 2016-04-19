@@ -36,7 +36,7 @@ module scenes {
             this._fadeIn(500);
 
             this._label = new objects.Label(
-                "Instruction Level3 goes here" +
+                "Instruction Level3\n" +
                 "Boss",
 
                 "35px Merienda One",

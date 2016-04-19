@@ -66,7 +66,7 @@ var assetData: objects.Asset[] = [
 
 
     { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
-    { id: "end", src: "../../Assets/images/End-fixed.jpg" },
+    { id: "end", src: "../../Assets/images/End-fixed.png" },
     { id: "instruction", src: "../../Assets/images/instruction.jpg" },
     { id: "win", src: "../../Assets/images/win.jpg" },
 
