@@ -13,7 +13,7 @@ module objects {
             this.regY = 0;
 
 
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < 9; i++) {
                 this.ocean3[i] = assets.getResult("level3Ocean" + i);
                 //console.log("level3Ocean" + i);
             }
@@ -42,7 +42,11 @@ module objects {
 
 
             if (Level3Ocean.counter > 120) {
-                var rand = Math.round(Math.random() * 7);
+                var rand = Math.round(Math.random() * 8);
+                //i want to decrease the chance of thunder storm
+                if (rand === 8) {
+                    rand = Math.round(Math.random() * 4 + 4);
+                }
                 this.image = this.ocean3[rand];
                 Level3Ocean.switch = true;
             }

@@ -126,14 +126,14 @@ module scenes {
 
             //skip button
             this._skipButton = new objects.Button("SkipButton",
-                config.Screen.WIDTH - 100, 100, true);
+                config.Screen.WIDTH - 130, 100, true);
             this.addChild(this._skipButton);
             this._skipButton.on("click", this._skipButtonClick, this);
 
 
             //suicide button
             this._suicideButton = new objects.Button("suicideButton",
-                config.Screen.WIDTH - 100, 200, true);
+                config.Screen.WIDTH - 130, 220, true);
             this.addChild(this._suicideButton);
             this._suicideButton.on("click", this._suicideButtonClick, this);
 

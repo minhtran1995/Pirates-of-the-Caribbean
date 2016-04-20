@@ -59,7 +59,7 @@ module scenes {
             this.addChild(this._status);
 
             //current score
-            this._currentScore = new objects.Label("Your Score: " + Math.round(scoreValue), "Bold 50px Merienda One",
+            this._currentScore = new objects.Label("Your Score: " + Math.round(scoreValue), "Bold 45px Merienda One",
                 "#ffcc00",
                 config.Screen.CENTER_X - 310, config.Screen.CENTER_Y - 100, true);
             this.addChild(this._currentScore);

@@ -51,16 +51,23 @@ var assetData: objects.Asset[] = [
     { id: "suicideButton", src: "../../Assets/sample/Buttons/suicide.png" },
 
 
-    { id: "SkipButton", src: "../../Assets/sample/skipButton.png" },
+    { id: "SkipButton", src: "../../Assets/sample/Buttons/skipButton.png" },
 
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
     { id: "level2Ocean", src: "../../Assets/sample/Level2Ocean-resized-looped.jpg" },
 
     { id: "bullet1", src: "../../Assets/sample/bullet1.png" },
+    //normal cannon
     { id: "cannon", src: "../../Assets/sample/cannon-resized.png" },
     { id: "cannon-shoot", src: "../../Assets/sample/cannon-resized-shoot.png" },
+    //treasure cannon
     { id: "biggerCannon", src: "../../Assets/sample/biggerCannon-resized.png" },
+
+    //big cannon for level3
+    { id: "lv3Cannon", src: "../../Assets/sample/cannons/big cannon-resized.png" },
+    { id: "lv3Cannon-shoot", src: "../../Assets/sample/cannons/big cannon-resized-shoot.png" },
+
 
     { id: "reload", src: "../../Assets/sample/reload-resized.png" },
     { id: "explosion", src: "../../Assets/sample/explosion-resized.png" },
@@ -94,6 +101,7 @@ var assetData: objects.Asset[] = [
     { id: "level3Ocean5", src: "../../Assets/sample/rain/rainBG6.png" },
     { id: "level3Ocean6", src: "../../Assets/sample/rain/rainBG7.png" },
     { id: "level3Ocean7", src: "../../Assets/sample/rain/rainBG8.png" },
+    { id: "level3Ocean8", src: "../../Assets/sample/rain/rainBG9.png" },
 
 
     { id: "cannonShoot", src: "../../Assets/images/ironmanShoot.png" },

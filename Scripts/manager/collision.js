@@ -269,7 +269,8 @@ var managers;
                         else {
                             obj2.image = assets.getResult("boss1");
                         }
-                        objects.Boss.health -= (100 / 3);
+                        //boss health decrease here
+                        objects.Boss.health -= (50 / 3);
                         scoreValue += 200 / 3;
                         if (Math.round(objects.Boss.health) % 50 === 0) {
                         }
