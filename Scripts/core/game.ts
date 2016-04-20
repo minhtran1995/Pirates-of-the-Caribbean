@@ -46,8 +46,9 @@ var assetData: objects.Asset[] = [
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "InstructionButton", src: "../../Assets/sample/Buttons/instructionButton.png" },
     { id: "ExitButton", src: "../../Assets/sample/Buttons/exitButton.png" },
-    { id: "StartButtonFromInstruction", src: "../../Assets/sample/Buttons/startButton-FromInstruction.png" },
+    { id: "StartButtonFromInstruction", src: "../../Assets/sample/Buttons/start button 3.png" },
     { id: "tryAgainButton", src: "../../Assets/sample/Buttons/tryAgainButton.png" },
+    { id: "suicideButton", src: "../../Assets/sample/Buttons/suicide.png" },
 
 
     { id: "SkipButton", src: "../../Assets/sample/skipButton.png" },

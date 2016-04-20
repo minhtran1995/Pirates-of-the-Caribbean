@@ -34,6 +34,8 @@ module scenes {
         //Game buttons
         private _reloadButton: objects.Button;
         private _skipButton: objects.Button;
+        private _suicideButton: objects.Button;
+
 
         private static _counter;
         private static _labelDisplayCounter;
@@ -143,6 +145,13 @@ module scenes {
                 config.Screen.WIDTH - 100, 100, true);
             this.addChild(this._skipButton);
             this._skipButton.on("click", this._skipButtonClick, this);
+
+            //suicide button
+            this._suicideButton = new objects.Button("suicideButton",
+                config.Screen.WIDTH - 100, 200, true);
+            this.addChild(this._suicideButton);
+            this._suicideButton.on("click", this._suicideButtonClick, this);
+
 
             //reload label
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One",
@@ -354,6 +363,16 @@ module scenes {
                 scene = config.Scene.INSTRUCTION3;
                 changeScene();
             });
+            Level2._counter = 0;
+        }
+
+        private _suicideButtonClick(event: createjs.MouseEvent) {
+            //disable sound effect
+            window.onmousedown = function() {
+                console.log("Mouse disabled");
+            };
+
+            livesValue = 0;
             Level2._counter = 0;
         }
 

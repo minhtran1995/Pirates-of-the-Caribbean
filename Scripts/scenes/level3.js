@@ -73,6 +73,11 @@ var scenes;
             this._skipButton = new objects.Button("SkipButton", config.Screen.WIDTH - 100, 100, true);
             this.addChild(this._skipButton);
             this._skipButton.on("click", this._skipButtonClick, this);
+            //suicide button
+            this._suicideButton = new objects.Button("suicideButton", config.Screen.WIDTH - 100, 200, true);
+            this.addChild(this._suicideButton);
+            this._suicideButton.on("click", this._suicideButtonClick, this);
+            //reload label
             this._reloadLabel = new objects.Label("Bullet: ", "Bold 25px Merienda One", "#FF0000", 50, 60, true);
             this.addChild(this._reloadLabel);
             //dead message
@@ -218,6 +223,14 @@ var scenes;
                             changeScene();
                         });
                         */
+            Level3._counter = 0;
+        };
+        Level3.prototype._suicideButtonClick = function (event) {
+            //disable sound effect
+            window.onmousedown = function () {
+                console.log("Mouse disabled");
+            };
+            livesValue = 0;
             Level3._counter = 0;
         };
         return Level3;
