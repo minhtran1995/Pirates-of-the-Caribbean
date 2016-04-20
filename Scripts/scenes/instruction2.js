@@ -32,7 +32,7 @@ var scenes;
             this._setupBackground("InstructionBG2");
             this._fadeIn(500);
             // add the Start button to the instruction scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 260, true);
+            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.HEIGHT - 123 * 0.5, true);
             this.addChild(this._startButton);
             // Start Button event listener
             this._startButton.on("click", this._startButtonClick, this);
