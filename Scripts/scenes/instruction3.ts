@@ -32,18 +32,8 @@ module scenes {
             createjs.Sound.stop();
             createjs.Sound.play("menuBGM", 0, 0, 0, -1);
 
-            this._setupBackground("blank");
+            this._setupBackground("InstructionBG3");
             this._fadeIn(500);
-
-            this._label = new objects.Label(
-                "Instruction Level3\n" +
-                "Boss",
-
-                "35px Merienda One",
-                "#B40404",
-                config.Screen.CENTER_X,
-                config.Screen.CENTER_Y, true);
-            this.addChild(this._label);
 
 
             // add the Start button to the instruction scene

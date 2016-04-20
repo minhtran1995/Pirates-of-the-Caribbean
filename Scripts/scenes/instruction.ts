@@ -29,22 +29,14 @@ module scenes {
 
         // Start Method
         public start(): void {
-            this._setupBackground("blank");
+            this._setupBackground("InstructionBG1");
             this._fadeIn(500);
-
-            this._label = new objects.Label(
-                "Instruction LEVEL1 \nW A S D to control\nLeft Click to shoot\nSpaceBar to reload", "35px Merienda One",
-                "#B40404",
-                config.Screen.CENTER_X,
-                config.Screen.CENTER_Y, true);
-            this.addChild(this._label);
-
 
             // add the Start button to the instruction scene
             this._startButton = new objects.Button(
-                "StartButton",
+                "StartButtonFromInstruction",
                 config.Screen.CENTER_X,
-                config.Screen.CENTER_Y + 260, true);
+                config.Screen.HEIGHT - 123 * 0.5, true);
             this.addChild(this._startButton);
 
             // Start Button event listener

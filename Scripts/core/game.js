@@ -33,10 +33,12 @@ var livesValue = 100;
 var scoreValue = 0;
 var highScoreValue = 0;
 var assetData = [
-    { id: "StartButton", src: "../../Assets/images/StartButton.png" },
+    { id: "StartButton", src: "../../Assets/sample/Buttons/StartButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
-    { id: "InstructionButton", src: "../../Assets/sample/instructionButton.png" },
-    { id: "ExitButton", src: "../../Assets/sample/exitButton.png" },
+    { id: "InstructionButton", src: "../../Assets/sample/Buttons/instructionButton.png" },
+    { id: "ExitButton", src: "../../Assets/sample/Buttons/exitButton.png" },
+    { id: "StartButtonFromInstruction", src: "../../Assets/sample/Buttons/startButton-FromInstruction.png" },
+    { id: "tryAgainButton", src: "../../Assets/sample/Buttons/tryAgainButton.png" },
     { id: "SkipButton", src: "../../Assets/sample/skipButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "night", src: "../../Assets/sample/ocean.png" },
@@ -47,9 +49,12 @@ var assetData = [
     { id: "biggerCannon", src: "../../Assets/sample/biggerCannon-resized.png" },
     { id: "reload", src: "../../Assets/sample/reload-resized.png" },
     { id: "explosion", src: "../../Assets/sample/explosion-resized.png" },
-    { id: "menuBG", src: "../../Assets/sample/menuBg-resized.jpg" },
+    //BG
+    { id: "menuBG", src: "../../Assets/sample/menuBg-resized.png" },
+    { id: "InstructionBG1", src: "../../Assets/sample/InstructionsBG/instruction level 1.png" },
+    { id: "InstructionBG2", src: "../../Assets/sample/InstructionsBG/instruction level 2.png" },
+    { id: "InstructionBG3", src: "../../Assets/sample/InstructionsBG/instruction level 3.png" },
     { id: "end", src: "../../Assets/images/End-fixed.png" },
-    { id: "instruction", src: "../../Assets/images/instruction.jpg" },
     { id: "win", src: "../../Assets/images/win.jpg" },
     { id: "enemy", src: "../../Assets/sample/enemy-resized.png" },
     { id: "goldChest", src: "../../Assets/sample/goldChest-resized.png" },
@@ -206,14 +211,16 @@ function changeScene() {
             console.log("Starting MENU Scene");
             break;
         case config.Scene.INSTRUCTION:
-            // show the MENU scene
+            // show the instruction scene
+            livesValue = 100;
             stage.removeAllChildren();
             instruction = new scenes.Instruction();
             currentScene = instruction;
             console.log("Starting instruction Scene");
             break;
         case config.Scene.LEVEL1:
-            // show the LEVEL1 scene            
+            // show the LEVEL1 scene  
+            livesValue = 100;
             stage.removeAllChildren();
             level1 = new scenes.Level1();
             currentScene = level1;
@@ -221,6 +228,7 @@ function changeScene() {
             break;
         case config.Scene.INSTRUCTION2:
             // show the PLAY scene
+            livesValue = 100;
             stage.removeAllChildren();
             instruction2 = new scenes.Instruction2();
             currentScene = instruction2;
@@ -235,6 +243,7 @@ function changeScene() {
             break;
         case config.Scene.INSTRUCTION3:
             // show the PLAY scene
+            livesValue = 100;
             stage.removeAllChildren();
             instruction3 = new scenes.Instruction3();
             currentScene = instruction3;
@@ -249,6 +258,9 @@ function changeScene() {
             break;
         case config.Scene.END:
             // show the END scene
+            if (scoreValue > highScoreValue) {
+                highScoreValue = scoreValue;
+            }
             stage.removeAllChildren();
             end = new scenes.End();
             currentScene = end;
@@ -256,6 +268,9 @@ function changeScene() {
             break;
         case config.Scene.WIN:
             // show the END scene
+            if (scoreValue > highScoreValue) {
+                highScoreValue = scoreValue;
+            }
             stage.removeAllChildren();
             win = new scenes.Win();
             currentScene = win;
